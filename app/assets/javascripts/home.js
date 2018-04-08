@@ -1,18 +1,23 @@
 
-  var app = new Vue({
+  const app = new Vue({
     el: '#app',
     data: {
       message: 'Hello Vue!'
-  	},
-  	methods: {
-  		say_hi: function() {
-  			axios.get('/home/ajax')
-  				.then(function(response) {
-  					console.log(response.data.a);
-  				})
-  				.catch(function() {
-  					console.log('error');
-  				});
-  		}
-  	}
+    },
+    methods: {
+      say_hi: function(num) {
+        this.message = `now ${num}`
+        axios.get('/home/ajax', {
+            params: {
+              t: num
+            }
+          })
+          .then(function(response) {
+            console.log(response.data.a);
+          })
+          .catch(function() {
+            console.log('error');
+          });
+      }
+    }
   })

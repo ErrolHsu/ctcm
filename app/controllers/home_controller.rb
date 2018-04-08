@@ -1,10 +1,11 @@
 class HomeController < ApplicationController
-	def index
-		
-	end
+  def index
+    @t = 123
+  end
 
-	def ajax
-		render json: {a: 'okok'}.to_json
-		puts response.body
-	end
+  def ajax
+    num = params[:t]
+    render json: {a: num}.to_json
+    puts response.body
+  end
 end

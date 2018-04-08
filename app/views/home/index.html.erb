@@ -1,25 +1,34 @@
 
 
 <div id="app">
+
+
   {{ message }}
 
 
-<button v-on:click='say_hi()' class="btn btn-secondary">
+<button v-on:click='say_hi(<%= @t %>)' class="btn btn-secondary">
   按我
 </button>
 
 </div>
 
 
-<!-- <script type="text/javascript">
-  window.onload = function(e) {
-    console.log('hi')
-      var app = new Vue({
-    el: '#app',
-    data: {
-      message: 'Hello Vue!'
-    }
-  })
-  }
+<div id='ouo'>
+  <p>{{msg}}</p>
+</div>
 
-</script> -->
+
+<script type="text/javascript">
+  (function() {
+    document.onreadystatechange = function () {
+      if (document.readyState === 'interactive') {
+        const ouo = new Vue({
+          el: '#ouo',
+          data: {
+            msg: 'OuO'
+          }
+        })
+      }
+    }
+  })();
+</script>
