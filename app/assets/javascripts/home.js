@@ -18,6 +18,14 @@
           .catch(function() {
             console.log('error');
           });
+      },
+      render_mark: function() {
+        str = '### 33333'
+        var reader = new commonmark.Parser({smart: true});
+        var writer = new commonmark.HtmlRenderer();
+        var parsed = reader.parse(str);
+        var result = writer.render(parsed);
+        return result
       }
     }
   })
