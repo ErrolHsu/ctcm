@@ -8,4 +8,5 @@ class HomeController < ApplicationController
     render json: {a: num}.to_json
     puts response.body
   end
+
 end
