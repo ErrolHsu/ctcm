@@ -1,1 +1,14 @@
 Hello
+
+
+<div id="app">
+
+  <p v-html='render_mark()'></p>
+  {{ message }}
+
+
+  <button v-on:click='say_hi(<%= @t %>)' class="btn btn-secondary">
+    按我
+  </button>
+
+</div>

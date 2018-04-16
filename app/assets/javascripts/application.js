@@ -17,4 +17,5 @@
 //= require commonmark.js
 //= require vue
 //= require axios.js
-//= require_tree .
+//= require_tree ./common
+//= require vue_test
