@@ -1,14 +1,33 @@
-Hello
+<div class="wrapper">
 
+  <nav id="sidebar">
+    <!-- Sidebar Header -->
+    <div class="sidebar-header">
+      <h3>後台專用 Sidebar</h3>
+    </div>
 
-<div id="app">
+    <!-- Sidebar Links -->
+    <ul class="list-unstyled components">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">訂單管理</a></li>
 
-  <p v-html='render_mark()'></p>
-  {{ message }}
+      <li>
+        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+          <span class="inline-block">商品管理</span>
+          <span class="inline-block" style="float:right;">
+            <i class="fa fa-caret-down" aria-hidden="true"></i>
+          </span>
+        </a>
+      </li>
+      <ul class="collapse list-unstyled" id="homeSubmenu">
+        <li><a href="#">Page</a></li>
+        <li><a href="#">Page</a></li>
+        <li><a href="#">Page</a></li>
+      </ul>
 
-
-  <button v-on:click='say_hi(<%= @t %>)' class="btn btn-secondary">
-    按我
-  </button>
+      <li><a href="#">文章管理</a></li>
+      <li><a href="#">網站設定</a></li>
+    </ul>
+  </nav>
 
 </div>
