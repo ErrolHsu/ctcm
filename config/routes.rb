@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     root 'admin/core#index', as: :authenticated_root
   end
 
+  namespace :admin do
+    resources :products
+  end
   # 顧客登入後 root
   # authenticated :user do
   #   root ''
