@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    root 'core#index'
+    get 'index' => 'core#index'
     resources :products
   end
   # 顧客登入後 root
@@ -19,7 +21,4 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/ajax' => 'home#ajax'
 
-  namespace :admin do
-    get 'index' => 'core#index'
-  end
 end
