@@ -2,21 +2,34 @@
 
   <%= form_for @product, url: admin_products_path(@product), html: { method: :post } do |f| %>
     <%= f.label :title, "商品名稱" %>
-    <%= f.text_field :title %> <br />
-
+    <% if @product.errors.full_messages_for(:title).size > 0 %>
+      <%= @product.errors.full_messages_for(:title) %>
+    <% end %>
+    <%= f.text_field :title %> 
+    <br />
     <%= f.label :description, "商品介紹" %>
-    <%= f.text_area :description %> <br />
+    <% if @product.errors.full_messages_for(:description).size > 0 %>
+      <%= @product.errors.full_messages_for(:description) %>
+    <% end %>
+    <%= f.text_area :description %> 
+    <br />
 
     <%= f.label :price, "商品價格" %>
-    <%= f.text_field :price %> <br />
+    <% if @product.errors.full_messages_for(:price).size > 0 %>
+      <%= @product.errors.full_messages_for(:price) %>
+    <% end %>
+    <%= f.text_field :price %> 
+    <br />
 
     <%= f.label :quantity, "商品數量" %>
-    <%= f.text_field :quantity %> <br />
+    <% if @product.errors.full_messages_for(:quantity).size > 0 %>
+      <%= @product.errors.full_messages_for(:quantity) %>
+    <% end %>
+    <%= f.text_field :quantity %> 
+    <br />
 
     <%= f.submit %>
   <% end %>
-
-
 
   <br />
   <%= link_to '回商品列表', admin_products_path %>
