@@ -7,8 +7,11 @@
     <%= stylesheet_link_tag    'admin', media: 'all' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="container-fluid">
+    <div class="row">
+      <%= render  'share/admin/side_bar' %>
+      <%= yield %>
+    </div>
     <%= javascript_include_tag 'admin_application' %>
   </body>
 </html>
