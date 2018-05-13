@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   #   root 'admin/core#index', as: :authenticated_root
   # end
 
+  resource :cart, only:[:show, :destroy] do
+    collection do
+      post :add, path:'add/:id'
+    end
+  end
+
   namespace :admin do
     root 'core#index'
     get 'index' => 'core#index'

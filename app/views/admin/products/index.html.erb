@@ -1,6 +1,7 @@
   <h1>商品列表</h1>
 
   <%= link_to "新增商品", new_admin_product_path %>
+  <%= link_to '購物車', cart_path, class: "btn btn-default btn-success" %>
 
   <table>
     <thead>
@@ -19,9 +20,10 @@
         <td><%= product.price %></td>
         <td><%= product.quantity %></td>
         <td>
+          <%= link_to '放到購物車', add_cart_path(product), method: "post", class: "btn btn-xs btn-danger" %>
           <%= link_to "編輯", edit_admin_product_path(product) %>
           <%= link_to "刪除", admin_product_path(product), method: "delete", data: { confirm: "確認刪除???" } %>
-        </td>        
+        </td>
       </tr>
       <% end %>
     </tbody>
