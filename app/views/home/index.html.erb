@@ -7,10 +7,11 @@
   <button v-on:click='say_hi(<%= @t %>)' class="btn btn-secondary">
     按我
   </button>
-
 </div>
+<%= current_user.try(:id) %>
+<%= link_to '登出', destroy_user_session_path,method: 'delete', class: "btn btn-default" %>
 
-
+<%= link_to '產品列表', admin_products_path, class: "btn btn-default btn-success" %>
 <div id='ouo'>
   <p>{{msg}}</p>
 </div>

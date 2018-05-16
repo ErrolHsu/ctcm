@@ -17,11 +17,11 @@ class Admin::ProductsController < AdminController
       # 失敗
       render :new
     end
-  end 
+  end
 
   def edit
     @product = Product.find_by(id: params[:id])
-  end  
+  end
 
   def update
     @product = Product.find_by(id: params[:id])
@@ -44,5 +44,5 @@ class Admin::ProductsController < AdminController
   private
   def product_params
     params.require(:product).permit(:title, :description, :price, :quantity)
-  end  
+  end
 end
