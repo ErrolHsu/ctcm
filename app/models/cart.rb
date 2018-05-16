@@ -20,4 +20,8 @@ class Cart < ApplicationRecord
     end
   end
 
+  def total_price
+    self.cart_items.reduce(0) {|sum, item| sum + item.price}
+  end
+
 end
