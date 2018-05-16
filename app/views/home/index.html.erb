@@ -9,6 +9,8 @@
   </button>
 
 </div>
+<%= current_user.try(:id) %>
+<%= link_to '登出', destroy_user_session_path,method: 'delete', class: "btn btn-default" %>
 
 
 <div id='ouo'>
