@@ -3,8 +3,7 @@ class Cart < ApplicationRecord
   has_many :cart_items
 
   def add_item(product_id)
-    found_item = self.cart_items.find { |item| item.product_id == product_id }
-
+    found_item = self.cart_items.find_by(product_id: product_id)
     if found_item
       found_item.increment
     else

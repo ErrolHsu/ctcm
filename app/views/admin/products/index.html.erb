@@ -1,8 +1,14 @@
   <h1>商品列表</h1>
-
+  <% if user_signed_in? %>
+    <p>目前登入 會員id: <%= current_user.try(:id) %></p>
+    <%= link_to '登出', destroy_user_session_path,method: 'delete', class: "btn btn-default btn-info" %>
+  <% else %>
+    <p>未登入</p>
+    <%= link_to '登入', new_user_session_path, class: "btn btn-default btn-info" %>
+  <% end %>
+  <br>
   <%= link_to "新增商品", new_admin_product_path %>
   <%= link_to '購物車', cart_path, class: "btn btn-default btn-success" %>
-
   <table>
     <thead>
       <tr>

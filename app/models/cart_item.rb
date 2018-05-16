@@ -8,7 +8,7 @@ class CartItem < ApplicationRecord
   end
 
   def increment(n = 1)
-    quantity += n
+    self.update(quantity: self.quantity += n)
   end
 
 end
