@@ -1,3 +1,4 @@
+<div>
   <h1>商品列表</h1>
   <% if user_signed_in? %>
     <p>目前登入 會員id: <%= current_user.try(:id) %></p>
@@ -9,6 +10,7 @@
   <br>
   <%= link_to "新增商品", new_admin_product_path %>
   <%= link_to '購物車', cart_path, class: "btn btn-default btn-success" %>
+</div>
   <table>
     <thead>
       <tr>
