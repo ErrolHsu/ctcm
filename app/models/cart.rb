@@ -1,6 +1,7 @@
 class Cart < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :cart_items
+  has_many :products, through: :cart_items
 
   def add_item(product_id)
     found_item = self.cart_items.find_by(product_id: product_id)
@@ -11,14 +12,6 @@ class Cart < ApplicationRecord
     end
   end
 
-  def self.find_cart(user_id)
-    cart = Cart.find_by(user_id: user_id)
-    if cart
-      cart
-    else
-      Cart.create(user_id: user_id)
-    end
-  end
 
   def total_price
     self.cart_items.reduce(0) {|sum, item| sum + item.price}
