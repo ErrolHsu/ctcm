@@ -1,6 +1,6 @@
 #new_product_app.col-md-9
-  %h1 新增商品
-  = form_for @product, url: admin_products_path(@product), html: { method: :post } do |f|
+  %h1 編輯商品
+  = form_for @product, url: admin_product_path(@product), html: { method: :put } do |f|
     %div.form-group
       = f.label :title, "商品名稱"
       - if @product.errors.full_messages_for(:title).size > 0

@@ -1,16 +1,22 @@
 const new_product_app = new Vue({
   el: '#new_product_app',
   data: {
-    description: '',
-    str: '',
+    markdown_preview: '',
   },
 
   methods: {
-    parse_markdown: function() {
-      var reader = new commonmark.Parser();
-      var writer = new commonmark.HtmlRenderer();
-      var parsed = reader.parse(this.description)
-      this.str = writer.render(parsed);
+    parse_markdown: function(str) {
+      let reader = new commonmark.Parser();
+      let writer = new commonmark.HtmlRenderer();
+      let parsed = reader.parse(str)
+      let result = writer.render(parsed)
+      return result
+    },
+
+    show_markdown_preview: function(e) {
+      let input_str = e.target.value;
+      let parsed_str = this.parse_markdown(input_str);
+      this.markdown_preview = parsed_str;
     }
   }
 })
