@@ -1,0 +1,6 @@
+.col-md-9
+  - @products.each do |product|
+    %div(style='display: flex')
+      = product.title
+      = product.description
+    %hr
