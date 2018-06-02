@@ -1,0 +1,37 @@
+#new_product_app.col-md-9
+  %h1 新增商品
+  = form_for @product, url: admin_products_path(@product), html: { method: :post } do |f|
+    %div.form-group
+      = f.label :title, "商品名稱"
+      - if @product.errors.full_messages_for(:title).size > 0
+        = @product.errors.full_messages_for(:title)
+      = f.text_field :title, class: 'form-control'
+
+    %div.form-group
+      = f.label :price, "商品價格"
+      - if @product.errors.full_messages_for(:price).size > 0
+        = @product.errors.full_messages_for(:price)
+      = f.text_field :price, class: 'form-control'
+    %div.form-group
+      = f.label :quantity, "商品數量"
+      - if @product.errors.full_messages_for(:quantity).size > 0
+        = @product.errors.full_messages_for(:quantity)
+      = f.text_field :quantity, class: 'form-control'
+
+    %div.form-group
+      = f.label :description, "商品介紹"
+      - if @product.errors.full_messages_for(:description).size > 0
+        = @product.errors.full_messages_for(:description)
+      = f.text_area :description, class: 'form-control', 'v-model' => 'description', 'v-on:input' => 'parse_markdown()', style: 'min-height: 400px;'
+
+    %div.mb-5
+      %h3
+        商品介紹預覽
+      %div(v-html='str')
+    %hr
+
+
+    = f.submit class: 'btn btn-dark', style: 'position: fixed; z-index: 10; right:20px; bottom: 20px;'
+  %br/
+  = link_to '回商品列表', admin_products_path
+

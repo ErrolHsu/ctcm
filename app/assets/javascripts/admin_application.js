@@ -7,4 +7,3 @@
 //= require axios.js
 //= require_tree ./admin
 //= require_tree ./common
-//= require vue_test

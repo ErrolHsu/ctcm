@@ -1,0 +1,8 @@
+#test_app
+  {{msg}}
+  %div
+    %button(v-on:click='show = !show')
+      enter
+  %transition(name='fade')
+    %div(v-if='show')
+      出現
