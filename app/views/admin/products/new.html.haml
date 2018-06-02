@@ -18,6 +18,10 @@
         = @product.errors.full_messages_for(:quantity)
       = f.text_field :quantity, class: 'form-control'
 
+
+    %a(href="https://markdown.tw/" target="_blank")
+      markdown語法說明
+
     %div.form-group
       = f.label :description, "商品介紹"
       - if @product.errors.full_messages_for(:description).size > 0
