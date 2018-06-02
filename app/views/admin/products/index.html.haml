@@ -4,4 +4,5 @@
       = product.title
       = product.description
       = link_to 'edit', edit_admin_product_path(product)
+      = link_to "刪除", admin_product_path(product), method: "delete", data: { confirm: "確認刪除???" }
     %hr
