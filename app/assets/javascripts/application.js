@@ -18,4 +18,3 @@
 //= require vue
 //= require axios.js
 //= require_tree ./common
-//= require vue_test
