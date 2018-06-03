@@ -5,5 +5,6 @@
 //= require commonmark.js
 //= require vue
 //= require axios.js
-//= require_tree ./admin
 //= require_tree ./common
+//= require_tree ./admin
+

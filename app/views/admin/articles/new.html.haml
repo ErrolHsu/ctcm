@@ -1,11 +1,3 @@
 #new_article_app.col-md-9
   %h1 New Article
-  = form_for [:admin, article] do |f|
-    %div.form-group
-      = f.label :title, "Title"
-      = f.text_field :title, class: 'form-control'
-    %div.form-group
-      = f.label :title, "Content"
-      = f.text_area :title, class: 'form-control'
-
-    = f.submit class: 'btn btn-dark'
+  = render 'form'

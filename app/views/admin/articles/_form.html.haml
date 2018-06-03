@@ -1,0 +1,19 @@
+= form_for [:admin, article] do |f|
+  %div.form-group
+    = f.label :title, "Title"
+    = f.text_field :title, class: 'form-control'
+
+  %a(href="https://markdown.tw/" target="_blank")
+    markdown語法說明
+
+  %div.form-group
+    = f.label :content, "Content"
+    = f.text_area :content, class: 'form-control', 'v-on:input' => 'show_markdown_preview($event)', style: 'min-height: 400px;'
+
+  %div.mb-5
+    %h3
+      文章內容預覽
+    %div(v-html='markdown_preview')
+  %hr
+
+  = f.submit class: 'btn btn-dark fixed-br'

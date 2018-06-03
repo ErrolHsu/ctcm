@@ -2,6 +2,9 @@
   display: inline-block;
 }
 
-.p20 {
-  padding: 20px;
+.fixed-br {
+  position: fixed;
+  z-index: 10;
+  right:20px;
+  bottom: 20px;
 }
