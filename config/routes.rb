@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   resources :products
 
+  resources :orders
+
   namespace :admin do
     root 'core#index'
     get 'index' => 'core#index'
