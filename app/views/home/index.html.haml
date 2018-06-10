@@ -1,2 +1,3 @@
 
-.btn.btn-secondary 建立定期訂單
+- if current_user.present?
+  = link_to '建立定期訂單', orders_path,  method: 'POST', class: 'btn btn-secondary'

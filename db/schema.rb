@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_10_083643) do
+ActiveRecord::Schema.define(version: 2018_06_10_115926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2018_06_10_083643) do
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "total"
-    t.string "type"
+    t.boolean "regular"
     t.string "status"
     t.string "payment_status"
     t.string "shipping_status"
@@ -69,6 +69,21 @@ ActiveRecord::Schema.define(version: 2018_06_10_083643) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "period_orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "order_id"
+    t.integer "no"
+    t.integer "amount"
+    t.date "expected_date"
+    t.string "status"
+    t.boolean "paid"
+    t.string "shipping_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_period_orders_on_order_id"
+    t.index ["user_id"], name: "index_period_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -100,4 +115,6 @@ ActiveRecord::Schema.define(version: 2018_06_10_083643) do
   add_foreign_key "cart_items", "carts"
   add_foreign_key "carts", "users"
   add_foreign_key "orders", "users"
+  add_foreign_key "period_orders", "orders"
+  add_foreign_key "period_orders", "users"
 end

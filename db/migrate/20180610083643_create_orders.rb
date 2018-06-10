@@ -3,7 +3,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
     create_table :orders do |t|
       t.references :user, foreign_key: true
       t.integer :total
-      t.string :type
+      t.boolean :regular
       t.string :status
       t.string :payment_status
       t.string :shipping_status

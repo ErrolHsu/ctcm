@@ -4,8 +4,8 @@
     %span.navbar-toggler-icon
   #navbarNavAltMarkup.collapse.navbar-collapse
     .navbar-nav
-      %a.nav-item.nav-link.active{:href => "#"}
-        Home
+      .nav-item.nav-link.active
+        = link_to 'Home', root_path
         %span.sr-only (current)
       .nav-item.nav-link
         - if current_user
@@ -13,6 +13,9 @@
             = "會員ID: #{current_user.id}"
         - else
           = link_to '登入', new_user_session_path
+      .nav-item.nav-link
+        - if current_user
+          = link_to '我的訂單', orders_path
       .nav-item.nav-link
         - if current_user
           = link_to '登出', destroy_user_session_path,method: 'delete'
