@@ -47,7 +47,10 @@ gem 'awesome_print'
 gem 'decent_exposure', '3.0.0'
 
 gem 'haml'
-
+# fb sign up or login
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'koala'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

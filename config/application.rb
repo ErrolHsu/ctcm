@@ -17,3 +17,4 @@ module Ctcm
     # -- all .rb files in that directory are automatically loaded.
   end
 end
+CONFIG = Rails.application.secrets
