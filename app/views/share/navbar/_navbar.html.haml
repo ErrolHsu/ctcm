@@ -7,6 +7,8 @@
       .nav-item.nav-link.active
         = link_to 'Home', root_path
         %span.sr-only (current)
+      .nav-item.nav-link.active
+        = link_to '方便去後台', admin_root_path
       .nav-item.nav-link
         - if current_user
           %span
