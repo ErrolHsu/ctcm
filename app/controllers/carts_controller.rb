@@ -1,4 +1,5 @@
 class CartsController < ApplicationController
+
   def add
     current_cart.add_item(params[:id])
     # session[current_user.id] = current_cart.serialize
@@ -9,5 +10,10 @@ class CartsController < ApplicationController
     # session[current_user.id] = nil
     current_cart.cart_items.delete_all
     redirect_to admin_products_path, notice: "購物車已清空"
+  end
+
+  def checkout
+    # temp
+    @product = Product.find_by(id: params[:product_id])
   end
 end

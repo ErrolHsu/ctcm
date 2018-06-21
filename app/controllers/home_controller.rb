@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  expose(:products) { Product.all }
+
   def index
     @t = 123
   end

@@ -1,0 +1,17 @@
+%div
+  訂單類型： 訂閱
+%div
+  總金額
+  = order.total
+%div
+  每次金額：
+  = order.period_amount
+%div
+  訂閱週期： 月
+%div
+  訂閱次數：
+  = order.exec_times
+
+.btn
+  = link_to 'Pay', pay_order_path(order), method: 'POST', class: 'btn btn-secondary'
+

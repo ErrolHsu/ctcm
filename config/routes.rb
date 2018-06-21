@@ -8,12 +8,17 @@ Rails.application.routes.draw do
   resource :cart, only:[:show, :destroy] do
     collection do
       post :add, path:'add/:id'
+      get 'checkout' => 'carts#checkout'
     end
   end
 
   resources :products
 
-  resources :orders
+  resources :orders do
+    member do
+      post 'pay' => 'orders#pay'
+    end
+  end
 
   namespace :admin do
     root 'core#index'
