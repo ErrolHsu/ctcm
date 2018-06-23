@@ -3,5 +3,6 @@ local:
   root: <%= Rails.root.join("storage/images") %>
 google:
   service: GCS
-  project: 'CTCM'
+  credentials: '/home/deployer/ctcm/shared/CTCM-12d6b8857450.json'
+  project: 'ctcm-207213'
   bucket: 'ctcm_storage'

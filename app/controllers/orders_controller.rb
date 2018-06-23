@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
 
+  expose(:orders) { current_user.orders }
   expose(:period_orders) { current_user.period_orders }
   expose(:order)
 
