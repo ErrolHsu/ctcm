@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
-  expose :period_orders, -> { current_user.period_orders }
-  expose :order
+  expose(:period_orders) { current_user.period_orders }
+  expose(:order)
 
   def index
 

@@ -1,16 +1,19 @@
 class Admin::ProductsController < AdminController
+
+  expose(:products) { Product.order('created_at ASC') }
+  expose(:product)
+
   def index
-    @products = Product.all
+
   end
 
   def new
-    @product = Product.new
+
   end
 
   def create
-    @product = Product.new(product_params)
 
-    if @product.save
+    if product.save
       # 成功
       redirect_to admin_products_path
     else
@@ -19,14 +22,16 @@ class Admin::ProductsController < AdminController
     end
   end
 
+  def show
+
+  end
+
   def edit
-    @product = Product.find_by(id: params[:id])
+
   end
 
   def update
-    @product = Product.find_by(id: params[:id])
-
-    if @product.update(product_params)
+    if product.update(product_params)
       # 成功
       redirect_to admin_products_path
     else
@@ -36,13 +41,12 @@ class Admin::ProductsController < AdminController
   end
 
   def destroy
-    @product = Product.find_by(id: params[:id])
-    @product.destroy if @product
+    product.destroy if product
     redirect_to admin_products_path
   end
 
   private
   def product_params
-    params.require(:product).permit(:title, :description, :price, :quantity)
+    params.require(:product).permit(:title, :description, :price, :quantity, :img)
   end
 end

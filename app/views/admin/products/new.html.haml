@@ -1,21 +1,27 @@
 #new_product_app.col-md-9
   %h1 新增商品
-  = form_for @product, url: admin_products_path(@product), html: { method: :post } do |f|
+  = form_for product, url: admin_products_path(product), html: { method: :post } do |f|
     %div.form-group
       = f.label :title, "商品名稱"
-      - if @product.errors.full_messages_for(:title).size > 0
-        = @product.errors.full_messages_for(:title)
+      - if product.errors.full_messages_for(:title).size > 0
+        = product.errors.full_messages_for(:title)
       = f.text_field :title, class: 'form-control'
 
     %div.form-group
+      = f.label :img, "Image"
+      %br/
+      = f.file_field :img
+
+
+    %div.form-group
       = f.label :price, "商品價格"
-      - if @product.errors.full_messages_for(:price).size > 0
-        = @product.errors.full_messages_for(:price)
+      - if product.errors.full_messages_for(:price).size > 0
+        = product.errors.full_messages_for(:price)
       = f.text_field :price, class: 'form-control'
     %div.form-group
       = f.label :quantity, "商品數量"
-      - if @product.errors.full_messages_for(:quantity).size > 0
-        = @product.errors.full_messages_for(:quantity)
+      - if product.errors.full_messages_for(:quantity).size > 0
+        = product.errors.full_messages_for(:quantity)
       = f.text_field :quantity, class: 'form-control'
 
 
@@ -24,8 +30,8 @@
 
     %div.form-group
       = f.label :description, "商品介紹"
-      - if @product.errors.full_messages_for(:description).size > 0
-        = @product.errors.full_messages_for(:description)
+      - if product.errors.full_messages_for(:description).size > 0
+        = product.errors.full_messages_for(:description)
       = f.text_area :description, class: 'form-control', 'v-on:input' => 'show_markdown_preview($event)', style: 'min-height: 400px;'
 
     %div.mb-5

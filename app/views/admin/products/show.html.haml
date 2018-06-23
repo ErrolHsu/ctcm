@@ -1,0 +1,6 @@
+%div
+  = product.title
+
+%div
+  - if product.img.attached?
+    = image_tag(product.img.variant(resize: "500x500"))
