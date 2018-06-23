@@ -11,17 +11,17 @@ class OrdersController < ApplicationController
     # 測試
     product = Product.find_by(id: params[:product_id])
     order = current_user.orders.create(
-      total: product.price * 12,
+      total: 100 * 12, # TODO
       regular: true,
       period_type: 'month',
-      period_amount: product.price,
+      period_amount: 100, # TODO
       frequency: 1,
       exec_times: 12,
     )
 
     order_item = order.items.create(
       product_name: product.title,
-      price: product.price,
+      price: 100,  #  TODO
       quantity: 1
     )
 

@@ -7,16 +7,16 @@
         = product.errors.full_messages_for(:title)
       = f.text_field :title, class: 'form-control'
 
-    %div.form-group
-      = f.label :price, "商品價格"
-      - if product.errors.full_messages_for(:price).size > 0
-        = product.errors.full_messages_for(:price)
-      = f.text_field :price, class: 'form-control'
-    %div.form-group
-      = f.label :quantity, "商品數量"
-      - if product.errors.full_messages_for(:quantity).size > 0
-        = product.errors.full_messages_for(:quantity)
-      = f.text_field :quantity, class: 'form-control'
+    / %div.form-group
+    /   = f.label :price, "商品價格"
+    /   - if product.errors.full_messages_for(:price).size > 0
+    /     = product.errors.full_messages_for(:price)
+    /   = f.text_field :price, class: 'form-control'
+    / %div.form-group
+    /   = f.label :quantity, "商品數量"
+    /   - if product.errors.full_messages_for(:quantity).size > 0
+    /     = product.errors.full_messages_for(:quantity)
+    /   = f.text_field :quantity, class: 'form-control'
 
 
     %a(href="https://markdown.tw/" target="_blank")
