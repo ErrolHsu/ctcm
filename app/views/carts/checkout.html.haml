@@ -1,9 +1,14 @@
 %h4
   產品
 %h5
-  = @product.title
+  = product.title
+
+%div
+  - if product.img.attached?
+    = image_tag(product.img.variant(resize: "300x300"))
+
 %div
   每月一次共12次
 
 %div
-  = link_to '確認下單', orders_path(product_id: @product.id),  method: 'POST', class: 'btn btn-secondary'
+  = link_to '確認下單', orders_path(product_id: product.id),  method: 'POST', class: 'btn btn-secondary'

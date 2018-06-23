@@ -1,0 +1,7 @@
+%div
+  - order.items.each do |item|
+    %div
+      = item.product_name
+      %br/
+      - if item.img.attached?
+        = image_tag(item.img.variant(resize: "500x500"))

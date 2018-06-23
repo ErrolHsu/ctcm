@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     get 'index' => 'core#index'
     resources :products
     resources :articles
+    resources :orders
   end
 
 end

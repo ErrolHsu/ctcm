@@ -9,8 +9,12 @@
 
   <body class="container-fluid">
     <div class="row">
-      <%= render  'share/admin/side_bar' %>
-      <%= yield %>
+      <div class="wrapper col-md-3 d-none d-md-block">
+        <%= render  'share/admin/side_bar' %>
+      </div>
+      <div class='col-md-9'>
+        <%= yield %>
+      </div>
     </div>
     <%= javascript_include_tag 'admin_application' %>
   </body>

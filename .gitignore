@@ -16,6 +16,9 @@
 /node_modules
 /yarn-error.log
 
+# 圖片儲存
+/storage/images
+
 .byebug_history
 config/database.yml
 config/secrets.yml

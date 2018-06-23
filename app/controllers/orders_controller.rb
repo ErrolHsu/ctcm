@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
-  expose :period_orders, -> { current_user.period_orders }
-  expose :order
+  expose(:period_orders) { current_user.period_orders }
+  expose(:order)
 
   def index
 
@@ -19,11 +19,17 @@ class OrdersController < ApplicationController
       exec_times: 12,
     )
 
-    order.items.create(
+    order_item = order.items.create(
       product_name: product.title,
       price: product.price,
       quantity: 1
     )
+
+    # add img
+    if product.img.attached?
+      product_img = product.img.blob
+      order_item.img.attach(product_img)
+    end
 
     order.create_shipping_address(
       address: '台北市松山區八德路三段巷15號3樓',

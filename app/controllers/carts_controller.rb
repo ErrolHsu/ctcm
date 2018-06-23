@@ -1,5 +1,7 @@
 class CartsController < ApplicationController
 
+  expose(:product) { Product.find_by(id: params[:product_id]) }
+
   def add
     current_cart.add_item(params[:id])
     # session[current_user.id] = current_cart.serialize
@@ -13,7 +15,5 @@ class CartsController < ApplicationController
   end
 
   def checkout
-    # temp
-    @product = Product.find_by(id: params[:product_id])
   end
 end
