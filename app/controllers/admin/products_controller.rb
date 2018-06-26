@@ -13,13 +13,17 @@ class Admin::ProductsController < AdminController
 
   def create
 
-    if product.save
-      # 成功
-      redirect_to admin_products_path
-    else
-      # 失敗
-      render :new
+    variants = JSON.parse(params['variants_json']) if params['variants_json']
+    ActiveRecord::Base.transaction do
+      product.save!
+      if variants.present?
+        variants.each do |variant|
+          next if variant.values.any? { |value| value.blank? }
+          product.variants.create!(variant)
+        end
+      end
     end
+    redirect_to admin_products_path
   end
 
   def show

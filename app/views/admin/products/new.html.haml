@@ -12,18 +12,24 @@
       %br/
       = f.file_field :img
 
-    %input(name='hello')
-    / %div.form-group
-    /   = f.label :price, "商品價格"
-    /   - if product.errors.full_messages_for(:price).size > 0
-    /     = product.errors.full_messages_for(:price)
-    /   = f.text_field :price, class: 'form-control'
-    / %div.form-group
-    /   = f.label :quantity, "商品數量"
-    /   - if product.errors.full_messages_for(:quantity).size > 0
-    /     = product.errors.full_messages_for(:quantity)
-    /   = f.text_field :quantity, class: 'form-control'
+    %hr
 
+    %h5
+      Variants
+    .d-flex.justify-content-between.align-items-baseline(v-for='(variant, index) in variants' )
+      %input.form-control.mt-2(v-model='variant.weight' placeholder='重量')
+      %input.form-control.mt-2.ml-2(v-model='variant.price' placeholder='價格')
+      %input.form-control.mt-2.ml-2(v-model='variant.quantity' placeholder='數量')
+      .fa.fa-times.pointer.ml-2(v-on:click='remove_variant_input(index)')
+
+
+    .button.mt-2(v-on:click='add_variant_input')
+      ADD
+
+    %hr
+
+    / variants input
+    %input(type="hidden" name='variants_json' v-model='variants_json')
 
     %a(href="https://markdown.tw/" target="_blank")
       markdown語法說明

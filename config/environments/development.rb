@@ -56,4 +56,6 @@ Rails.application.configure do
 
   # active storage
   config.active_storage.service = :local
+  # for ActiveJob deadlocks db
+  config.active_job.queue_adapter = :inline
 end

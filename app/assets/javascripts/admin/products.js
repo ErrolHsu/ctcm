@@ -4,11 +4,24 @@ const new_product_app = new Vue({
   data: {
     variants: [{
       weight: '',
-      price: 0,
-      quantity: 0,
+      price: '',
+      quantity: '',
     }]
   },
 
+  computed: {
+    variants_json: function() {
+      return JSON.stringify(this.variants);
+    }
+  },
+
   methods: {
+    add_variant_input: function() {
+      this.variants.push({weight: '', price: '', quantity: ''});
+    },
+
+    remove_variant_input: function(index) {
+      this.variants.splice(index, 1);
+    },
   }
 })
