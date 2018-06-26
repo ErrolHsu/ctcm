@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   root 'home#index'
-  get 'home/ajax' => 'home#ajax'
+  get 'home/initialize_data' => 'home#initialize_data'
 
   resource :cart, only:[:show, :destroy] do
     collection do

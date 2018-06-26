@@ -1,9 +1,18 @@
-- products.each do |product|
-  .d-flex
-    %div
-      = link_to product.title, checkout_cart_path(product_id: product.id)
-    %div(style='margin-left:10px;')
-      / TODO
-      = 100
-    %hr
+#home_page_app
+  %div.d-inline-block.ml-2(v-for='product in products')
+    %div.button-normal(v-on:click='product_selected(product)')
+      {{ product.title }}
+  %br
 
+  %div.d-inline-block.ml-2.mt-4(v-for='variant in current_variants')
+    %div.button-normal(v-on:click='variant_seleted(variant)')
+      {{ variant.weight }} {{ variant.price }}
+
+  %br
+
+  %div.d-inline-block.ml-2.mt-4(v-if='customer_set.variant_id != 0'  v-for='period in periods')
+    %div.button-normal(v-on:click='period_seleted(period)')
+      {{ period }}
+
+  %hr/
+  {{ customer_set.period }}
