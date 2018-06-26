@@ -15,6 +15,7 @@
 //= require bootstrap
 //= require rails-ujs
 //= require commonmark.js
+//= require commonmark.js
 //= require vue
 //= require axios.js
 //= require_tree ./common

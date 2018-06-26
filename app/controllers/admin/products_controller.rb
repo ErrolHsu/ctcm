@@ -23,7 +23,6 @@ class Admin::ProductsController < AdminController
   end
 
   def show
-
   end
 
   def edit
