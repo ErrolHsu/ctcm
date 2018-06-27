@@ -15,11 +15,22 @@ const home_page_app = new Vue({
 
   mounted() {
     let self = this
+
+    // set CSRF Token
+    const csrf_token = document.querySelector("meta[name=csrf-token]").content
+    axios.defaults.headers.common['X-CSRF-Token'] = csrf_token
+
     axios.get('/home/initialize_data')
       .then(function(response) {
         console.log(JSON.parse(response['data']['products']))
         self.products = JSON.parse(response['data']['products'])
       });
+  },
+
+  computed: {
+    show_buy_button: function() {
+      return this.customer_set.product_id != 0 && this.customer_set.variant_id != 0 && this.customer_set.period.length != 0
+    }
   },
 
   methods: {
@@ -46,7 +57,19 @@ const home_page_app = new Vue({
         variant_id: 0,
         period: '',
       }
-    }
+    },
+
+    // 下單
+    buy_request: function() {
+      let self = this;
+      axios.post('orders/create_period_order', {
+        data: 'Hello',
+        customer_set: self.customer_set,
+      })
+      .then(function(response) {
+        alertify.logPosition("top right").closeLogOnClick(true).success(response['data']['message']);
+      })
+    },
 
   }
 })

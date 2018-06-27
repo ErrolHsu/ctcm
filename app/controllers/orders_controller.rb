@@ -40,6 +40,10 @@ class OrdersController < ApplicationController
 
   end
 
+  def create_period_order
+    render json: {message: "#{params['data']}建立訂單成功"}
+  end
+
   def show
 
   end

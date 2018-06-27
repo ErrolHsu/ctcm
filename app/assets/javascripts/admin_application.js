@@ -6,6 +6,7 @@
 //= require commonmark.js
 //= require vue
 //= require axios.js
+//= require alertify.js
 //= require_tree ./common
 //= require_tree ./admin
 

@@ -18,6 +18,9 @@ Rails.application.routes.draw do
     member do
       post 'pay' => 'orders#pay'
     end
+    collection do
+      post 'create_period_order' => 'orders#create_period_order'
+    end
   end
 
   namespace :admin do
