@@ -14,9 +14,10 @@
 //= require popper
 //= require bootstrap
 //= require rails-ujs
+//= require lodash.js
 //= require commonmark.js
-//= require vue
 //= require axios.js
 //= require alertify.js
+//= require vue
 //= require_tree ./common
 //= require home.js

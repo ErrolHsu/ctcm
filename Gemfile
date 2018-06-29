@@ -47,6 +47,8 @@ gem 'awesome_print'
 
 gem 'decent_exposure', '3.0.0'
 
+gem 'active_hash'
+
 gem 'haml'
 # fb sign up or login
 gem 'omniauth'

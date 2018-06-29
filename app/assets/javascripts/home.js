@@ -4,11 +4,13 @@ const home_page_app = new Vue({
   data: {
     products: [],
     periods: ['每週', '隔週', '三週', '每月'],
+    times: [1, 2, 3, 4],
     current_variants: [],
     customer_set: {
       product_id: 0,
       variant_id: 0,
       period: '',
+      time: '',
     },
 
   },
@@ -22,14 +24,18 @@ const home_page_app = new Vue({
 
     axios.get('/home/initialize_data')
       .then(function(response) {
-        console.log(JSON.parse(response['data']['products']))
         self.products = JSON.parse(response['data']['products'])
       });
   },
 
   computed: {
     show_buy_button: function() {
-      return this.customer_set.product_id != 0 && this.customer_set.variant_id != 0 && this.customer_set.period.length != 0
+      return (
+        this.customer_set.product_id != 0 &&
+        this.customer_set.variant_id != 0 &&
+        this.customer_set.period.length != 0 &&
+        this.customer_set.time
+      )
     }
   },
 
@@ -51,23 +57,33 @@ const home_page_app = new Vue({
       this.customer_set.period = period;
     },
 
+    time_seleted: function(time) {
+      this.customer_set.time = time;
+    },
+
     reset: function() {
       this.customer_set = {
         product_id: 0,
         variant_id: 0,
         period: '',
+        time: '',
+      }
+    },
+
+    seleted: function(a, b) {
+      if(a == b) {
+        return {background: '#fff', color: '#444'}
       }
     },
 
     // 下單
-    buy_request: function() {
+    order_request: function() {
       let self = this;
       axios.post('orders/create_period_order', {
-        data: 'Hello',
         customer_set: self.customer_set,
       })
       .then(function(response) {
-        alertify.logPosition("top right").closeLogOnClick(true).success(response['data']['message']);
+        success_msg(response['data']['message']);
       })
     },
 

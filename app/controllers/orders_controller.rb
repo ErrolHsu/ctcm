@@ -41,6 +41,33 @@ class OrdersController < ApplicationController
   end
 
   def create_period_order
+    unless current_user.present?
+      render json: { message: 'please login!' }
+      return
+    end
+    # TODO
+    # valid customer_set
+    customer_set = params['customer_set']
+    product = Product.find_by(id: customer_set[:product_id])
+    variant = ProductVariant.find_by(id: customer_set['variant_id'])
+    frequency = get_frequency(customer_set['period'])
+    order = current_user.orders.create!(
+      total: variant.price * customer_set['time'],
+      regular: true,
+      period_type: 'day',
+      period_amount: variant.price,
+      frequency: frequency,
+      exec_times: customer_set['time'],
+    )
+
+    order.items.create!(
+      product_name: "#{product.title} #{variant.weight}",
+      price: variant.price,
+      quantity: 1,
+      product_id: product.id,
+      variant_id: variant.id,
+    )
+
     render json: {message: "#{params['data']}建立訂單成功"}
   end
 
@@ -63,6 +90,21 @@ class OrdersController < ApplicationController
     end
 
     redirect_to root_path
+  end
+
+  private
+
+  def get_frequency(period)
+    case period
+    when '每週'
+      7
+    when '隔週'
+      14
+    when '三週'
+      21
+    when '每月'
+      30
+    end
   end
 
 end

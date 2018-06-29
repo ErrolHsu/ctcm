@@ -1,19 +1,25 @@
 #home_page_app
   .d-inline-block.ml-2(v-for='product in products')
-    .button-normal(v-on:click='product_selected(product)')
+    .button-normal(v-on:click='product_selected(product)' :style='seleted(customer_set.product_id, product.id)')
       {{ product.title }}
   %br
 
   .d-inline-block.ml-2.mt-4(v-for='variant in current_variants')
-    .button-normal(v-on:click='variant_seleted(variant)')
-      {{ variant.weight }} {{ variant.price }}
+    .button-normal(v-on:click='variant_seleted(variant)' :style='seleted(customer_set.variant_id, variant.id)')
+      {{ variant.weight }} ${{ variant.price }}
 
   %br
 
-  .d-inline-block.ml-2.mt-4(v-if='customer_set.variant_id != 0'  v-for='period in periods')
-    .button-normal(v-on:click='period_seleted(period)')
+  .d-inline-block.ml-2.mt-4(v-if='customer_set.variant_id != 0' v-for='period in periods')
+    .button-normal(v-on:click='period_seleted(period)' :style='seleted(customer_set.period, period)')
       {{ period }}
 
+  %br
+
+  .d-inline-block.ml-2.mt-4(v-if='customer_set.period.length != 0' v-for='time in times')
+    .button-normal(v-on:click='time_seleted(time)' :style='seleted(customer_set.time, time)')
+      {{ time }}
+
   %hr/
-  .button-normal.ml-2(v-if='show_buy_button' v-on:click='buy_request')
+  .button-normal.ml-2(v-if='show_buy_button' v-on:click='order_request')
     Buy
