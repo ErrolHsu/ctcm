@@ -58,6 +58,9 @@ class OrdersController < ApplicationController
       period_amount: variant.price,
       frequency: frequency,
       exec_times: customer_set['time'],
+      status: 'open',
+      payment_status: 'pending',
+      shipping_status: 'unshipping',
     )
 
     order.items.create!(
@@ -67,6 +70,8 @@ class OrdersController < ApplicationController
       product_id: product.id,
       variant_id: variant.id,
     )
+
+    order.create_shipping_address!(address: customer_set['address'])
 
     render json: {message: "#{params['data']}建立訂單成功"}
   end

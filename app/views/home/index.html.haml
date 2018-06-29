@@ -20,6 +20,11 @@
     .button-normal(v-on:click='time_seleted(time)' :style='seleted(customer_set.time, time)')
       {{ time }}
 
+  %br
+
+  .d-inline-block.ml-2.mt-4(v-if='show_address_input')
+    %input.form-control.mt-2(v-model='customer_set.address' placeholder='請輸入地址')
+
   %hr/
   .button-normal.ml-2(v-if='show_buy_button' v-on:click='order_request')
     Buy

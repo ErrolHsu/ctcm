@@ -11,6 +11,7 @@ const home_page_app = new Vue({
       variant_id: 0,
       period: '',
       time: '',
+      address: '',
     },
 
   },
@@ -29,14 +30,24 @@ const home_page_app = new Vue({
   },
 
   computed: {
+    show_address_input: function() {
+      return ( this.customer_set_item_completed )
+    },
+
     show_buy_button: function() {
+      return (
+        this.customer_set_item_completed && this.customer_set.address.length != 0
+      )
+    },
+
+    customer_set_item_completed: function() {
       return (
         this.customer_set.product_id != 0 &&
         this.customer_set.variant_id != 0 &&
         this.customer_set.period.length != 0 &&
         this.customer_set.time
       )
-    }
+    },
   },
 
   methods: {
@@ -62,12 +73,10 @@ const home_page_app = new Vue({
     },
 
     reset: function() {
-      this.customer_set = {
-        product_id: 0,
-        variant_id: 0,
-        period: '',
-        time: '',
-      }
+      this.customer_set.product_id = 0;
+      this.customer_set.variant_id = 0;
+      this.customer_set.period = '';
+      this.customer_set.time = '';
     },
 
     seleted: function(a, b) {
