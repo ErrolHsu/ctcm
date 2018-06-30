@@ -6,10 +6,9 @@ class HomeController < ApplicationController
   end
 
   def initialize_data
-
     render json: {
       products: product_json,
-      periods: Setting::Period.to_hash,
+      periods: Reference::Period.to_hash,
     }
   end
 

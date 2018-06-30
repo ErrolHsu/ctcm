@@ -291,6 +291,7 @@ GEM
     selenium-webdriver (3.12.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
+    settingslogic (2.0.9)
     signet (0.8.1)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -365,6 +366,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
+  settingslogic
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data

@@ -1,5 +1,5 @@
 # encoding: utf-8
-module Setting
+module Reference
   class Base < ActiveHash::Base
 
     def self.to_hash
@@ -8,7 +8,7 @@ module Setting
 
   end
 
-  class OrderStatus < Setting::Base
+  class OrderStatus < Reference::Base
     self.data = [
       {id: 1, name: '已下單', value: 'open' },
       {id: 2, name: '待處理', value: 'pending'},
@@ -18,7 +18,7 @@ module Setting
     ]
   end
 
-  class PaymentStatus < Setting::Base
+  class PaymentStatus < Reference::Base
     self.data = [
       {id: 1, name: '待付款', value: 'pending' },
       {id: 2, name: '已取號', value: 'take'},
@@ -28,7 +28,7 @@ module Setting
     ]
   end
 
-  class ShippingStatus < Setting::Base
+  class ShippingStatus < Reference::Base
     self.data = [
       {id: 1, name: '烘培中',  value: '' },
       {id: 2, name: '已寄送',  value: ''},
@@ -39,7 +39,7 @@ module Setting
     ]
   end
 
-  class Period < Setting::Base
+  class Period < Reference::Base
     self.data = [
       {id: 1, name: '每週', value: 7 },
       {id: 2, name: '隔週', value: 14 },
