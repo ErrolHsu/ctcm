@@ -52,6 +52,7 @@ class OrdersController < ApplicationController
     variant = ProductVariant.find_by(id: customer_set['variant_id'])
     frequency = customer_set['period'].to_i
     order = current_user.orders.create!(
+      order_no: generate_order_no,
       total: variant.price * customer_set['time'],
       regular: true,
       period_type: 'day',
@@ -100,5 +101,9 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def generate_order_no
+    Time.now.strftime("%y%m%d%H%M%S") + 'CTCM' + SecureRandom.hex(2).upcase
+  end
 
 end
