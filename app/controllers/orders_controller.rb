@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
     customer_set = params['customer_set']
     product = Product.find_by(id: customer_set[:product_id])
     variant = ProductVariant.find_by(id: customer_set['variant_id'])
-    frequency = get_frequency(customer_set['period'])
+    frequency = customer_set['period'].to_i
     order = current_user.orders.create!(
       total: variant.price * customer_set['time'],
       regular: true,
@@ -84,13 +84,15 @@ class OrdersController < ApplicationController
     order = Order.find_by(id: params[:id])
     date = Date.today
 
-    12.times do |i|
+    order.exec_times.times do |i|
+      date += order.frequency.days
       order.period_orders.create(
         user_id: current_user.id,
         no: i,
-        amount: 100,
-        expected_date: date + (i - 1).month,
+        amount: order.period_amount,
+        expected_date: date,
         paid: false,
+        status: 'pending',
       )
     end
 
@@ -98,18 +100,5 @@ class OrdersController < ApplicationController
   end
 
   private
-
-  def get_frequency(period)
-    case period
-    when '每週'
-      7
-    when '隔週'
-      14
-    when '三週'
-      21
-    when '每月'
-      30
-    end
-  end
 
 end

@@ -25,7 +25,8 @@ const home_page_app = new Vue({
 
     axios.get('/home/initialize_data')
       .then(function(response) {
-        self.products = JSON.parse(response['data']['products'])
+        self.products = JSON.parse(response['data']['products']);
+        self.periods = response['data']['periods']
       });
   },
 
@@ -65,7 +66,7 @@ const home_page_app = new Vue({
 
     // 選定週期
     period_seleted: function(period) {
-      this.customer_set.period = period;
+      this.customer_set.period = period.value;
     },
 
     time_seleted: function(time) {
@@ -73,7 +74,6 @@ const home_page_app = new Vue({
     },
 
     reset: function() {
-      this.customer_set.product_id = 0;
       this.customer_set.variant_id = 0;
       this.customer_set.period = '';
       this.customer_set.time = '';

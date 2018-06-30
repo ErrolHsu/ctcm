@@ -11,8 +11,8 @@
   %br
 
   .d-inline-block.ml-2.mt-4(v-if='customer_set.variant_id != 0' v-for='period in periods')
-    .button-normal(v-on:click='period_seleted(period)' :style='seleted(customer_set.period, period)')
-      {{ period }}
+    .button-normal(v-on:click='period_seleted(period)' :style='seleted(customer_set.period, period.value)')
+      {{ period.name }}
 
   %br
 
