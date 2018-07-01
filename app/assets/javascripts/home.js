@@ -3,7 +3,9 @@ const home_page_app = new Vue({
   mixins: [markDown],
   data: {
     products: [],
-    periods: ['每週', '隔週', '三週', '每月'],
+
+    // 定期訂單相關
+    periods: [],
     times: [1, 2, 3, 4],
     current_variants: [],
     customer_set: {
@@ -69,6 +71,7 @@ const home_page_app = new Vue({
       this.customer_set.period = period.value;
     },
 
+    // 選定次數
     time_seleted: function(time) {
       this.customer_set.time = time;
     },
@@ -79,6 +82,7 @@ const home_page_app = new Vue({
       this.customer_set.time = '';
     },
 
+    // 是否選中
     seleted: function(a, b) {
       if(a == b) {
         return {background: '#fff', color: '#444'}

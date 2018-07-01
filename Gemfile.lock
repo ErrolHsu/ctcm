@@ -350,6 +350,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   faker
+  faraday
   font-awesome-sass (~> 5.0.9)
   google-cloud-storage (~> 1.8)
   haml

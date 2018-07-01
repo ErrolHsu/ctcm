@@ -2,7 +2,8 @@ class OrdersController < ApplicationController
 
   expose(:orders) { current_user.orders }
   expose(:period_orders) { current_user.period_orders }
-  expose(:order)
+  expose :order, scope: ->{ orders }
+  expose(:ecpay_order) { get_ecpay_order(order) }
 
   def index
 
@@ -55,7 +56,7 @@ class OrdersController < ApplicationController
       order_no: generate_order_no,
       total: variant.price * customer_set['time'],
       regular: true,
-      period_type: 'day',
+      period_type: 'D',
       period_amount: variant.price,
       frequency: frequency,
       exec_times: customer_set['time'],
@@ -78,7 +79,22 @@ class OrdersController < ApplicationController
   end
 
   def show
+  end
 
+  # 更新merchant_trade_no，並產生綠界訂單data
+  def ecpay_generate
+    order = Order.find_by(id: params['order_id'].to_i)
+    begin
+      order.merchant_trade_no = order.order_no + SecureRandom.hex(1).upcase
+      order.save!
+
+      ecpay_order = get_ecpay_order(order)
+
+      render json: { order: ecpay_order }
+    rescue => e
+      render json: { 'message' => '發生錯誤，請稍候重試。' }, status: 500
+      error_log 'ecpay_generate', e.message
+    end
   end
 
   def pay
@@ -103,7 +119,12 @@ class OrdersController < ApplicationController
   private
 
   def generate_order_no
-    Time.now.strftime("%y%m%d%H%M%S") + 'CTCM' + SecureRandom.hex(2).upcase
+    Time.now.to_s(:no) + SecureRandom.hex(1).upcase
+  end
+
+  def get_ecpay_order(order)
+    ecpay_order = EcpayServices::PeriodOrder.new(order)
+    ecpay_order.call
   end
 
 end
