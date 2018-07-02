@@ -6,8 +6,16 @@ class ApplicationController < ActionController::Base
   private
 
   def error_log(action, msg)
-    File.open('log/error.log', 'a') do |f|
-      f.write "[#{Time.now.to_s(:complete)}][#{action}] #{msg}\n"
-    end
+    log = Logger.new("#{Rails.root}/log/error.log")
+    log.info "[#{action}] #{msg}"
+    # TODO
+    # slack
+  end
+
+  def ecpay_log(action, msg)
+    log = Logger.new("#{Rails.root}/log/ecpay.log")
+    log.info "[#{action}] #{msg}"
+    # TODO
+    # slack
   end
 end

@@ -5,12 +5,6 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/initialize_data' => 'home#initialize_data'
 
-  resource :cart, only:[:show, :destroy] do
-    collection do
-      post :add, path:'add/:id'
-      get 'checkout' => 'carts#checkout'
-    end
-  end
 
   resources :products
 
@@ -23,6 +17,19 @@ Rails.application.routes.draw do
       post 'ecpay_generate' => 'orders#ecpay_generate'
     end
   end
+
+  resource :cart, only:[:show, :destroy] do
+    collection do
+      post :add, path:'add/:id'
+      get 'checkout' => 'carts#checkout'
+    end
+  end
+
+  # ecpay
+
+  post 'ecpay/order_notify' => 'ecpay#order_notify'
+
+  # 後台
 
   namespace :admin do
     root 'core#index'

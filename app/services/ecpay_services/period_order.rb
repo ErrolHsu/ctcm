@@ -28,7 +28,7 @@ module EcpayServices
       }
 
       data.merge!(necessary_data)
-      data.merge!(CheckMacValue: generate_check_mac_value(data))
+      data.merge!(CheckMacValue: PeriodOrder.generate_check_mac_value(data))
     end
 
     private

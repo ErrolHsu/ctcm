@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 2018_07_01_122001) do
 
   create_table "trade_infos", force: :cascade do |t|
     t.bigint "order_id"
+    t.integer "period_order_id"
     t.integer "rtn_code"
     t.string "merchant_trade_no"
     t.string "trade_no"
@@ -160,6 +161,7 @@ ActiveRecord::Schema.define(version: 2018_07_01_122001) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_trade_infos_on_order_id"
+    t.index ["period_order_id"], name: "index_trade_infos_on_period_order_id"
   end
 
   create_table "users", force: :cascade do |t|
