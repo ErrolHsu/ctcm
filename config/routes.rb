@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/initialize_data' => 'home#initialize_data'
 
-
   resources :products
 
   resources :orders do
