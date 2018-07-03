@@ -25,6 +25,7 @@ module EcpayServices
         PeriodType: @order.period_type,
         Frequency: @order.frequency,
         ExecTimes: @order.exec_times,
+        # OrderResultURL: "http://localhost:3000/orders/ecpay_return",
       }
 
       data.merge!(necessary_data)

@@ -28,3 +28,24 @@
   %hr/
   .button-normal.ml-2(v-if='show_buy_button' v-on:click='order_request')
     Buy
+
+
+  %div.mt-6(v-if='object_present(order)')
+    %div
+      訂單類型： 訂閱
+    %div
+      每次金額：
+      {{order.period_amount}}
+    %div
+      訂閱週期：
+      {{order.frequency}}日/次
+    %div
+      訂閱次數：
+      {{order.exec_times}}
+
+  %div(v-if='object_present(order)')
+    / 綠界付款連結
+    = form_tag("#{Settings.ecpay.host}/Cashier/AioCheckOut/V5", id: 'ecpay_info_form', method: "post", :authenticity_token => false, :enforce_utf8 => false ) do
+      %input(v-for='(value, key) in ecpay_info' v-bind:name='key' v-bind:value='value' type="hidden")
+    .button-normal{ 'v-on:click' => 'go_to_pay'}
+      Pay!

@@ -1,7 +1,7 @@
 const order_show_app = new Vue({
   el: '#order_show_app',
   data: {
-    order: {},
+    ecpay_info: {},
     merchant_trade_no: '',
   },
 
@@ -13,10 +13,10 @@ const order_show_app = new Vue({
         order_id: order_id
       })
       .then(function(response) {
-        self.order = Object.assign({}, response['data']['order']);
+        self.ecpay_info = Object.assign({}, response['data']['ecpay_info']);
       })
       .then(function(response) {
-        document.getElementById('order_form').submit();
+        document.getElementById('ecpay_info_form').submit();
       })
       .catch(function(error) {
         error_msg(error.response['data']['message']);

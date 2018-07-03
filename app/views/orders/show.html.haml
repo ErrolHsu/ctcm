@@ -15,7 +15,7 @@
     = order.exec_times
 
   / 綠界付款連結
-  = form_tag("#{Settings.ecpay.host}/Cashier/AioCheckOut/V5", id: 'order_form', method: "post", :authenticity_token => false, :enforce_utf8 => false ) do
-    %input(v-for='(value, key) in order' v-bind:name='key' v-bind:value='value' type="hidden")
+  = form_tag("#{Settings.ecpay.host}/Cashier/AioCheckOut/V5", id: 'ecpay_info_form', method: "post", :authenticity_token => false, :enforce_utf8 => false ) do
+    %input(v-for='(value, key) in ecpay_info' v-bind:name='key' v-bind:value='value' type="hidden")
   .button-normal(data-order-id="#{order.id}"){ 'v-on:click' => 'go_to_pay($event)'}
     Pay!

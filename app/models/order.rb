@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   has_many :items, class_name: 'OrderItem', dependent: :destroy
   has_many :period_orders, dependent: :destroy
   has_one  :shipping_address, dependent: :destroy
-  has_many :trade_infos
+  has_many :trade_infos, dependent: :nullify
 
   def paid!(params)
     self.status = 'pending'

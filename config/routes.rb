@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     collection do
       post 'create_period_order' => 'orders#create_period_order'
       post 'ecpay_generate' => 'orders#ecpay_generate'
+      post 'ecpay_return' => 'orders#ecpay_return'
     end
   end
 

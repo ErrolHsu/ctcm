@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :ecpay_return
 
   expose(:orders) { current_user.orders }
   expose(:period_orders) { current_user.period_orders }
@@ -75,7 +76,7 @@ class OrdersController < ApplicationController
 
     order.create_shipping_address!(address: customer_set['address'])
 
-    render json: {message: "#{params['data']}建立訂單成功"}
+    render json: {message: "#{params['data']}建立訂單成功", order: order.to_json}
   end
 
   def show
@@ -88,14 +89,19 @@ class OrdersController < ApplicationController
       order.merchant_trade_no = order.order_no + SecureRandom.hex(1).upcase
       order.save!
 
-      ecpay_order = get_ecpay_order(order)
+      ecpay_info = get_ecpay_info(order)
 
-      render json: { order: ecpay_order }
+      render json: { ecpay_info: ecpay_info }
     rescue => e
       render json: { 'message' => '發生錯誤，請稍候重試。' }, status: 500
       error_log 'ecpay_generate', e.message
     end
   end
+
+  # ecpay 付款完成返回網址
+  # def ecpay_return
+  #  
+  # end
 
   def pay
     order = Order.find_by(id: params[:id])
@@ -122,7 +128,7 @@ class OrdersController < ApplicationController
     Time.now.to_s(:no) + SecureRandom.hex(1).upcase
   end
 
-  def get_ecpay_order(order)
+  def get_ecpay_info(order)
     ecpay_order = EcpayServices::PeriodOrder.new(order)
     ecpay_order.call
   end

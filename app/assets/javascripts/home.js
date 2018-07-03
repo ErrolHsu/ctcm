@@ -16,6 +16,10 @@ const home_page_app = new Vue({
       address: '',
     },
 
+    // 付款相關
+    order: {},
+    ecpay_info: {},
+
   },
 
   mounted() {
@@ -54,6 +58,11 @@ const home_page_app = new Vue({
   },
 
   methods: {
+    // 是否出現付款連結
+    object_present: function(object) {
+      return object_present(object);
+    },
+
     // 選定產品
     product_selected: function(product) {
       this.reset();
@@ -97,6 +106,24 @@ const home_page_app = new Vue({
       })
       .then(function(response) {
         success_msg(response['data']['message']);
+        self.order = JSON.parse(response['data']['order']);
+      })
+    },
+
+    // 產生ecpay付款所需資料
+    go_to_pay: function() {
+      let self = this;
+      axios.post('/orders/ecpay_generate', {
+        order_id: self.order.id
+      })
+      .then(function(response) {
+        self.ecpay_info = Object.assign({}, response['data']['ecpay_info']);
+      })
+      .then(function(response) {
+        document.getElementById('ecpay_info_form').submit();
+      })
+      .catch(function(error) {
+        error_msg(error.response['data']['message']);
       })
     },
 
