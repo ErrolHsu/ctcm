@@ -6,13 +6,13 @@ const home_page_app = new Vue({
 
     // 定期訂單相關
     periods: [],
-    times: [1, 2, 3, 4],
+    limits: [],
     current_variants: [],
     customer_set: {
       product_id: 0,
       variant_id: 0,
       period: '',
-      time: '',
+      limit: '',
       address: '',
     },
 
@@ -33,6 +33,7 @@ const home_page_app = new Vue({
       .then(function(response) {
         self.products = JSON.parse(response['data']['products']);
         self.periods = response['data']['periods']
+        self.limits = response['data']['limits']
       });
   },
 
@@ -52,7 +53,7 @@ const home_page_app = new Vue({
         this.customer_set.product_id != 0 &&
         this.customer_set.variant_id != 0 &&
         this.customer_set.period.length != 0 &&
-        this.customer_set.time
+        this.customer_set.limit
       )
     },
   },
@@ -80,15 +81,15 @@ const home_page_app = new Vue({
       this.customer_set.period = period.value;
     },
 
-    // 選定次數
-    time_seleted: function(time) {
-      this.customer_set.time = time;
+    // limit
+    limit_seleted: function(limit) {
+      this.customer_set.limit = limit.value;
     },
 
     reset: function() {
       this.customer_set.variant_id = 0;
       this.customer_set.period = '';
-      this.customer_set.time = '';
+      this.customer_set.limit = '';
     },
 
     // 是否選中

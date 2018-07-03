@@ -12,6 +12,7 @@ class HomeController < ApplicationController
     render json: {
       products: product_json,
       periods: Reference::Period.to_hash,
+      limits: Reference::Limit.to_hash,
     }
   end
 

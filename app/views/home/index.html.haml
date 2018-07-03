@@ -16,9 +16,9 @@
 
   %br
 
-  .d-inline-block.ml-2.mt-4(v-if='customer_set.period.length != 0' v-for='time in times')
-    .button-normal(v-on:click='time_seleted(time)' :style='seleted(customer_set.time, time)')
-      {{ time }}
+  .d-inline-block.ml-2.mt-4(v-if='customer_set.period.length != 0' v-for='limit in limits')
+    .button-normal(v-on:click='limit_seleted(limit)' :style='seleted(customer_set.limit, limit.value)')
+      {{ limit.name }}
 
   %br
 

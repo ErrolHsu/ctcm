@@ -53,17 +53,20 @@ class OrdersController < ApplicationController
     product = Product.find_by(id: customer_set[:product_id])
     variant = ProductVariant.find_by(id: customer_set['variant_id'])
     frequency = customer_set['period'].to_i
+    exec_times = customer_set['limit'].to_i / frequency
+
     order = current_user.orders.create!(
       order_no: generate_order_no,
-      total: variant.price * customer_set['time'],
+      total: variant.price * exec_times,
       regular: true,
       period_type: 'D',
       period_amount: variant.price,
       frequency: frequency,
-      exec_times: customer_set['time'],
+      exec_times: exec_times,
       status: 'open',
       payment_status: 'pending',
       shipping_status: 'unshipping',
+      duration: customer_set['limit'].to_i,
     )
 
     order.items.create!(
@@ -100,7 +103,7 @@ class OrdersController < ApplicationController
 
   # ecpay 付款完成返回網址
   # def ecpay_return
-  #  
+  #
   # end
 
   def pay

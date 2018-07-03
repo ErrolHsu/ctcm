@@ -30,12 +30,13 @@ module Reference
 
   class ShippingStatus < Reference::Base
     self.data = [
-      {id: 1, name: '烘培中',  value: '' },
-      {id: 2, name: '已寄送',  value: ''},
-      {id: 3, name: '已到店',  value: ''},
-      {id: 4, name: '已取貨',  value: ''},
-      {id: 5, name: '定期配送', value: ''},
-      {id: 6, name: '異常',    value: 'error'},
+      {id: 1, name: '收到訂單',  value: '' },
+      {id: 2, name: '烘培中',    value: '' },
+      {id: 3, name: '已寄送',    value: ''},
+      {id: 4, name: '已到店',    value: ''},
+      {id: 5, name: '已取貨',    value: ''},
+      {id: 6, name: '定期配送',  value: ''},
+      {id: 7, name: '異常',      value: 'error'},
     ]
   end
 
@@ -45,6 +46,15 @@ module Reference
       {id: 2, name: '隔週', value: 14 },
       {id: 3, name: '三週', value: 21 },
       {id: 4, name: '每月', value: 30 },
+    ]
+  end
+
+  class Limit < Reference::Base
+    self.data = [
+      {id: 1, name: '三個月', value: 90},
+      {id: 2, name: '六個月', value: 180},
+      {id: 3, name: '九個月', value: 270},
+      {id: 4, name: '十二個月', value: 360},
     ]
   end
 
