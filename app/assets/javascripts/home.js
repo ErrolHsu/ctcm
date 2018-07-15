@@ -26,15 +26,9 @@ const home_page_app = new Vue({
     let self = this
 
     // set CSRF Token
-    const csrf_token = document.querySelector("meta[name=csrf-token]").content
-    axios.defaults.headers.common['X-CSRF-Token'] = csrf_token
+    const csrf_token = document.querySelector("meta[name=csrf-token]").content;
+    axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
 
-    axios.get('/home/initialize_data')
-      .then(function(response) {
-        self.products = JSON.parse(response['data']['products']);
-        self.periods = response['data']['periods']
-        self.limits = response['data']['limits']
-      });
   },
 
   computed: {
@@ -59,6 +53,17 @@ const home_page_app = new Vue({
   },
 
   methods: {
+    // get product data
+    get_product: function() {
+      let self = this;
+      axios.get('/home/initialize_data')
+        .then(function(response) {
+          self.products = JSON.parse(response['data']['products']);
+          self.periods = response['data']['periods']
+          self.limits = response['data']['limits']
+        });
+    },
+
     // 是否出現付款連結
     object_present: function(object) {
       return object_present(object);

@@ -1,5 +1,10 @@
 #home_page_app
-  .d-inline-block.ml-2(v-for='product in products')
+  .d-inline-block.ml-2
+    .button-normal(v-on:click='get_product')
+      XXXXX
+  %br
+
+  .d-inline-block.ml-2.mt-4(v-for='product in products')
     .button-normal(v-on:click='product_selected(product)' :style='seleted(customer_set.product_id, product.id)')
       {{ product.title }}
   %br
@@ -42,6 +47,9 @@
     %div
       訂閱次數：
       {{order.exec_times}}
+    %div
+      持續時間：
+      {{order.duration}}天
 
   %div(v-if='object_present(order)')
     / 綠界付款連結
