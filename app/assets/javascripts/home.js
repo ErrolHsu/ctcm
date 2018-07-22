@@ -20,6 +20,7 @@ const home_page_app = new Vue({
     order: {},
     ecpay_info: {},
 
+
   },
 
   mounted() {
@@ -53,8 +54,9 @@ const home_page_app = new Vue({
   },
 
   methods: {
-    // get product data
-    get_product: function() {
+
+    // get products data
+    get_products: function() {
       let self = this;
       axios.get('/home/initialize_data')
         .then(function(response) {

@@ -1,3 +1,9 @@
+// 置中
+
+.center {
+  text-align: center;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -15,4 +21,67 @@
 
 .w30 {
   width: 30%;
+}
+
+// input
+
+.no-outline-input {
+  background: inherit;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  border-bottom: 1px solid #fff;
+  padding: 6px;
+  width: 100%;
+  &:focus {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    border-bottom: 1px solid #fff;
+  }
+}
+
+.input-normal {
+  background: inherit;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  border-bottom: 1px solid #fff;
+  padding: 6px;
+  width: 100%;
+  &:focus {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    border-bottom: 1px solid #fff;
+  }
+}
+
+// color
+.white {
+  color: #fff;
+}
+
+// font size
+
+.font-13 {
+  font-size: 13px;
+}
+
+
+// bootstrap col padding 0
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+
+  > .col,
+  > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }

@@ -1,12 +1,25 @@
 .modal.fade#product-modal{:role => "dialog", :tabindex => "-1"}
   .modal-dialog.modal-lg{:role => "document"}
     .modal-content
-      .modal-header
-        %h5.modal-title Modal title
+      .modal-body
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
-      .modal-body
-        %p Modal body text goes here.
-      .modal-footer
-        %button.btn.btn-primary{:type => "button"} Save changes
-        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+        .container-fluid
+          .row
+            .col-md-8
+              .product-img
+            .col-md-4
+              .product-info
+                %h4
+                  Sprkle
+                %div.font-13
+                  單一產區 | 蜜處理 | 巴拿馬
+                %div.font-13
+                  Single Origin | Caturra Honey | Panama
+                %div.mt-3.font-13
+                  層次分明，富含檸檬花、柳橙、芭樂香氣，舌尖可以感受到可可以及太妃糖風味，餘韻清新動人
+                %div.mt-5.font-13
+                  FB / IG / Twitter
+      / .modal-footer
+      /   %button.btn.btn-primary{:type => "button"} Save changes
+      /   %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close

@@ -24,13 +24,39 @@
 
     / 顧客資料表
     #customer-info
-      #info-form
+      .row
+        .col-md-6
+          %div.white.font-13
+            台北市松山區
+          %div.white.font-13.mt-2
+            Bade Rd. SongShan Dist, Taipei City 105, Taiwan
+          %div.white.font-13.mt-4
+            Hola@Altitudetosteria.com
+          %div.white.font-13.mt-4
+            02-23456789
+        .col-md-6
+          #info-form
+            .row
+              .col-md-6
+                %input.no-outline-input.white.font-13(type='text'  placeholder='Name')
+              .col-md-6
+                %input.no-outline-input.white.font-13(type='text'  placeholder='Email')
+              .col-md-12.mt-3
+                %input.no-outline-input.white.font-13(type='text'  placeholder='Subject')
+              .col-md-12.mt-3
+                %input.no-outline-input.white.font-13(type='text'  placeholder='Phone')
+              .col-md-12.mt-3
+                %input.no-outline-input.white.font-13(type='text'  placeholder='Address')
+              .col-md-12.mt-3
+                %textarea.no-outline-input.white.font-13(type='text' placeholder='Message' style='height: 100px;')
+              .col-md-12.mt-3.white.font-13.text-center
+                send
 
 
     // 先隱藏
 
     / .d-inline-block.ml-2
-    /   .button-normal(v-on:click='get_product')
+    /   .button-normal(v-on:click='get_products')
     /     XXXXX
     / %br
 
