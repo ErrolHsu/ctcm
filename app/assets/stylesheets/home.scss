@@ -141,6 +141,12 @@
       width: 560px;
       height: 390px;
     }
+    #trial-submit {
+      padding: 6px;
+      &:hover {
+        border-bottom: 1px solid #fff;
+      }
+    }
   }
 
   @media screen and (max-width: 991.98px) {
