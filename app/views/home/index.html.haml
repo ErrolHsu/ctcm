@@ -1,6 +1,8 @@
 #home_page_app()
   / product modal
-  = render 'product_modal'
+  = render 'home/product_modal/timeless_modal'
+  = render 'home/product_modal/go_bold_modal'
+  = render 'home/product_modal/qk_modal'
 
   / navbar
   = render 'share/navbar/user_navbar'
@@ -12,52 +14,60 @@
 
     / 首頁 shop
     #home-shop
-      .product
-        .quick-show(data-toggle="modal" data-target="#product-modal")
+      .product.pointer(data-toggle="modal" data-target="#timeless-modal")
+        .quick-show
           QUICK SHOW
-      .product
-        .quick-show(data-toggle="modal" data-target="#product-modal")
+      .product.pointer(data-toggle="modal" data-target="#go-bold-modal")
+        .quick-show
           QUICK SHOW
-      .product
-        .quick-show(data-toggle="modal" data-target="#product-modal")
+      .product.pointer(data-toggle="modal" data-target="#qk-modal")
+        .quick-show
           QUICK SHOW
 
     / 顧客資料表
-    #customer-info
-      .row
-        .col-md-6
-          %div.white.font-13
-            台北市松山區
-          %div.white.font-13.mt-2
-            Bade Rd. SongShan Dist, Taipei City 105, Taiwan
-          %div.white.font-13.mt-4
-            Hola@Altitudetosteria.com
-          %div.white.font-13.mt-4
-            02-23456789
-        .col-md-6
-          #info-form
-            .row
-              .col-md-6
-                .border-bottom
-                  %input.no-outline-input.white.font-13(type='text'  placeholder='Name')
-              .col-md-6
-                .border-bottom
-                  %input.no-outline-input.white.font-13(type='text'  placeholder='Email')
-              .col-md-12.mt-3
-                .border-bottom
-                  %input.no-outline-input.white.font-13(type='text'  placeholder='Subject')
-              .col-md-12.mt-3
-                .border-bottom
-                  %input.no-outline-input.white.font-13(type='text'  placeholder='Phone')
-              .col-md-12.mt-3
-                .border-bottom
-                  %input.no-outline-input.white.font-13(type='text'  placeholder='Address')
-              .col-md-12.mt-3
-                .border-bottom
-                  %textarea.no-outline-input.white.font-13(type='text' placeholder='Message' style='height: 100px;')
-              .col-md-12.mt-3.white.font-13.text-center
-                send
-
+    #customer-info.d-flex
+      / .row
+      /   .col-md-6.mt-3.d-none.d-sm-block
+      /     %div.white.font-13
+      /       台北市松山區
+      /     %div.white.font-13.mt-2
+      /       Bade Rd. SongShan Dist, Taipei City 105, Taiwan
+      /     %div.white.font-13.mt-4
+      /       Hola@Altitudetosteria.com
+      /   .col-md-6
+      #info-form
+        .row
+          .col-md-6.col-xs-12.mt-3
+            .border-bottom
+              %input.no-outline-input.white.font-13(type='text' placeholder='姓名 / Name' v-model='trial.name')
+          .col-md-6.col-xs-12.mt-3
+            .border-bottom
+              %input.no-outline-input.white.font-13(type='text' placeholder='電子信箱 / Email' v-model='trial.email')
+          .col-md-12.mt-3
+            .border-bottom
+              %input.no-outline-input.white.font-13(type='text' placeholder='手機 / Phone' v-model='trial.phone')
+          .col-md-12.mt-3
+            .border-bottom
+              %input.no-outline-input.white.font-13(type='text' placeholder='地址 / Address' v-model='trial.address')
+          .col-md-12
+            .button-normal.mr-1.mt-3(v-on:click='selectTrialProduct("Timeless")'
+            v-bind:class='selectedCheck(trial.product_name, "Timeless")')
+              %i.fas.fa-check
+              Timeless
+            .button-normal.mr-1.mt-3(v-on:click='selectTrialProduct("Go bold!")'
+            v-bind:class='selectedCheck(trial.product_name, "Go bold!")')
+              %i.fas.fa-check
+              Go bold!
+            .button-normal.mt-3(v-on:click='selectTrialProduct("QK")'
+            v-bind:class='selectedCheck(trial.product_name, "QK")')
+              %i.fas.fa-check
+              QK
+          .col-md-12.mt-3
+            .border-bottom
+              %textarea.no-outline-input.white.font-13(type='text' placeholder='意見 / Message' style='height: 100px;' v-model='trial.message')
+          .col-md-12.mt-3.white.font-13.text-center
+            %span.pointer(v-on:click='trialRequest')
+              送出 / send
 
     // 先隱藏
 

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get 'home/initialize_data' => 'home#initialize_data'
+  post 'home/trial_request' => 'home#trial_request'
 
   resources :products
 

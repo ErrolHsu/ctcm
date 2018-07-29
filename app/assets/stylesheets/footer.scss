@@ -1,7 +1,46 @@
 #footer {
+  justify-content:flex-start;
+  align-items:center;
   width: 100%;
   height: 170px;
-  background: $gray;
+  #confact {
+    display: inline-block;
+    margin-top: 50px;
+    width: 330px;
+    height: 70px;
+    margin-left: 150px;
+    div {
+      line-height: 35px;
+    }
+  }
+  #follow {
+    display: inline-block;
+    margin-top: 50px;
+    width: 250px;
+    height: 70px;
+    div {
+      line-height: 35px;
+    }
+  }
+}
+
+@media screen and (max-width: 991.98px)  {
+  #footer {
+    #confact {
+      display: block;
+      margin-top: 25px;
+      margin-left: 15px;
+    }
+    #follow {
+      display: block;
+      margin-top: 0px;
+      margin-left: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+
 }
 
 #info {

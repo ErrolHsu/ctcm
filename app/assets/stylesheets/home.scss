@@ -4,6 +4,7 @@
     max-width: 940px;
   }
 
+  // 首頁大圖
   #home-img {
     width: 100%;
     height: 53.1vw;
@@ -13,18 +14,25 @@
     background-repeat: no-repeat;
   }
 
+  @media screen and (max-width: 767.98px) {
+    #home-img {
+      width: 100vw;
+      height: 150vw;
+    }
+  }
+
+// #home-shop
   #home-shop {
     width: 100%;
     height: 43vw;
     min-height: 550px;
-    background: #999;
     display: flex;
     justify-content:space-around;
     align-items:center;
     .product {
-      width: 265px;
-      height: 265px;
-      background: #fff;
+      width: 25vw;
+      height: 25vw;
+      background: #426c7a;
       position: relative;
       &:hover {
         .quick-show  {
@@ -49,33 +57,99 @@
     }
   }
 
-  #customer-info {
-    width: 100%;
-    height: 50vw;
-    min-height: 640px;
-    padding: 100px 150px;
-    background: #ad7820;
-    #info-form {
-      width: 460px;
-      height: 390px;
+  @media screen and (max-width: 991.98px) {
+    #home-shop {
+      min-height: 0;
+      padding: 150px 0;
+      .product {
+        width: 30vw;
+        height: 30vw;
+      }
+    }
+  }
+
+  @media screen and (max-width: 767.98px) {
+    #home-shop {
+      min-height: 0;
+      height: auto;
+      padding: 50px 0;
+      display: flex;
+      flex-wrap: wrap;
+      .product {
+        width: 80vw;
+        height: 80vw;
+        margin-top: 20px;
+      }
     }
   }
 
   // quick show modal
-  #product-modal {
+  .product-modal {
     .modal-body {
       background: #d7d7d7;
       padding-top: 30px;
       padding-bottom: 130px;
       .product-img {
-        max-width: 600px;
-        max-height: 600px;
+        max-width: 550px;
+        max-height: 550px;
         width: 45vw;
         height: 45vw;
         background: #426c7a;
       }
       .product-info {
-        padding-top: 130px;
+        padding-top: 5vh;
+      }
+    }
+  }
+
+  @media screen and (max-width: 991.98px) {
+    .product-modal {
+      .modal-body {
+        .product-img {
+
+        }
+        .product-info {
+          padding-top: 50px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 767.98px) {
+    .product-modal {
+      .modal-body {
+        .product-img {
+          width: 70vw;
+          height: 70vw;
+        }
+        .product-info {
+          padding-top: 30px;
+        }
+      }
+    }
+  }
+
+
+  // 試用表單
+  #customer-info {
+    justify-content:center;
+    align-items:center;
+    width: 100%;
+    padding: 80px 150px;
+    background: #ad7820;
+    #info-form {
+      width: 560px;
+      height: 390px;
+    }
+  }
+
+  @media screen and (max-width: 991.98px) {
+    #customer-info {
+      height: auto;
+      padding: 20px 20px;
+      #info-form {
+        width: auto;
+        height: auto;
       }
     }
   }

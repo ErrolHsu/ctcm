@@ -2,23 +2,33 @@ const home_page_app = new Vue({
   el: '#home_page_app',
   mixins: [markDown],
   data: {
-    products: [],
-
-    // 定期訂單相關
-    periods: [],
-    limits: [],
-    current_variants: [],
-    customer_set: {
-      product_id: 0,
-      variant_id: 0,
-      period: '',
-      limit: '',
+    trial: {
+      name: '',
+      email: '',
+      phone: '',
       address: '',
-    },
+      message: '',
+      product_name: '',
+    }
 
-    // 付款相關
-    order: {},
-    ecpay_info: {},
+
+    // products: [],
+
+    // // 定期訂單相關
+    // periods: [],
+    // limits: [],
+    // current_variants: [],
+    // customer_set: {
+    //   product_id: 0,
+    //   variant_id: 0,
+    //   period: '',
+    //   limit: '',
+    //   address: '',
+    // },
+
+    // // 付款相關
+    // order: {},
+    // ecpay_info: {},
 
 
   },
@@ -54,7 +64,51 @@ const home_page_app = new Vue({
   },
 
   methods: {
+    selectTrialProduct: function(product_name) {
+      this.trial.product_name = product_name;
+    },
 
+    trialRequest: function() {
+      let self = this;
+      axios.post('/home/trial_request', {
+        trial_info: {
+          name: self.trial.name,
+          phone: self.trial.phone,
+          address: self.trial.address,
+          email: self.trial.email,
+          message: self.trial.message,
+          product_name: self.trial.product_name,
+        }
+      })
+      .then(function(response) {
+        success_msg(response['data']['message']);
+        self.clearTrialInput();
+      })
+      .catch(function(error) {
+        error_msg(error.response['data']['message']);
+      })
+    },
+
+    clearTrialInput: function() {
+      this.trial = {
+        name: '',
+        email: '',
+        phone: '',
+        address: '',
+        message: '',
+        product_name: '',
+      }
+    },
+
+    // 是否被選取
+    selectedCheck: function(prop, str) {
+      if (str === prop) {
+        return "seleted";
+      }
+    },
+
+
+    // 暫時用不到.......
     // get products data
     get_products: function() {
       let self = this;
