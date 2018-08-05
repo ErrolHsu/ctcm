@@ -1,4 +1,4 @@
-const trial_app = new Vue({
+const TrialApp = new Vue({
   el: '#trial_app',
   data: {
     trial: {

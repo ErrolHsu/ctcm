@@ -1,4 +1,4 @@
-const order_show_app = new Vue({
+const OrderShowApp = new Vue({
   el: '#order_show_app',
   data: {
     ecpay_info: {},

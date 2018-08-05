@@ -1,4 +1,4 @@
-const home_page = new Vue({
+const HomePageApp = new Vue({
   el: '#home_page_app',
   mixins: [markDown],
   data: {
