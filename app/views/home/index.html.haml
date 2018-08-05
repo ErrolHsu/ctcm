@@ -50,7 +50,7 @@
             .border-bottom
               %input.no-outline-input.white.font-13(type='text' placeholder='* 地址 / Address' v-model='trial.address')
           .col-md-12
-            .button-normal.mr-1.mt-3{"v-on:touchstart.native" => 'selectTrialProduct("Timeless")' }(v-on:click='selectTrialProduct("Timeless")'
+            .button-normal.mr-1.mt-3(v-on:click='selectTrialProduct("Timeless")'
             v-bind:class='selectedCheck(trial.product_name, "Timeless")')
               %i.fas.fa-check
               Timeless
