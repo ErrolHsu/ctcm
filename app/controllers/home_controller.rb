@@ -38,7 +38,7 @@ class HomeController < ApplicationController
 
     begin
       Trial.create!(trial_params)
-      render json: { message: 'SUCCESS' }, status: 200
+      render json: { message: '感謝您的填寫，我們將以Email通知您結果。' }, status: 200
     rescue => e
       Rails.logger.error(e)
       render json: { message: '發生錯誤，請稍候重試。' }, status: 500
