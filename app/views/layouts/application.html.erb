@@ -4,11 +4,16 @@
     <title>Ctcm</title>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
     <%= csrf_meta_tags %>
-
+    <script type='application/javascript' src='/path/to/fastclick.js'></script>
     <%= stylesheet_link_tag  'application', media: 'all' %>
   </head>
 
   <body class="container-fluid p-0">
+    <script type="text/javascript">
+      $(function() {
+        FastClick.attach(document.body);
+      });
+    </script>
 <!--     <%= render  'share/navbar/navbar' %>
  -->
     <%= yield %>
