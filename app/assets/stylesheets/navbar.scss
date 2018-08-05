@@ -10,6 +10,37 @@
   .nav-left {
     position: absolute;
     left: 0;
+    #nav-logo {
+      align-items:center;
+      margin-left: 150px;
+      width: 245px;
+      height: 80px;
+      @media screen and (max-width: 991.98px) {
+        margin-left: 30px;
+      }
+      @media screen and (max-width: 767.98px) {
+        #logo-right {
+          display: none;
+        }
+      }
+      #logo-left {
+        width: 70px;
+        height: 70px;
+        background-image: image-url("Logo-01.png");
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      #logo-right {
+        width: 160px;
+        height: 70px;
+        margin-left: 15px;
+        background-image: image-url("Logo-03.png");
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
   }
 
   .nav-right {
@@ -21,6 +52,9 @@
     div {
       color: #444;
       padding: 0 10px;
+    }
+    .icon-link {
+
     }
   }
 

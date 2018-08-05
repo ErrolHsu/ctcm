@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get 'home/initialize_data' => 'home#initialize_data'
   post 'home/trial_request' => 'home#trial_request'
 
+  # 索取試用頁
+  get 'trial' => 'home#trial'
+
   resources :products
 
   resources :orders do

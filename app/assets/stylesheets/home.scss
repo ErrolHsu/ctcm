@@ -32,7 +32,9 @@
     .product {
       width: 25vw;
       height: 25vw;
-      background: #426c7a;
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
       position: relative;
       &:hover {
         .quick-show  {
@@ -55,6 +57,18 @@
         color: #fff;
       }
     }
+  }
+
+  .p1-img {
+    background-image: image-url("p1.jpg");
+  }
+
+  .p2-img {
+    background-image: image-url("p2.jpg");
+  }
+
+  .p3-img {
+    background-image: image-url("p3.jpg");
   }
 
   @media screen and (max-width: 991.98px) {
@@ -94,7 +108,9 @@
         max-height: 550px;
         width: 45vw;
         height: 45vw;
-        background: #426c7a;
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
       }
       .product-info {
         padding-top: 5vh;
@@ -136,7 +152,7 @@
     align-items:center;
     width: 100%;
     padding: 80px 150px;
-    background: #ad7820;
+    background: $brown;
     #info-form {
       width: 560px;
       height: 390px;

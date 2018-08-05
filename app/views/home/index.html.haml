@@ -14,13 +14,13 @@
 
     / 首頁 shop
     #home-shop
-      .product.pointer(data-toggle="modal" data-target="#timeless-modal")
+      .p1-img.product.pointer(data-toggle="modal" data-target="#timeless-modal")
         .quick-show
           QUICK SHOW
-      .product.pointer(data-toggle="modal" data-target="#go-bold-modal")
+      .p2-img.product.pointer(data-toggle="modal" data-target="#go-bold-modal")
         .quick-show
           QUICK SHOW
-      .product.pointer(data-toggle="modal" data-target="#qk-modal")
+      .p3-img.product.pointer(data-toggle="modal" data-target="#qk-modal")
         .quick-show
           QUICK SHOW
 
@@ -39,16 +39,16 @@
         .row
           .col-md-6.col-xs-12.mt-3
             .border-bottom
-              %input.no-outline-input.white.font-13(type='text' placeholder='姓名 / Name' v-model='trial.name')
+              %input.no-outline-input.white.font-13(type='text' placeholder='* 姓名 / Name' v-model='trial.name')
           .col-md-6.col-xs-12.mt-3
             .border-bottom
-              %input.no-outline-input.white.font-13(type='text' placeholder='電子信箱 / Email' v-model='trial.email')
+              %input.no-outline-input.white.font-13(type='text' placeholder='* 電子信箱 / Email' v-model='trial.email')
           .col-md-12.mt-3
             .border-bottom
-              %input.no-outline-input.white.font-13(type='text' placeholder='手機 / Phone' v-model='trial.phone')
+              %input.no-outline-input.white.font-13(type='text' placeholder='* 手機 / Phone' v-model='trial.phone')
           .col-md-12.mt-3
             .border-bottom
-              %input.no-outline-input.white.font-13(type='text' placeholder='地址 / Address' v-model='trial.address')
+              %input.no-outline-input.white.font-13(type='text' placeholder='* 地址 / Address' v-model='trial.address')
           .col-md-12
             .button-normal.mr-1.mt-3(v-on:click='selectTrialProduct("Timeless")'
             v-bind:class='selectedCheck(trial.product_name, "Timeless")')

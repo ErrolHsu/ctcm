@@ -1,16 +1,18 @@
 .user_navbar
   .inline-block(class='nav-left')
-    / aaa
+    #nav-logo.d-flex
+      #logo-left
+      #logo-right
   .inline-block(class='nav-right')
-    %div
-      Home
-    %div
-      Product Slider
-    %div
-      Contact
-    %div
+    / %div
+    /   Home
+    / %div
+    /   Product Slider
+    / %div
+    /   Contact
+    %div.icon-link
       = icon('fab', 'facebook-f')
-    %div
+    %div.icon-link
       = icon('fab', 'twitter')
-    %div
+    %div.icon-link
       = icon('fab', 'instagram')
