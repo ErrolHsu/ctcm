@@ -17,10 +17,10 @@
       .p1-img.product.pointer(data-toggle="modal" data-target="#timeless-modal")
         .quick-show
           QUICK SHOW
-      .p2-img.product.pointer(data-toggle="modal" data-target="#go-bold-modal")
+      .p3-img.product.pointer(data-toggle="modal" data-target="#qk-modal")
         .quick-show
           QUICK SHOW
-      .p3-img.product.pointer(data-toggle="modal" data-target="#qk-modal")
+      .p2-img.product.pointer(data-toggle="modal" data-target="#go-bold-modal")
         .quick-show
           QUICK SHOW
 
@@ -54,14 +54,14 @@
             v-bind:class='selectedCheck(trial.product_name, "Timeless")')
               %i.fas.fa-check
               Timeless
-            .button-normal.mr-1.mt-3(v-on:click='selectTrialProduct("Go bold!")'
-            v-bind:class='selectedCheck(trial.product_name, "Go bold!")')
-              %i.fas.fa-check
-              Go bold!
-            .button-normal.mt-3(v-on:click='selectTrialProduct("QK")'
+            .button-normal.mr-1.mt-3(v-on:click='selectTrialProduct("QK")'
             v-bind:class='selectedCheck(trial.product_name, "QK")')
               %i.fas.fa-check
               QK
+            .button-normal.mt-3(v-on:click='selectTrialProduct("Go bold!")'
+            v-bind:class='selectedCheck(trial.product_name, "Go bold!")')
+              %i.fas.fa-check
+              Go bold!
           .col-md-12.mt-3
             .border-bottom
               %textarea.no-outline-input.white.font-13(type='text' placeholder='意見 / Message' style='height: 100px;' v-model='trial.message')
