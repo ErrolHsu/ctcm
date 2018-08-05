@@ -24,8 +24,15 @@ class HomeController < ApplicationController
   # 索取試用
   def trial_request
     # 除message外均必填
-    if trial_params.except(:message, :product_name).to_h.any? { |key, value| value.blank? }
-      render json: { message: "除 \'意見\' 外其餘欄位均為必填！" }, status: 500
+    h = {'name' => '姓名', 'address' => '地址', 'phone' => '電話', 'email' => '電子信箱'}
+    empty_column = ''
+    trial_params.except(:message, :product_name).each do |key, value|
+      empty_column << " \'#{h[key]}\'" if value.blank?
+    end
+
+
+    if empty_column.present?
+      render json: { message: "請填寫#{empty_column}" }, status: 500
       return
     end
 
