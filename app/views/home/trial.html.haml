@@ -1,13 +1,45 @@
-#trial
-  .row
-    .col-md-6
+#trial_app
+  .row.no-gutters
+    .col-md-5.col-xs-12
+      #trial-left
+    .col-md-7.col-xs-12.mt-5
+      #trial-right
+        %div#line-1.white
+          立刻索取免費
+        %div#line-2.white.lighter
+          巴拿馬精品咖啡豆
+        %div#line-3.white.lighter.font-italic(style='margin-left: 95px;')
+          數量有限，送完為止!
+        .row#trial-form
+          .col-lg-7.col-10
+            .trial-input
+              %input.no-outline-input.white.font-13(type='text' placeholder='* 姓名 / Name' v-model='trial.name')
+          .col-lg-7.col-10.mt-2
+            .trial-input
+              %input.no-outline-input.white.font-13(type='text' placeholder='* 電子信箱 / Email' v-model='trial.email')
+          .col-lg-7.col-10.mt-2
+            .trial-input
+              %input.no-outline-input.white.font-13(type='text' placeholder='* 手機 / Phone' v-model='trial.phone')
+          .col-lg-7.col-10.mt-2
+            .trial-input
+              %input.no-outline-input.white.font-13(type='text' placeholder='* 地址 / Address' v-model='trial.address')
 
-    .col-md-6.mt-5
-      %div.white.font-55.mt-5
-        立刻索取免費
-      %div.white.lighter(style='font-size: 41px;')
-        巴拿馬精品咖啡豆
-      %div.white.font-25.lighter.font-italic(style='margin-left: 95px;')
-        數量有限，送完為止!
+          // 咖啡豆種類
+          .col-lg-7.col-10#button-box
+            .button-normal.mr-1.mt-3(v-on:click='selectTrialProduct("Timeless")'
+            v-bind:class='selectedCheck(trial.product_name, "Timeless")')
+              %i.fas.fa-check
+              Timeless
+            .button-normal.mr-1.mt-3(v-on:click='selectTrialProduct("Go bold!")'
+            v-bind:class='selectedCheck(trial.product_name, "Go bold!")')
+              %i.fas.fa-check
+              Go bold!
+            .button-normal.mt-3(v-on:click='selectTrialProduct("QK")'
+            v-bind:class='selectedCheck(trial.product_name, "QK")')
+              %i.fas.fa-check
+              QK
+          .col-lg-7.col-10.mt-5.white.font-13.text-center
+            %div#submit.pointer(v-on:click='trialRequest')
+              送出領取免費咖啡豆!
 
 

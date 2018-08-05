@@ -23,3 +23,4 @@
 //= require_tree ./common
 //= require home.js
 //= require order_show.js
+//= require trial.js
