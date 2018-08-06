@@ -16,11 +16,6 @@ class HomeController < ApplicationController
     }
   end
 
-  # 索取試用頁
-  def trial
-
-  end
-
   # 索取試用
   def trial_request
     # 除message外均必填
