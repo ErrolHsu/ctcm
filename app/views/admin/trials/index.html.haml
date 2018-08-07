@@ -1,0 +1,13 @@
+.col-md-9.mt-5
+  %div
+    - trials.each do |trial|
+      %div
+        %div
+          = trial.name
+        %div
+          = trial.email
+        %div
+          = trial.address
+        %div
+          = trial.product_name
+      %hr

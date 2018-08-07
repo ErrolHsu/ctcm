@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :cart, only:[:show, :destroy] do
+  resource :cart, only: [:show, :destroy] do
     collection do
       post :add, path:'add/:id'
       get 'checkout' => 'carts#checkout'
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     resources :products
     resources :articles
     resources :orders
-    resources :trials
+    resources :trials, only: [:index, :show]
   end
 
 end

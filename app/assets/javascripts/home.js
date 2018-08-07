@@ -35,6 +35,7 @@ const HomePageApp = new Vue({
 
   mounted() {
     let self = this
+    console.log('12345')
     // set CSRF Token
     const csrf_token = document.querySelector("meta[name=csrf-token]").content;
     axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
