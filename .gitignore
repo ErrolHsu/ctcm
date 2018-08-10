@@ -30,3 +30,6 @@ config/secrets.yml
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+
+# foreman
+Procfile

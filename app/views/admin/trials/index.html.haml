@@ -1,16 +1,26 @@
-.mt-5
+= javascript_pack_tag 'admin/trial/index'
+
+#admin_trials_app.mt-5
   %div
-    #hello
-      {{message}}
-      %app
-    - trials.each do |trial|
+    %div(v-for="(trial, key) in trials")
       %div
-        %div
-          = trial.name
-        %div
-          = trial.email
-        %div
-          = trial.address
-        %div
-          = trial.product_name
+        姓名: {{trial.name}} {{key}}
+      %div
+        信箱: {{trial.email}}
+      %div
+        地址: {{trial.address}}
+      %div
+        電話: {{trial.phone}}
+      %div
+        品名: {{trial.product_name}}
+      %div
+        狀態: {{trial.status}}
+      .d-flex.mt-2
+        .button-normal(v-on:click='option(key, "shipped")')
+          出貨
+        .button-normal.ml-1(v-on:click='option(key, "reject")')
+          拒絕
       %hr
+
+
+#props(data="#{props}")

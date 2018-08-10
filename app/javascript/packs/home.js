@@ -3,7 +3,6 @@ import Vue from 'vue/dist/vue.esm'
 document.addEventListener('DOMContentLoaded', () => {
   const HomePageApp = new Vue({
     el: '#home_page_app',
-    mixins: [markDown],
     data: {
       trial: {
         name: '',

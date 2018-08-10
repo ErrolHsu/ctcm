@@ -41,7 +41,11 @@ Rails.application.routes.draw do
     resources :products
     resources :articles
     resources :orders
-    resources :trials, only: [:index, :show]
+    resources :trials, only: [:index, :show] do
+      member do
+        post :option
+      end
+    end
   end
 
 end
