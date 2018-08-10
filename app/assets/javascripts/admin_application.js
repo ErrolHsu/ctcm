@@ -8,7 +8,6 @@
 //= require jquery.twzipcode.min.js
 //= require_tree ./shard
 //= require commonmark.js
-//= require vue
 //= require_tree ./common
 //= require_tree ./admin
 

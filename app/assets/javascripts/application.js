@@ -19,7 +19,6 @@
 //= require axios.js
 //= require alertify.js
 //= require jquery.twzipcode.min.js
-//= require vue
 //= require_tree ./common
 //= require home.js
 //= require order_show.js

@@ -40,6 +40,14 @@ module Reference
     ]
   end
 
+  class TrialStatus < Reference::Base
+    self.data = [
+      {id: 1, name: '申請試用', value: 'request' },
+      {id: 2, name: '已寄出',   value: 'shipped'},
+      {id: 3, name: '拒絕',     value: 'reject'},
+    ]
+  end
+
   class Period < Reference::Base
     self.data = [
       {id: 1, name: '每週', value: 7 },

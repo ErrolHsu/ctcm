@@ -1,8 +1,7 @@
-.col-md-9
-  - articles.each do |article|
-    %div(style='display: flex')
-      = article.title
-      = article.content
-      = link_to 'edit', edit_admin_article_path(article)
-      = link_to "刪除", admin_article_path(article), method: "delete", data: { confirm: "確認刪除???" }
-    %hr
+- articles.each do |article|
+  %div(style='display: flex')
+    = article.title
+    = article.content
+    = link_to 'edit', edit_admin_article_path(article)
+    = link_to "刪除", admin_article_path(article), method: "delete", data: { confirm: "確認刪除???" }
+  %hr

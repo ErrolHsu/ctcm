@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'capistrano-rails', group: :development
 gem 'capistrano-passenger', :group => :development
 
-gem 'vuejs-rails'
+# gem 'vuejs-rails'
 
 gem 'bootstrap', '~> 4.0.0'
 
@@ -63,6 +63,8 @@ gem 'settingslogic'
 
 # http request
 gem 'faraday'
+
+gem 'webpacker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
