@@ -60,6 +60,17 @@
     }
   }
 
+  @media screen and (max-width: 767.98px) {
+    #home-shop{
+      .product {
+        .quick-show {
+          visibility:visible;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
   .p1-img {
     background-image: image-url("p1.jpg");
   }

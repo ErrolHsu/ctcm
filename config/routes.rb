@@ -45,6 +45,9 @@ Rails.application.routes.draw do
       member do
         post :option
       end
+      collection do
+        post :filter
+      end
     end
   end
 

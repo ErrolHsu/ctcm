@@ -1,8 +1,25 @@
 = javascript_pack_tag 'admin/trial/index'
 
 #admin_trials_app.mt-5
-  %div
-    %div(v-for="(trial, key) in trials")
+  // filter
+  .d-flex
+    .button-normal(v-on:click='set_filter("all")'
+    v-bind:class='selectedCheck(this.filter, "all")')
+      全部
+    .button-normal.ml-2(v-on:click='set_filter("undone")'
+    v-bind:class='selectedCheck(this.filter, "undone")')
+      待處理
+    .button-normal.ml-2(v-on:click='set_filter("shipped")'
+    v-bind:class='selectedCheck(this.filter, "shipped")')
+      已寄出
+    .button-normal.ml-2(v-on:click='set_filter("reject")'
+    v-bind:class='selectedCheck(this.filter, "reject")')
+      已拒絕
+
+  %hr/
+  // 試用申請列表
+  %transition-group.mt-3(name="list" tag='div')
+    %div.list-item(v-for="(trial, key) in trials" v-bind:key='key')
       %div
         姓名: {{trial.name}}
       %div
@@ -14,12 +31,16 @@
       %div
         品名: {{trial.product_name}}
       %div
-        狀態: {{trial.status}}
+        申請時間: {{trial.created_at}}
+      %div
+        狀態: {{translate_status(trial.status)}}
       .d-flex.mt-2
-        .button-normal(v-on:click='option(key, "shipped")')
+        .button-normal.mr-1(v-on:click='option(key, "shipped")' v-if=' trial.status === "request" ')
           出貨
-        .button-normal.ml-1(v-on:click='option(key, "reject")')
+        .button-normal.mr-1(v-on:click='option(key, "reject")' v-if=' trial.status === "request" ')
           拒絕
+        .button-normal(v-on:click='option(key, "request")' v-if='can_be_reset(trial)')
+          取消
       %hr
 
 
