@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   # 索取試用頁
   get 'trial' => 'home#trial'
 
+  get 'free_sample' => 'home#index'
+
   resources :products
 
   resources :orders do
