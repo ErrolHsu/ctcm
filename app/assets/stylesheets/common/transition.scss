@@ -10,6 +10,16 @@
   transition: opacity 1s;
 }
 
+
+// opacity
+.opacity-enter-active, .opacity-leave-active {
+  transition: opacity .5s;
+}
+
+.opacity-enter, .opacity-leave-to {
+  opacity: 0;
+}
+
 // list transition
 
 .list-item {

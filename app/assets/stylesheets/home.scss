@@ -6,19 +6,62 @@
 
   // 首頁大圖
   #home-img {
+    position: relative;
     width: 100%;
     height: 53.1vw;
-    background-image: image-url("homeimg.jpg");
+    background-image: image-url("home-page-ing.jpg");
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
+    #home-img-cta-box {
+      position: absolute;
+      top: 30%;
+      right: 7%;
+      padding: 20px;
+      font-size: 20px;
+      #home-img-cta {
+        display: inline-block;
+        padding: 1px 18px;
+        font-size: 14px;
+        font-weight: 100;
+        background: #ea6000;
+        color: #fff;
+        &:hover {
+          background: darken(#ea6000, 10%)
+        }
+      }
+    }
+    #about-us-box {
+      position: absolute;
+      bottom: 7%;
+      right: 0;
+      width: 415px;
+      height: 290px;
+      background-image: image-url("about-us.png");
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 
   @media screen and (max-width: 767.98px) {
     #home-img {
       width: 100vw;
       height: 100vw;
-      background-image: image-url("homeing-phone.jpg");
+      background-image: image-url("home-page-ing-phone.jpg");
+      #home-img-cta-box {
+        top: 3%;
+        right: 3%;
+        font-size: 15px;
+        #home-img-cta {
+          font-size: 12px;
+        }
+      }
+      #about-us-box {
+        bottom: 0;
+        width: 100vw;
+        height: 69vw;
+      }
     }
   }
 

@@ -12,6 +12,19 @@
 
     / 首頁大圖
     #home-img
+      / 首頁大圖CTA
+      #home-img-cta-box
+        %div.lighter
+          即將開幕，我想知道
+        %div.ml-3
+          #home-img-cta.pointer(v-on:click='displayAboutUs = !displayAboutUs')
+            Altitude Tosteria
+          .d-inline-block.lighter
+            的故事
+      / 大圖About us
+      %transition(name="opacity")
+        #about-us-box(v-if='displayAboutUs')
+
 
     / 首頁 shop
     #home-shop

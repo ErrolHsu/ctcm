@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const HomePageApp = new Vue({
     el: '#home_page_app',
     data: {
+      // 首頁大圖about us
+      displayAboutUs: false,
+      // trial form
       trial: {
         name: '',
         email: '',
