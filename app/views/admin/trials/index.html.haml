@@ -35,12 +35,12 @@
       %div
         狀態: {{translate_status(trial.status)}}
       .d-flex.mt-2
-        .button-normal.mr-1(v-on:click='option(key, "shipped")' v-if=' trial.status === "request" ')
+        .button-normal.mr-1(v-on:click='option(key, "shipping")' v-if=' trial.status === "request" ')
           出貨
         .button-normal.mr-1(v-on:click='option(key, "reject")' v-if=' trial.status === "request" ')
           拒絕
-        .button-normal(v-on:click='option(key, "request")' v-if='can_be_reset(trial)')
-          取消
+        .button-normal(v-on:click='option(key, "reset")' v-if='can_be_reset(trial)')
+          復原
       %hr
 
 

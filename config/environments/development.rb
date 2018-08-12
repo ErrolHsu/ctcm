@@ -60,4 +60,7 @@ Rails.application.configure do
   config.active_storage.service = :local
   # for ActiveJob deadlocks db
   config.active_job.queue_adapter = :inline
+  # for letter open
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 end

@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   # 索取試用頁
   get 'trial' => 'home#trial'
-
   get 'free_sample' => 'home#index'
 
   resources :products
@@ -45,7 +44,9 @@ Rails.application.routes.draw do
     resources :orders
     resources :trials, only: [:index, :show] do
       member do
-        post :option
+        post :shipping
+        post :request_reject
+        post :reset
       end
       collection do
         post :filter

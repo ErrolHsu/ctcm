@@ -8,23 +8,58 @@ class Admin::TrialsController < AdminController
 
   end
 
-  def option
+  def shipping
     begin
       trial = Trial.find_by(id: params[:id].to_i)
-      trial.status = params['status']
-      if params['status'] == 'request'
-        trial.executed = false
-      else
-        trial.executed = true
-      end
-      trial.save
-
+      trial.shipping
+      # TrialMailer.notify_shipped(Trial.last).deliver!
       trials = get_trials_by_filter(params['filter'])
       render json: {trials: build_trials_hash(trials), message: 'success'}, status: 200
     rescue
       render json: {message: '伺服器錯誤'}, status: 500
     end
   end
+
+  def request_reject
+    begin
+      trial = Trial.find_by(id: params[:id].to_i)
+      trial.request_reject
+      # TODO 寄信
+      trials = get_trials_by_filter(params['filter'])
+      render json: {trials: build_trials_hash(trials), message: 'success'}, status: 200
+    rescue
+      render json: {message: '伺服器錯誤'}, status: 500
+    end
+  end
+
+  def reset
+    begin
+      trial = Trial.find_by(id: params[:id].to_i)
+      trial.reset
+      trials = get_trials_by_filter(params['filter'])
+      render json: {trials: build_trials_hash(trials), message: 'success'}, status: 200
+    rescue
+      render json: {message: '伺服器錯誤'}, status: 500
+    end
+  end
+
+  # def option
+  #   begin
+  #     trial = Trial.find_by(id: params[:id].to_i)
+  #     trial.status = params['status']
+  #     if params['status'] == 'request'
+  #       trial.executed = false
+  #     else
+  #       trial.executed = true
+  #     end
+  #     trial.save
+
+  #     trials = get_trials_by_filter(params['filter'])
+  #     render json: {trials: build_trials_hash(trials), message: 'success'}, status: 200
+  #   rescue
+  #     render json: {message: '伺服器錯誤'}, status: 500
+  #   end
+  # end
 
   def filter
     begin

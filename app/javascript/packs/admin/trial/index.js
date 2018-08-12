@@ -38,12 +38,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
       option: function(trial_id, action) {
         let self = this;
-        axios.post('/admin/trials/' + trial_id + '/option',{
+        let path;
+        switch(action) {
+        case 'shipping':
+          path = '/admin/trials/' + trial_id + '/shipping'
+          break;
+        case 'reject':
+          path = '/admin/trials/' + trial_id + '/request_reject'
+          break;
+        case 'reset':
+          path = '/admin/trials/' + trial_id + '/reset'
+          break;
+        }
+
+        axios.post(path, {
           filter: self.filter,
-          status: action,
         })
         .then((response) => {
-          // self.trials[trial_id] = response['data']['trial']
           self.trials = Object.assign({}, response['data']['trials']);
           success_msg(response['data']['message'])
         })
@@ -61,17 +72,17 @@ document.addEventListener('DOMContentLoaded', () => {
       translate_status: function(status) {
         let str = ''
         switch(status) {
-          case 'request':
-            str = '試用申請'
-            break;
-          case 'reject':
-            str = '已拒絕'
-            break;
-          case 'shipped':
-            str = '已寄出'
-            break;
-          default:
-            str = status
+        case 'request':
+          str = '試用申請'
+          break;
+        case 'reject':
+          str = '已拒絕'
+          break;
+        case 'shipped':
+          str = '已寄出'
+          break;
+        default:
+          str = status
         }
         return str;
       },

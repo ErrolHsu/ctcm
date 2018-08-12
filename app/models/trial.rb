@@ -11,4 +11,22 @@ class Trial < ApplicationRecord
     self
   end
 
+  def shipping
+    self.status = 'shipped'
+    self.executed = true
+    self.save
+  end
+
+  def request_reject
+    self.status = 'reject'
+    self.executed = true
+    self.save
+  end
+
+  def reset
+    self.status = 'request'
+    self.executed = false
+    self.save
+  end
+
 end
