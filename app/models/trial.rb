@@ -1,4 +1,5 @@
 class Trial < ApplicationRecord
+  default_scope { order(created_at: :asc) }
 
   scope :undone, -> { where( executed: false ) }
   scope :shipped, -> { where( status: 'shipped' ) }

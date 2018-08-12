@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then((response) => {
           self.trials = Object.assign({}, response['data']['trials']);
-          success_msg(response['data']['message'])
         })
         .catch((error) => {
           error_msg(error.response['data']['message']);

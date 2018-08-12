@@ -64,7 +64,7 @@ class Admin::TrialsController < AdminController
   def filter
     begin
       trials = get_trials_by_filter(params['filter'])
-      render json: {trials: build_trials_hash(trials), message: 'success'}, status: 200
+      render json: {trials: build_trials_hash(trials)}, status: 200
     rescue
       render json: {message: '伺服器錯誤'}, status: 500
     end

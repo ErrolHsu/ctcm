@@ -22,7 +22,7 @@ class HomeController < ApplicationController
     h = {'name' => '姓名', 'address' => '地址', 'phone' => '電話', 'email' => '電子信箱'}
     empty_column = ''
     trial_params.except(:message, :product_name).each do |key, value|
-      empty_column << " \'#{h[key]}\'" if value.blank?
+      empty_column << " #{h[key]}" if value.blank?
     end
 
 
