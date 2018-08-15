@@ -1,0 +1,145 @@
+= javascript_pack_tag 'landing_page'
+#landing_page_app()
+  / product modal
+  = render 'home/product_modal/timeless_modal'
+  = render 'home/product_modal/go_bold_modal'
+  = render 'home/product_modal/qk_modal'
+
+  / navbar
+  = render 'share/navbar/user_navbar'
+
+  .content()
+
+    / 首頁大圖
+    #home-img
+      / 首頁大圖CTA
+      #home-img-cta-box
+        %div.lighter
+          即將開幕，我想知道
+        %div.ml-3
+          #home-img-cta.pointer(v-on:click='displayAboutUs = !displayAboutUs')
+            Altitude Tosteria
+          .d-inline-block.lighter
+            的故事
+      / 大圖About us
+      %transition(name="opacity")
+        #about-us-box(v-if='displayAboutUs')
+
+
+    / 首頁 shop
+    #home-shop
+      .p1-img.product.pointer(data-toggle="modal" data-target="#timeless-modal")
+        .quick-show
+          QUICK SHOW
+      .p3-img.product.pointer(data-toggle="modal" data-target="#qk-modal")
+        .quick-show
+          QUICK SHOW
+      .p2-img.product.pointer(data-toggle="modal" data-target="#go-bold-modal")
+        .quick-show
+          QUICK SHOW
+
+    / 顧客資料表
+    #customer-info.d-flex
+      / .row
+      /   .col-md-6.mt-3.d-none.d-sm-block
+      /     %div.white.font-13
+      /       台北市松山區
+      /     %div.white.font-13.mt-2
+      /       Bade Rd. SongShan Dist, Taipei City 105, Taiwan
+      /     %div.white.font-13.mt-4
+      /       Hola@Altitudetosteria.com
+      /   .col-md-6
+      #info-form
+        .row
+          .col-md-6.col-xs-12.mt-3
+            .border-bottom
+              %input.no-outline-input.white.font-13(type='text' placeholder='* 姓名 / Name' v-model='trial.name')
+          .col-md-6.col-xs-12.mt-3
+            .border-bottom
+              %input.no-outline-input.white.font-13(type='text' placeholder='* 電子信箱 / Email' v-model='trial.email')
+          .col-md-12.mt-3
+            .border-bottom
+              %input.no-outline-input.white.font-13(type='text' placeholder='* 手機 / Phone' v-model='trial.phone')
+          .col-md-12.mt-3
+            .border-bottom
+              %input.no-outline-input.white.font-13(type='text' placeholder='* 地址 / Address' v-model='trial.address')
+          .col-md-12
+            .button-normal.mr-1.mt-3(v-on:click='selectTrialProduct("Timeless")'
+            v-bind:class='selectedCheck(trial.product_name, "Timeless")')
+              %i.fas.fa-check
+              Timeless
+            .button-normal.mr-1.mt-3(v-on:click='selectTrialProduct("QK")'
+            v-bind:class='selectedCheck(trial.product_name, "QK")')
+              %i.fas.fa-check
+              QK
+            .button-normal.mt-3(v-on:click='selectTrialProduct("Go bold!")'
+            v-bind:class='selectedCheck(trial.product_name, "Go bold!")')
+              %i.fas.fa-check
+              Go bold!
+          .col-md-12.mt-3
+            .border-bottom
+              %textarea.no-outline-input.white.font-13(type='text' placeholder='意見 / Message' style='height: 100px;' v-model='trial.message')
+          .col-md-12.mt-3.white.font-13.text-center
+            %span#trial-submit.pointer(v-on:click='trialRequest')
+              已索取完畢，填寫資訊獲得最新消息
+
+    // 先隱藏
+
+    / .d-inline-block.ml-2
+    /   .button-normal(v-on:click='get_products')
+    /     XXXXX
+    / %br
+
+    / .d-inline-block.ml-2.mt-4(v-for='product in products')
+    /   .button-normal(v-on:click='product_selected(product)' :style='seleted(customer_set.product_id, product.id)')
+    /     {{ product.title }}
+    / %br
+
+    / .d-inline-block.ml-2.mt-4(v-for='variant in current_variants')
+    /   .button-normal(v-on:click='variant_seleted(variant)' :style='seleted(customer_set.variant_id, variant.id)')
+    /     {{ variant.weight }} ${{ variant.price }}
+
+    / %br
+
+    / .d-inline-block.ml-2.mt-4(v-if='customer_set.variant_id != 0' v-for='period in periods')
+    /   .button-normal(v-on:click='period_seleted(period)' :style='seleted(customer_set.period, period.value)')
+    /     {{ period.name }}
+
+    / %br
+
+    / .d-inline-block.ml-2.mt-4(v-if='customer_set.period.length != 0' v-for='limit in limits')
+    /   .button-normal(v-on:click='limit_seleted(limit)' :style='seleted(customer_set.limit, limit.value)')
+    /     {{ limit.name }}
+
+    / %br
+
+    / .d-inline-block.ml-2.mt-4(v-if='show_address_input')
+    /   %input.form-control.mt-2(v-model='customer_set.address' placeholder='請輸入地址')
+
+    / %hr/
+    / .button-normal.ml-2(v-if='show_buy_button' v-on:click='order_request')
+    /   Buy
+
+
+    / %div.mt-6(v-if='object_present(order)')
+    /   %div
+    /     訂單類型： 訂閱
+    /   %div
+    /     每次金額：
+    /     {{order.period_amount}}
+    /   %div
+    /     訂閱週期：
+    /     {{order.frequency}}日/次
+    /   %div
+    /     訂閱次數：
+    /     {{order.exec_times}}
+    /   %div
+    /     持續時間：
+    /     {{order.duration}}天
+
+    / %div(v-if='object_present(order)')
+    /   / 綠界付款連結
+    /   = form_tag("#{Settings.ecpay.host}/Cashier/AioCheckOut/V5", id: 'ecpay_info_form', method: "post", :authenticity_token => false, :enforce_utf8 => false ) do
+    /     %input(v-for='(value, key) in ecpay_info' v-bind:name='key' v-bind:value='value' type="hidden")
+    /   .button-normal{ 'v-on:click' => 'go_to_pay'}
+    /     Pay!

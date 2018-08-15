@@ -2,13 +2,14 @@ Rails.application.routes.draw do
   devise_for :admins
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
-  root 'home#index'
+  root 'home#landing_page'
+  get 'temp' => 'home#index'
   get 'home/initialize_data' => 'home#initialize_data'
   post 'home/trial_request' => 'home#trial_request'
 
   # 索取試用頁
   get 'trial' => 'home#trial'
-  get 'free_sample' => 'home#index'
+  get 'free_sample' => 'home#landing_page'
 
   resources :products
 

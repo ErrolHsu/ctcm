@@ -4,6 +4,10 @@ class HomeController < ApplicationController
   expose(:products) { Product.all }
   expose(:product_json) { Product.includes(:variants).to_json(include: :variants) }
 
+  def landing_page
+
+  end
+
   def index
 
   end
