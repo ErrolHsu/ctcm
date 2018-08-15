@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     el: '#admin_trials_app',
     data: {
       trials: {},
+      trial_count: '',
       filter: 'undone',
     },
 
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const element = document.getElementById("props");
       const props = JSON.parse(element.getAttribute('data'));
       self.trials = props.trials;
+      self.trial_count = props.trial_count;
     },
 
     methods: {

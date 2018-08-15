@@ -2,7 +2,7 @@ class Admin::TrialsController < AdminController
 
   expose(:trials) { Trial.all }
   expose(:undone_trials) { Trial.undone  }
-  expose(:props) { {trials: build_trials_hash(Trial.undone)}.to_json }
+  expose(:props) { {trials: build_trials_hash(Trial.undone), trial_count: Trial.all.count}.to_json }
 
   def index
 

@@ -15,6 +15,8 @@
     .button-normal.ml-2(v-on:click='set_filter("reject")'
     v-bind:class='selectedCheck(this.filter, "reject")')
       已拒絕
+  %div.mt-2
+    目前總數 {{ trial_count }}
 
   %hr/
   // 試用申請列表
