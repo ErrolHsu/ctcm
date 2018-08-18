@@ -1,0 +1,60 @@
+#home-page-app {
+  .content {
+    padding: 0 30px;
+    #home-img-1 {
+      width: 100%;
+      height: 53.1vw;
+      background-image: image-url("home-page-ing.jpg");
+    }
+    #home-img-2 {
+      width: 100%;
+      height: 43.1vw;
+      background: #09334c;
+      // background-image: image-url("home-page-ing.jpg");
+    }
+    /**  定期訂購區塊 **/
+    #period-order {
+      width: 100%;
+      min-height: 43.1vw;
+      background: #e4cca6;
+      #order-options {
+        padding: 0 5% 0 20%;
+        font-size: 15px;
+        #checkout-btn {
+          height: 80px;
+          width: 80px;
+          line-height: 80px;
+          border-radius: 50%;
+          background: $blood;
+          color: #fff;
+          font-size: 13px;
+          font-weight: bolder;
+          letter-spacing: 1px;
+          cursor: pointer;
+          transition: all 0.4s;
+          &:hover {
+            color: $blood;
+            background: #fff;
+          }
+        }
+      }
+    }
+
+    #fast-shipping {
+      justify-content:space-between;
+      #sample-1, #sample-2, #sample-3 {
+        height: 475px;
+        width: 355px;
+      }
+      #sample-1 {
+        background-image: image-url("sample1.png");
+      }
+      #sample-2 {
+        background-image: image-url("sample2.png");
+      }
+      #sample-3 {
+        background-image: image-url("sample3.png");
+      }
+    }
+  }
+}
