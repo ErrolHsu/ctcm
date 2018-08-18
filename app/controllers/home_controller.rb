@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   expose(:product_json) { Product.includes(:variants).to_json(include: :variants) }
 
   def index
-
+    # MailServices::TrialMailer.reject(to: 's20a3264@gmail.com', subject: '明天抽血', text: '早上八點')
   end
 
   def initialize_data

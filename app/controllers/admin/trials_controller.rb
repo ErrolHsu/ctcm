@@ -24,7 +24,6 @@ class Admin::TrialsController < AdminController
     begin
       trial = Trial.find_by(id: params[:id].to_i)
       trial.request_reject
-      # TODO 寄信
       trials = get_trials_by_filter(params['filter'])
       render json: {trials: build_trials_hash(trials), message: 'success'}, status: 200
     rescue

@@ -16,12 +16,16 @@ class Trial < ApplicationRecord
     self.status = 'shipped'
     self.executed = true
     self.save
+
+    MailServices::TrialMailer.shipped(self)
   end
 
   def request_reject
     self.status = 'reject'
     self.executed = true
     self.save
+
+    MailServices::TrialMailer.reject(self)
   end
 
   def reset
