@@ -61,6 +61,7 @@ Rails.application.configure do
   # for ActiveJob deadlocks db
   config.active_job.queue_adapter = :inline
   # for letter open
-  config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
+  # config.action_mailer.delivery_method = :letter_opener
+
 end

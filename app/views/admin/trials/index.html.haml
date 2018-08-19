@@ -1,6 +1,8 @@
 = javascript_pack_tag 'admin/trial/index'
+= stylesheet_pack_tag 'admin/trial/index'
 
 #admin_trials_app.mt-5
+  %loader
   // filter
   .d-flex
     .button-normal(v-on:click='set_filter("all")'
@@ -15,6 +17,7 @@
     .button-normal.ml-2(v-on:click='set_filter("reject")'
     v-bind:class='selectedCheck(this.filter, "reject")')
       已拒絕
+
   %div.mt-2
     目前總數 {{ trial_count }}
 
