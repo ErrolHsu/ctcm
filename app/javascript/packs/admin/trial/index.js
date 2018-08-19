@@ -1,4 +1,6 @@
 import Vue from 'vue/dist/vue.esm'
+import Loader from '../../../components/loader.vue'
+import { EventBus } from '../../../event_bus.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const adminTrialsApp = new Vue({
@@ -8,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
       trial_count: '',
       filter: 'undone',
     },
+
+    components: { Loader },
 
     mounted() {
       let self = this;
@@ -40,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       option: function(trial_id, action) {
         let self = this;
         let path;
+        EventBus.$emit('loading');
         switch(action) {
         case 'shipping':
           path = '/admin/trials/' + trial_id + '/shipping'
@@ -58,9 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
         .then((response) => {
           self.trials = Object.assign({}, response['data']['trials']);
           success_msg(response['data']['message'])
+          EventBus.$emit('end-loading');
         })
         .catch((error) => {
           error_msg(error.response['data']['message']);
+          EventBus.$emit('end-loading');
         })
       },
 

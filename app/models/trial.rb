@@ -13,19 +13,17 @@ class Trial < ApplicationRecord
   end
 
   def shipping
+    MailServices::TrialMailer.shipped(self)
     self.status = 'shipped'
     self.executed = true
     self.save
-
-    MailServices::TrialMailer.shipped(self)
   end
 
   def request_reject
+    MailServices::TrialMailer.reject(self)
     self.status = 'reject'
     self.executed = true
     self.save
-
-    MailServices::TrialMailer.reject(self)
   end
 
   def reset
