@@ -15,8 +15,8 @@ class Admin::TrialsController < AdminController
       # TrialMailer.notify_shipped(Trial.last).deliver!
       trials = get_trials_by_filter(params['filter'])
       render json: {trials: build_trials_hash(trials), message: 'success'}, status: 200
-    rescue
-      render json: {message: '伺服器錯誤'}, status: 500
+    rescue => e
+      render json: {message: "伺服器錯誤 #{e.message}"}, status: 500
     end
   end
 
@@ -24,11 +24,10 @@ class Admin::TrialsController < AdminController
     begin
       trial = Trial.find_by(id: params[:id].to_i)
       trial.request_reject
-      # TODO 寄信
       trials = get_trials_by_filter(params['filter'])
       render json: {trials: build_trials_hash(trials), message: 'success'}, status: 200
-    rescue
-      render json: {message: '伺服器錯誤'}, status: 500
+    rescue => e
+      render json: {message: "伺服器錯誤 #{e.message}"}, status: 500
     end
   end
 
