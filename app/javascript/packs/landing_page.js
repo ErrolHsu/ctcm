@@ -1,4 +1,7 @@
 import Vue from 'vue/dist/vue.esm'
+import NavbarUserController from '../components/navbar_user_controller.vue'
+import LoginModal from '../components/login_modal.vue'
+import axios from 'axios'
 
 document.addEventListener('DOMContentLoaded', () => {
   const landingPageApp = new Vue({
@@ -38,12 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     },
 
+    components: {
+      NavbarUserController,
+      LoginModal
+    },
+
     mounted() {
       let self = this
       // set CSRF Token
       const csrf_token = document.querySelector("meta[name=csrf-token]").content;
       axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
-
+      axios.defaults.headers.common['Accept'] = 'application/json'
     },
 
     computed: {

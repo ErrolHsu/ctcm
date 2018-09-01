@@ -1,12 +1,14 @@
 = javascript_pack_tag 'landing_page'
-#landing_page_app()
+= stylesheet_pack_tag 'landing_page'
+
+#landing_page_app
   / product modal
   = render 'home/product_modal/timeless_modal'
   = render 'home/product_modal/go_bold_modal'
   = render 'home/product_modal/qk_modal'
 
-  / navbar
-  = render 'share/navbar/user_navbar'
+  / 必要的共用組件
+  = render 'share/components'
 
   / 首頁大圖
   #home-img

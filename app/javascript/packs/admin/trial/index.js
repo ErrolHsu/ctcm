@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // set CSRF Token
       const csrf_token = document.querySelector("meta[name=csrf-token]").content;
       axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
+      axios.defaults.headers.common['Accept'] = 'application/json'
 
       // init data
       const element = document.getElementById("props");
