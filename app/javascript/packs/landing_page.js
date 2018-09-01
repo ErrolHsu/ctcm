@@ -1,12 +1,10 @@
 import Vue from 'vue/dist/vue.esm'
-import NavbarUserController from '../components/navbar_user_controller.vue'
-import LoginModal from '../components/login_modal.vue'
-import axios from 'axios'
-import { EventBus } from '../event_bus.js';
+import { vue_init } from '../mixins/vue_init.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const landingPageApp = new Vue({
     el: '#landing_page_app',
+    mixins: [vue_init],
     data: {
       // 首頁大圖about us
       displayAboutUs: false,
@@ -43,16 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
     },
 
     components: {
-      NavbarUserController,
-      LoginModal
+
     },
 
     mounted() {
-      let self = this
-      // set CSRF Token
-      const csrf_token = document.querySelector("meta[name=csrf-token]").content;
-      axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
-      axios.defaults.headers.common['Accept'] = 'application/json'
+
     },
 
     computed: {

@@ -12,8 +12,9 @@
       = link_to 'ABOUT', '#'
     %div.font-15.ml-4
       = link_to 'BLOG', '#'
+    / vue 組件
     %div.font-15.ml-4
-      %navbar-user-controller
+      %navbar-user-controller(v-bind:current_user="current_user" v-bind:user_login='user_login')
 
     %div.icon-link(style='margin-left: 40px;')
       %a{:href => "#", 'target' =>"_blank"}

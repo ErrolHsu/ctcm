@@ -11,6 +11,13 @@ Rails.application.routes.draw do
   get 'trial' => 'home#trial'
   get 'free_sample' => 'home#landing_page'
 
+  # user註冊登入
+  devise_scope :user do
+    post 'user_sign_up' => 'devise#user_sign_up'
+    post 'user_login' => 'devise#user_login'
+    get 'user_sign_out' => 'devise#user_sign_out'
+  end
+
   resources :products
 
   resources :orders do

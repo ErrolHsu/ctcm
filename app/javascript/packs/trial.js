@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     },
 
     mounted() {
-      let self = this
       // set CSRF Token
       const csrf_token = document.querySelector("meta[name=csrf-token]").content;
       axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;

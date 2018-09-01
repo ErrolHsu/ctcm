@@ -1,23 +1,26 @@
 import Vue from 'vue/dist/vue.esm'
-import NavbarUserController from '../components/navbar_user_controller.vue'
-import LoginModal from '../components/login_modal.vue'
-import axios from 'axios'
-import { EventBus } from '../event_bus.js';
+import { vue_init } from '../mixins/vue_init.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const homePageApp = new Vue({
     el: '#home-page-app',
+    mixins: [vue_init],
     data: {
 
     },
 
     components: {
-      NavbarUserController,
-      LoginModal
+
+    },
+
+    mounted() {
+
     },
 
     methods: {
 
-    }
+    },
+
+
   });
 });
