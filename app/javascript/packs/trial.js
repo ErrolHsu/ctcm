@@ -1,4 +1,5 @@
 import Vue from 'vue/dist/vue.esm'
+import axios from 'axios'
 
 document.addEventListener('DOMContentLoaded', () => {
   const TrialApp = new Vue({
@@ -18,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // set CSRF Token
       const csrf_token = document.querySelector("meta[name=csrf-token]").content;
       axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
-
+      //////////
+      axios.defaults.headers.common['Accept'] = 'application/json'
     },
 
     methods: {

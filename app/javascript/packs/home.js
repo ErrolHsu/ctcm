@@ -1,4 +1,5 @@
 import Vue from 'vue/dist/vue.esm'
+import axios from 'axios'
 
 document.addEventListener('DOMContentLoaded', () => {
   const HomePageApp = new Vue({
