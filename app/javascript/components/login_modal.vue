@@ -1,13 +1,22 @@
 <template>
 
   <div>
+    <!-- 遮罩 -->
     <div class='mask' v-show='display' v-on:click.stop='hideLoginModal'>
     </div>
+
+    <!-- login modal -->
     <transition name='opacity'>
       <div class='login-modal' v-show='display'>
-        xxxxxxxxxx
+        <div>
+          <input name="">
+        </div>
+        <div>
+          <input name="">
+        </div>
       </div>
     </transition>
+
   </div>
 
 </template>
@@ -64,6 +73,7 @@
     height: 50vh;
     background: #fff;
     display:flex;
+    flex-direction:column;
     align-items: center;
     justify-content: center;
     i {
