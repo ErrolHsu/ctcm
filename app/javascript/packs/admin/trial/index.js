@@ -1,6 +1,7 @@
 import Vue from 'vue/dist/vue.esm'
 import Loader from '../../../components/loader.vue'
 import { EventBus } from '../../../event_bus.js';
+import axios from 'axios'
 
 document.addEventListener('DOMContentLoaded', () => {
   const adminTrialsApp = new Vue({
