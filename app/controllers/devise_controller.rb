@@ -36,4 +36,12 @@ class DeviseController < ApplicationController
     end
   end
 
+  # FB登入
+  def user_facebook_login
+    user_profile = params['user_profile']
+    user = User.from_facebook(user_profile)
+    sign_in(user)
+    render json: { current_user: {id: current_user.id, email: current_user.email} }, status: 200
+  end
+
 end

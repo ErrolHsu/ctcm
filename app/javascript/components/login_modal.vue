@@ -32,6 +32,10 @@
           <div class='btn btn-normal' v-on:click='login'>登入</div>
         </div>
 
+        <div class='btn btn-nremal' @click="facebookLogin">facebook</div>
+
+        <div class='btn btn-nremal' @click="facebookLogout">登出</div>
+
       </div>
     </transition>
 
@@ -59,6 +63,21 @@
 
     mounted() {
 
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1946477608986227',
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v3.1'
+        });
+
+        FB.AppEvents.logPageView();
+        // Get FB Login Status
+        FB.getLoginStatus( response => {
+          console.log('res', response)        // 這裡可以得到 fb 回傳的結果
+        })
+      };
+
       EventBus.$on('show-login-modal', () => {
         this.display = true;
       });
@@ -82,12 +101,7 @@
           password: self.password,
         })
         .then(response => {
-          let current_user = response['data']['current_user'];
-          EventBus.$emit('hide-login-modal');
-          EventBus.$emit('login-user', current_user);
-          success_msg('註冊成功');
-          self.reset_form();
-          EventBus.$emit('end-loading');
+          self.loginCallBack(response);
         })
         .catch(error => {
           error_msg(error.response['data']['message']);
@@ -104,14 +118,10 @@
           password: self.login_password,
         })
         .then(response => {
-          let current_user = response['data']['current_user'];
-          EventBus.$emit('hide-login-modal');
-          EventBus.$emit('login-user', current_user);
-          success_msg('登入成功');
-          self.reset_form();
-          EventBus.$emit('end-loading');
+          self.loginCallBack(response);
         })
         .catch(error => {
+          console.log(error)
           error_msg(error.response['data']['message']);
           EventBus.$emit('end-loading');
         })
@@ -125,6 +135,56 @@
         this.login_password = '';
       },
 
+      loginCallBack(response) {
+        let current_user = response['data']['current_user'];
+        EventBus.$emit('hide-login-modal');
+        EventBus.$emit('login-user', current_user);
+        success_msg('你已成功登入');
+        this.reset_form();
+        EventBus.$emit('end-loading');
+      },
+
+      facebookLogin: function() {
+        let self = this;
+        let scope = {
+          scope: 'email, public_profile',
+          return_scopes: true
+        }
+
+        FB.login(async function (response) {
+          console.log('res', response)
+          if (response.status === 'connected') {
+            let user_profile = await self.getProfile();
+            axios.post('/user_facebook_login', {
+              user_profile: user_profile,
+            })
+            .then(res => {
+              self.loginCallBack(res);
+            })
+            .catch(err => {
+              error_msg(err.response['data']['message']);
+            })
+          } else {
+            error_msg('FACEBOOK登入失敗');
+          }
+        }, scope);
+      },
+
+      facebookLogout () {
+        let self = this;
+        FB.logout(function (response) {
+          console.log('res when logout', response)
+        })
+      },
+
+      getProfile () {
+        return new Promise((resolve, reject) => {
+          FB.api('/me?fields=name,id,email', function (response) {
+            console.log('res in graphAPI', response)
+             resolve(response);
+          })
+        })
+      },
 
     }
 

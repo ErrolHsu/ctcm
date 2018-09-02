@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     post 'user_sign_up' => 'devise#user_sign_up'
     post 'user_login' => 'devise#user_login'
     get 'user_sign_out' => 'devise#user_sign_out'
+    # facebook登入
+    post 'user_facebook_login' => 'devise#user_facebook_login'
   end
 
   resources :products
