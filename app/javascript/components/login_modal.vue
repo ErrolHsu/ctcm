@@ -154,7 +154,7 @@
           scope: 'email, public_profile',
           return_scopes: true
         }
-
+        EventBus.$emit('loading');
         FB.login(async function (response) {
           console.log('res', response)
           if (response.status === 'connected') {
@@ -169,9 +169,11 @@
             })
             .catch(err => {
               error_msg(err.response['data']['message']);
+              EventBus.$emit('end-loading');
             })
           } else {
             error_msg('FACEBOOK登入失敗');
+            EventBus.$emit('end-loading');
           }
         }, scope);
       },
