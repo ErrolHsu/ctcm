@@ -31,7 +31,6 @@ const vue_init = {
     this.current_user = props.current_user;
 
     // 會員登入
-    console.log('123')
     EventBus.$on('login-user', (current_user) => {
       this.user_login = true;
       this.current_user = current_user;

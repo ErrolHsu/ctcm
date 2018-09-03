@@ -10,6 +10,9 @@ development:
   mailgun:
     api_key: ''
     domain: ''
+  facebook:
+    app_id: '1946477608986227'
+    app_secret: '48fb2d1602dd5c8c69224f8801f32f89'
 
 test:
   <<: *defaults

@@ -58,23 +58,27 @@
         // 登入
         login_email: '',
         login_password: '',
+        // fb accessToken
+        access_token: '',
       }
     },
 
     mounted() {
-
+      let self = this;
       window.fbAsyncInit = function() {
         FB.init({
           appId      : '1946477608986227',
           cookie     : true,
           xfbml      : true,
-          version    : 'v3.1'
+          version    : 'v3.1',
         });
 
         FB.AppEvents.logPageView();
         // Get FB Login Status
         FB.getLoginStatus( response => {
-          console.log('res', response)        // 這裡可以得到 fb 回傳的結果
+          if (response.status === 'connected') {
+            // self.access_token = response.authResponse.accessToken;
+          }
         })
       };
 
@@ -154,8 +158,10 @@
         FB.login(async function (response) {
           console.log('res', response)
           if (response.status === 'connected') {
+            self.access_token = response.authResponse.accessToken;
             let user_profile = await self.getProfile();
             axios.post('/user_facebook_login', {
+              access_token: self.access_token,
               user_profile: user_profile,
             })
             .then(res => {

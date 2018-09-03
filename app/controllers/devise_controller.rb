@@ -38,10 +38,29 @@ class DeviseController < ApplicationController
 
   # FB登入
   def user_facebook_login
+    # 驗證 access_token
+    unless valid_facebook_token(params['access_token'])
+      render json: { message: 'facebook登入失敗' }, status: 500
+      return
+    end
+
     user_profile = params['user_profile']
     user = User.from_facebook(user_profile)
     sign_in(user)
     render json: { current_user: {id: current_user.id, email: current_user.email} }, status: 200
+  end
+
+  private
+
+  def valid_facebook_token(token)
+    begin
+      response = RestClient.get "https://graph.facebook.com/debug_token?input_token=#{token}&access_token=#{Settings.facebook.app_id}|#{Settings.facebook.app_secret}"
+      data = JSON.parse(response.body)['data']
+      return data['is_valid'] && data['app_id'] == Settings.facebook.app_id
+    rescue => e
+      Rails.logger.debug e
+      return false
+    end
   end
 
 end
