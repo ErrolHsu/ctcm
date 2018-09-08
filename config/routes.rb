@@ -13,11 +13,11 @@ Rails.application.routes.draw do
 
   # user註冊登入
   devise_scope :user do
-    post 'user_sign_up' => 'devise#user_sign_up'
-    post 'user_login' => 'devise#user_login'
-    get 'user_sign_out' => 'devise#user_sign_out'
+    post 'user_sign_up' => 'custom_devise#user_sign_up'
+    post 'user_login' => 'custom_devise#user_login'
+    get 'user_sign_out' => 'custom_devise#user_sign_out'
     # facebook登入
-    post 'user_facebook_login' => 'devise#user_facebook_login'
+    post 'user_facebook_login' => 'custom_devise#user_facebook_login'
   end
 
   resources :products

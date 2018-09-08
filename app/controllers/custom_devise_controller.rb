@@ -1,4 +1,4 @@
-class DeviseController < ApplicationController
+class CustomDeviseController < ApplicationController
 
 
   def user_sign_up

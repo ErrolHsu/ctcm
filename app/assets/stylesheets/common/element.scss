@@ -36,6 +36,15 @@
   }
 }
 
+.btn-facebook {
+  background: #4267b2;
+  color: #fff;
+  border-radius: 3px;
+  &:hover {
+    background: darken(#4267b2, 5%);
+  }
+}
+
 // border
 .border-bottom {
   border-bottom: 1px solid #fff;

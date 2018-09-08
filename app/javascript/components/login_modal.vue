@@ -29,12 +29,12 @@
           <div>
             <input v-model='login_password'>
           </div>
-          <div class='btn btn-normal' v-on:click='login'>登入</div>
+          <div class='' v-on:click='login'>登入</div>
         </div>
 
-        <div class='btn btn-nremal' @click="facebookLogin">facebook</div>
+        <div class='btn btn-facebook' @click="facebookLogin">以 Facebook 帳號繼續</div>
 
-        <div class='btn btn-nremal' @click="facebookLogout">登出</div>
+        <div class='' @click="facebookLogout">登出</div>
 
       </div>
     </transition>
