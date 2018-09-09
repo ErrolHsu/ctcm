@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import Vue from 'vue/dist/vue.esm';
 import { vue_init } from '../mixins/vue_init.js';
 

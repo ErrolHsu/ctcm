@@ -1,7 +1,12 @@
 class CustomDeviseController < ApplicationController
 
-
   def user_sign_up
+
+    if User.find_by(email: params['email']).present?
+      render json: {message: 'email已被註冊'}, status: 409
+      return
+    end
+
     begin
       user = User.create!(email: params['email'], password: params['password'])
       sign_in(user)
@@ -19,7 +24,7 @@ class CustomDeviseController < ApplicationController
         sign_in(user)
         render json: { current_user: {id: current_user.id, email: current_user.email} }, status: 200
       else
-        render json: {message: '無此用戶或密碼錯誤'}, status: 500
+        render json: {message: '無此用戶或密碼錯誤'}, status: 422
       end
     rescue => e
       Rails.logger.debug e
@@ -40,7 +45,7 @@ class CustomDeviseController < ApplicationController
   def user_facebook_login
     # 驗證 access_token
     unless valid_facebook_token(params['access_token'], params['user_profile']['id'])
-      render json: { message: 'facebook登入失敗' }, status: 500
+      render json: { message: 'facebook登入失敗' }, status: 401
       return
     end
 

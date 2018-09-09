@@ -8,33 +8,59 @@
     <!-- login & register modal -->
     <transition name='opacity'>
       <div class='login-register-modal' v-show='display'>
-        <!-- 註冊表單 -->
-        <div>
-          <div>
-            <input v-model='email'>
+        <h5 class='center mt-3 mb-3'>登入或註冊以繼續</h5>
+        <hr>
+        <div class='flex-box mb-3'>
+          <!-- 註冊表單 -->
+          <div class='register-box' v-show='register_form'>
+            <h6 class='mb-3'>成為會員</h6>
+            <div class="form-group">
+              <input type="email" class="form-control"
+              v-model='email' placeholder="Email">
+            </div>
+
+            <div class="form-group">
+              <input type='password' class="form-control"
+              v-model='password' placeholder='密碼'>
+            </div>
+
+            <div class="form-group">
+              <input type='password' class="form-control"
+              v-model='password_confirm' placeholder='密碼確認'>
+            </div>
+
+            <div class='btn button-full' v-on:click='register'>註冊</div>
+            <div class='small mt-2 pointer'style='color: #4267b2' @click='displayLoginForm'>會員登入</div>
           </div>
-          <div>
-            <input v-model='password'>
+
+
+          <!-- 登入表單 -->
+          <div class='login-box' v-show='login_form'>
+            <h6 class='mb-3'>會員登入</h6>
+
+            <div class="form-group">
+              <input type="email" class="form-control"
+              v-model='login_email' placeholder="請輸入Email">
+            </div>
+
+            <div class="form-group">
+              <input type='password' class="form-control"
+              v-model='login_password' placeholder='請輸入密碼'>
+            </div>
+
+            <div class='btn button-full' v-on:click='login'>登入</div>
+            <div class='small mt-2 pointer'style='color: #4267b2' @click='displayRegisterForm'>註冊新會員</div>
           </div>
-          <div class='btn btn-normal' v-on:click='register'>註冊</div>
         </div>
 
         <hr>
 
-        <!-- 登入表單 -->
-        <div>
-          <div>
-            <input v-model='login_email'>
-          </div>
-          <div>
-            <input v-model='login_password'>
-          </div>
-          <div class='' v-on:click='login'>登入</div>
+        <div class='center mb-3'>
+          <div class='mb-3'>OR</div>
+          <div class='btn btn-facebook' @click="facebookLogin">以 Facebook 帳號繼續</div>
+          <!-- <div class='' @click="facebookLogout">登出</div> -->
         </div>
 
-        <div class='btn btn-facebook' @click="facebookLogin">以 Facebook 帳號繼續</div>
-
-        <div class='' @click="facebookLogout">登出</div>
 
       </div>
     </transition>
@@ -52,9 +78,13 @@
     data: function () {
       return {
         display: false,
+        //display 表單
+        register_form: false,
+        login_form: true,
         // 註冊
         email: '',
         password: '',
+        password_confirm: '',
         // 登入
         login_email: '',
         login_password: '',
@@ -96,9 +126,24 @@
         EventBus.$emit('hide-login-modal');
       },
 
+      displayRegisterForm () {
+        this.register_form = true;
+        this.login_form = false;
+      },
+
+      displayLoginForm () {
+        this.register_form = false;
+        this.login_form = true;
+      },
+
       // 註冊
       register: function() {
         let self = this;
+        if(this.password !== this.password_confirm) {
+          error_msg('請輸入相同的密碼');
+          return
+        }
+
         EventBus.$emit('loading');
         axios.post('/user_sign_up', {
           email: self.email,
@@ -217,17 +262,45 @@
   .login-register-modal {
     z-index: 1060;
     position: fixed;
-    top: 25%;
+    top: 15%;
     right: 25%;
     width: 50vw;
-    height: 50vh;
+    height: auto;
     background: #fff;
-    display:flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content: center;
-    i {
-      color: #E7E7E7;
+    .flex-box {
+      display:flex;
+      align-items: flex-end;
+      justify-content: space-around;
+    }
+  }
+
+  .register-box {
+    width: 60%;
+  }
+
+  .login-box {
+    width: 60%;
+  }
+
+  @media screen and (max-width: 767.98px) {
+    .login-register-modal {
+      top: 10%;
+      right: 10%;
+      width: 80vw;
+      min-height: 70vh;
+      .flex-box {
+        flex-direction:column;
+        align-items: center;
+        // justify-content: center;
+      }
+    }
+
+    .register-box {
+      width: 80%;
+    }
+
+    .login-box {
+      width: 80%;
     }
   }
 </style>
