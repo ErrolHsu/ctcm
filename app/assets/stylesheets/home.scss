@@ -43,8 +43,8 @@
     #fast-shipping {
       justify-content:space-between;
       #sample-1, #sample-2, #sample-3 {
-        height: 475px;
-        width: 355px;
+        width: 29vw;
+        height: 38.7vw;
       }
       #sample-1 {
         background-image: image-url("home-p1.jpg");
@@ -70,6 +70,65 @@
         width: 47vw;
         height: 47vw;
         background-image: image-url("blog.jpg");
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  #home-page-app {
+    .content {
+      padding: 0;
+
+      /**  定期訂購區塊 **/
+      #period-order {
+        padding: 0 10px;
+        .period-order-title {
+          font-size: 20px;
+        }
+
+        #order-options {
+          padding: 0 20px;
+          .col-md-3 {
+            margin-bottom: 10px;
+          }
+
+          .btn-wb {
+            font-size: 13px;
+          }
+
+          #checkout-btn-box {
+            margin-top: 40px;
+            justify-content: center;
+          }
+        }
+      }
+
+      // 快速選購區塊
+      #fast-shipping {
+        justify-content:flex-start;
+        flex-direction:column;
+        #sample-1, #sample-2, #sample-3 {
+          width: 100vw;
+          height: 133.4vw;
+        }
+      }
+
+      // 關於我們 & 部落格區塊
+      #about-and-blog {
+        justify-content: flex-start;
+        flex-direction:column;
+        width: 100%;
+        #about-us {
+          width: 100vw;
+          height: 100vw;
+          background-image: image-url("about.jpg");
+        }
+        #blog {
+          width: 100vw;
+          height: 100vw;
+          background-image: image-url("blog.jpg");
+        }
       }
     }
   }
