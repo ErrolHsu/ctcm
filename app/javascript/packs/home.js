@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     el: '#home-page-app',
     mixins: [vue_init],
     data: {
-
+      period_order_form: false,
     },
 
     components: {
@@ -18,7 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     },
 
     methods: {
-
+      showPeriodOrderForm () {
+        this.period_order_form = true
+      }
     },
 
 

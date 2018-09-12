@@ -1,7 +1,7 @@
 #home-page-app {
   .content {
     padding: 0 30px;
-    #home-img-1 {
+    #slide-box {
       width: 100%;
       height: 55.1vw;
       background-image: image-url("slide-01.jpg");
@@ -80,6 +80,17 @@
     .content {
       padding: 0;
 
+      #slide-box {
+        width: 100vw;
+        height: 100vw;
+        background-image: image-url("slide-01-phone.jpg");
+      }
+
+      #regular-img{
+        width: 100%;
+        height: 43.1vw;
+        background-image: image-url("regular-phone.jpg");
+      }
       /**  定期訂購區塊 **/
       #period-order {
         padding: 0 10px;

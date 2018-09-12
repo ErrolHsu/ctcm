@@ -7,79 +7,80 @@
 
   .content
     // 輪播圖區塊
-    #home-img-1.bg-img
+    #slide-box.bg-img
     // 說明簡介區塊
-    #regular-img.bg-img
+    #regular-img.bg-img.pointer(v-on:click='showPeriodOrderForm')
 
     // 定期訂單區塊
-    #period-order
-      .period-order-title.font-35.center.pt-5
-        立刻行動，享有定期配送優惠價格
-      #order-options.mt-5
-        // 豆種
-        .row.align-items-baseline
-          .col-md-3
-            * 選擇您需要的豆種
-          .col-md-9
-            .btn.btn-wb.mr-1.mb-2
-              Single Origin・單一產區
-            .btn.btn-wb.mr-1.mb-2
-              Blend・配方豆
-            .btn.btn-wb.mb-2
-              Espresso
-        // 重量
-        .row.align-items-baseline.mt-3
-          .col-md-3
-            * 選擇您需要的重量
-          .col-md-9
-            .btn.btn-wb.mr-1.mb-2
-              1/4 lb
-            .btn.btn-wb.mr-1.mb-2
-              1/2 lb
-            .btn.btn-wb.mb-2
-              1 lb
-            .btn.btn-wb.mb-2
-              2 lb
+    %transition(name='opacity')
+      #period-order(v-if='period_order_form')
+        .period-order-title.font-35.center.pt-5
+          立刻行動，享有定期配送優惠價格
+        #order-options.mt-5
+          // 豆種
+          .row.align-items-baseline
+            .col-md-3
+              * 選擇您需要的豆種
+            .col-md-9
+              .btn.btn-wb.mr-1.mb-2
+                Single Origin・單一產區
+              .btn.btn-wb.mr-1.mb-2
+                Blend・配方豆
+              .btn.btn-wb.mb-2
+                Espresso
+          // 重量
+          .row.align-items-baseline.mt-3
+            .col-md-3
+              * 選擇您需要的重量
+            .col-md-9
+              .btn.btn-wb.mr-1.mb-2
+                1/4 lb
+              .btn.btn-wb.mr-1.mb-2
+                1/2 lb
+              .btn.btn-wb.mb-2
+                1 lb
+              .btn.btn-wb.mb-2
+                2 lb
 
-        // 頻率
-        .row.align-items-baseline.mt-3
-          .col-md-3
-            * 選擇您希望配送的頻率
-          .col-md-9
-            .btn.btn-wb.mr-1.mb-2
-              每週 / Weekly
-            .btn.btn-wb.mr-1.mb-2
-              隔週 / Every 2 Weeks
-            .btn.btn-wb.mb-2
-              三週 / Every 3 Weeks
-            .btn.btn-wb.mb-2
-              每月 / Monthly
+          // 頻率
+          .row.align-items-baseline.mt-3
+            .col-md-3
+              * 選擇您希望配送的頻率
+            .col-md-9
+              .btn.btn-wb.mr-1.mb-2
+                每週 / Weekly
+              .btn.btn-wb.mr-1.mb-2
+                隔週 / Every 2 Weeks
+              .btn.btn-wb.mb-2
+                三週 / Every 3 Weeks
+              .btn.btn-wb.mb-2
+                每月 / Monthly
 
-        // 時間長度
-        .row.align-items-baseline.mt-3
-          .col-md-3
-            * 選擇您希望訂購時間的長度
-            （仍然可以中途取消）
-          .col-md-9
-            .btn.btn-wb.mr-1.mb-2
-              三個月 / 3 Months
-            .btn.btn-wb.mr-1.mb-2
-              六個月 / 6 Months
-            .btn.btn-wb.mb-2
-              九個月 / 9 Months
-            .btn.btn-wb.mb-2
-              12個月 / 12 Months
+          // 時間長度
+          .row.align-items-baseline.mt-3
+            .col-md-3
+              * 選擇您希望訂購時間的長度
+              （仍然可以中途取消）
+            .col-md-9
+              .btn.btn-wb.mr-1.mb-2
+                三個月 / 3 Months
+              .btn.btn-wb.mr-1.mb-2
+                六個月 / 6 Months
+              .btn.btn-wb.mb-2
+                九個月 / 9 Months
+              .btn.btn-wb.mb-2
+                12個月 / 12 Months
 
-        // 結帳按鈕
-        .row.align-items-center.mt-3.pb-5
-          .col-md-3
-            * 心動結帳去
-            %div.small
-              貼心提醒：將於結帳頁面顯示金額及填寫詳細的購買人資訊和配送地址
+          // 結帳按鈕
+          .row.align-items-center.mt-3.pb-5
+            .col-md-3
+              * 心動結帳去
+              %div.small
+                貼心提醒：將於結帳頁面顯示金額及填寫詳細的購買人資訊和配送地址
 
-          #checkout-btn-box.col-md-9.col-12.d-flex
-            #checkout-btn.center
-              結帳 GO
+            #checkout-btn-box.col-md-9.col-12.d-flex
+              #checkout-btn.center
+                結帳 GO
 
     // 快速選購區塊
     #fast-shipping.d-flex.mt-5

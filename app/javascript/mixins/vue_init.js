@@ -1,5 +1,6 @@
 import axios from 'axios'
 import NavbarUserController from '../components/navbar_user_controller.vue'
+import PhoneUserController from '../components/phone_user_controller.vue'
 import LoginModal from '../components/login_modal.vue'
 import Loader from '../components/loader.vue'
 import { EventBus } from '../event_bus.js';
@@ -9,11 +10,13 @@ const vue_init = {
     return {
       user_login: false,
       current_user: {},
+      phone_options: false,
     }
   },
 
   components: {
     NavbarUserController,
+    PhoneUserController,
     LoginModal,
     Loader,
   },
@@ -42,6 +45,22 @@ const vue_init = {
       this.current_user = {};
     })
   },
+
+  computed: {
+    barStyle () {
+      if (this.phone_options) {
+        return 'clicked'
+      } else {
+        return 'non-clicked'
+      }
+    }
+  },
+
+  methods: {
+    showPhoneOptions () {
+      this.phone_options = !this.phone_options;
+    }
+  }
 }
 
 export { vue_init };

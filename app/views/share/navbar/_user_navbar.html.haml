@@ -1,25 +1,31 @@
 .user_navbar
   .nav-left.inline-block
     #nav-logo.d-flex
+      // 漢堡條
+      .con.pointer.phone-show.mr-2(v-on:click='showPhoneOptions' v-bind:class="barStyle")
+        .bar.top
+        .bar.middle
+        .bar.bottom
+
       #logo-left
-      #logo-right
+      #logo-right.phone-hide
   .nav-right.inline-block.mr-4
-    %div.font-15.ml-4
+    %div.font-15.ml-4.phone-hide
       = link_to '定期配送', '#'
-    %div.font-15.ml-4
+    %div.font-15.ml-4.phone-hide
       = link_to 'SHOP', '#'
-    %div.font-15.ml-4
+    %div.font-15.ml-4.phone-hide
       = link_to 'ABOUT', '#'
-    %div.font-15.ml-4
+    %div.font-15.ml-4.phone-hide
       = link_to 'BLOG', '#'
     / vue 組件
-    %div.font-15.ml-4
+    %div.font-15.ml-4.phone-hide
       %navbar-user-controller(v-bind:current_user="current_user" v-bind:user_login='user_login')
 
-    %div.icon-link(style='margin-left: 40px;')
+    .phone-hide.icon-link(style='margin-left: 40px;')
       %a{:href => "#", 'target' =>"_blank"}
         = icon('fab', 'facebook-f')
-    %div.icon-link.ml-4
+    .phone-hide.icon-link.ml-4
       %a{:href => "https://www.instagram.com/altitudetosteriacafe", 'target' =>"_blank"}
         = icon('fab', 'instagram')
     // 購物車
@@ -29,3 +35,35 @@
     #cart-count.ml-3
       %div.center
         0
+
+
+/// 手機navbar選單
+
+%transition(name='opacity')
+  #navbar-option-modal(v-if='phone_options')
+    .content
+      %div.center
+        %a{:href => "#"}
+          定期配送
+      %div.center
+        %a{:href => "#"}
+          SHOP
+      %div.center
+        %a.d-block{:href => "#"}(style='position: relative;')
+          %i.fas.fa-plus
+          ABOUT
+          %br
+          %a{:href => "#"}(style='font-size: 18px !important')
+            莊園農場
+          %br
+          %a{:href => "#"}(style='font-size: 18px !important')
+            創辦歷程
+          %br
+          %a{:href => "#"}(style='font-size: 18px !important')
+            展望與目標
+      %div.center
+        %a{:href => "#"}
+          BLOG
+      / vue 組件
+      %phone-user-controller(v-bind:current_user="current_user" v-bind:user_login='user_login')
+
