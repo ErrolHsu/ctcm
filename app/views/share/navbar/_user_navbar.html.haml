@@ -42,7 +42,7 @@
 /// 手機navbar選單
 
 %transition(name='slide-X')
-  #navbar-option-modal(v-if='phone_options')
+  #navbar-option-modal.phone-show(v-if='phone_options')
     .content
       %div.center.bottom-line
         %a{:href => "#"}
@@ -51,8 +51,8 @@
         %a{:href => "#"}
           SHOP
       %div.center.bottom-line
-        %a.d-block(style='position: relative;'){"v-on:click.prevent" =>'showAboutLinks'}
-          %i.fas.fa-plus.pointer
+        %a.d-block.pointer(style='position: relative;'){"v-on:click.prevent" =>'showAboutLinks'}
+          %i.fas.fa-plus
           ABOUT
         %transition(name='slide-Y')
           %div(v-if='about_links')
