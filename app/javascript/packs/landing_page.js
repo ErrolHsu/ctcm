@@ -1,5 +1,6 @@
 import Vue from 'vue/dist/vue.esm'
 import { vue_init } from '../mixins/vue_init.js';
+import axios from 'axios'
 
 document.addEventListener('DOMContentLoaded', () => {
   const landingPageApp = new Vue({

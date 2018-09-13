@@ -82,8 +82,8 @@
 // 手機選單
 
 #navbar-option-modal {
-  position: absolute;
-  top:80px;
+  position: fixed;
+  top: 0px;
   height:100vh;
   width:100vw;
   background: #e8e6e6;
@@ -95,12 +95,12 @@
     align-items: center;
     width: 100%;
     min-height: 100vh;
-    div {
+    .bottom-line {
       width: 60vw;
       padding: 15px 0;
       border-bottom: 1px solid #9c9b9b;
       a {
-        font-size: 23px;
+        font-size: 20px;
         color: #666;
         .fa-plus {
           position: absolute;
@@ -112,6 +112,8 @@
   }
 }
 
+
+// 漢堡條
 
  .bar {
    display: block;

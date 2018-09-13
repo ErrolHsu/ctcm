@@ -10,7 +10,9 @@ const vue_init = {
     return {
       user_login: false,
       current_user: {},
+      // 手機navbar
       phone_options: false,
+      about_links: false,
     }
   },
 
@@ -47,6 +49,7 @@ const vue_init = {
   },
 
   computed: {
+    // 手機navbar漢堡條樣式
     barStyle () {
       if (this.phone_options) {
         return 'clicked'
@@ -57,8 +60,13 @@ const vue_init = {
   },
 
   methods: {
+    // 手機選單
     showPhoneOptions () {
       this.phone_options = !this.phone_options;
+    },
+
+    showAboutLinks () {
+      this.about_links = !this.about_links;
     }
   }
 }
