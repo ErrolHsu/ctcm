@@ -50,9 +50,14 @@ class CustomDeviseController < ApplicationController
     end
 
     user_profile = params['user_profile']
-    user = User.from_facebook(user_profile)
-    sign_in(user)
-    render json: { current_user: {id: current_user.id, email: current_user.email} }, status: 200
+    begin
+      user = User.from_facebook(user_profile)
+      sign_in(user)
+      render json: { current_user: {id: current_user.id, email: current_user.email} }, status: 200
+    rescue => e
+      Rails.logger.debug e
+      render json: {message: e.message}, status: 500
+    end
   end
 
   private

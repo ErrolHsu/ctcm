@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :period_orders, dependent: :nullify
 
   def self.from_facebook(user_profile)
-    where(provider: 'facebook', uid: user_profile['id']).first_or_create do |user|
+    where(provider: 'facebook', uid: user_profile['id']).first_or_create! do |user|
       user.provider = 'facebook'
       user.uid      = user_profile['id']
       user.email    = user_profile['email']
