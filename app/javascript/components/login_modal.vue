@@ -247,6 +247,7 @@
 
 <style lang='scss' scoped>
   .mask {
+    -webkit-transform: translate3d(0,0,0);
     z-index: 1050;
     position: fixed;
     top: 0;
@@ -260,6 +261,7 @@
   }
 
   .login-register-modal {
+    -webkit-transform: translate3d(0,0,0);
     z-index: 1060;
     position: fixed;
     top: 15%;
