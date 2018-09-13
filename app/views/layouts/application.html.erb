@@ -8,10 +8,11 @@
   </head>
 
   <body class="container-fluid p-0">
-<!--     <%= render  'share/navbar/navbar' %>
- -->
+    <div id="fb-root"></div>
+
     <%= yield %>
     <%= render 'layouts/footer' %>
     <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
   </body>
 </html>

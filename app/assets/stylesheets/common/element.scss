@@ -1,11 +1,22 @@
 // 按鈕
-
-.button {
+.btn {
   cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  transition: all 0.3s;
+  border-radius: 0;
+}
+
+.button-full {
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
   color: #777;
   background: #d7d7d8;
   padding: 5px 25px;
-  text-align: center;
+  &:hover {
+    background: darken(#d7d7d8, 5%);
+  }
 }
 
 .button-normal {
@@ -16,6 +27,26 @@
   padding: 5px 25px;
   text-align: center;
   transition: all 0.3s;
+}
+
+.btn-wb {
+  color: #fff;
+  padding: 6px 18px;
+  border: 2px solid #fff;
+  min-width: 100px;
+  &:hover {
+    color: $blood;
+    background: #fff;
+  }
+}
+
+.btn-facebook {
+  background: #4267b2;
+  color: #fff;
+  border-radius: 3px;
+  &:hover {
+    background: darken(#4267b2, 5%);
+  }
 }
 
 // border

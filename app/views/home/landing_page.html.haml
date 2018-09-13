@@ -1,0 +1,88 @@
+= javascript_pack_tag 'landing_page'
+= stylesheet_pack_tag 'landing_page'
+
+#landing_page_app
+  / product modal
+  = render 'home/product_modal/timeless_modal'
+  = render 'home/product_modal/go_bold_modal'
+  = render 'home/product_modal/qk_modal'
+
+  / 必要的共用組件
+  = render 'share/components'
+
+  / 首頁大圖
+  #home-img
+    / 首頁大圖CTA
+    #home-img-cta-box
+      %div.lighter
+        即將開幕，我想知道
+      %div.ml-3
+        #home-img-cta.pointer(v-on:click='displayAboutUs = !displayAboutUs')
+          Altitude Tosteria
+        .d-inline-block.lighter
+          的故事
+    / 大圖About us
+    %transition(name="opacity")
+      #about-us-box(v-if='displayAboutUs')
+
+
+  / 首頁 shop
+  #home-shop
+    .p1-img.product.pointer(data-toggle="modal" data-target="#timeless-modal")
+      .quick-show
+        QUICK SHOW
+    .p3-img.product.pointer(data-toggle="modal" data-target="#qk-modal")
+      .quick-show
+        QUICK SHOW
+    .p2-img.product.pointer(data-toggle="modal" data-target="#go-bold-modal")
+      .quick-show
+        QUICK SHOW
+
+  / 顧客資料表
+  #customer-info.d-flex
+    / .row
+    /   .col-md-6.mt-3.d-none.d-sm-block
+    /     %div.white.font-13
+    /       台北市松山區
+    /     %div.white.font-13.mt-2
+    /       Bade Rd. SongShan Dist, Taipei City 105, Taiwan
+    /     %div.white.font-13.mt-4
+    /       Hola@Altitudetosteria.com
+    /   .col-md-6
+    #info-form
+      .row
+        .col-md-6.col-xs-12.mt-3
+          .border-bottom
+            %input.no-outline-input.white.font-13(type='text' placeholder='* 姓名 / Name' v-model='trial.name')
+        .col-md-6.col-xs-12.mt-3
+          .border-bottom
+            %input.no-outline-input.white.font-13(type='text' placeholder='* 電子信箱 / Email' v-model='trial.email')
+        .col-md-12.mt-3
+          .border-bottom
+            %input.no-outline-input.white.font-13(type='text' placeholder='* 手機 / Phone' v-model='trial.phone')
+        .col-md-12.mt-3
+          .border-bottom
+            %input.no-outline-input.white.font-13(type='text' placeholder='* 地址 / Address' v-model='trial.address')
+        .col-md-12
+          .button-normal.mr-1.mt-3(v-on:click='selectTrialProduct("Timeless")'
+          v-bind:class='selectedCheck(trial.product_name, "Timeless")')
+            %i.fas.fa-check
+            Timeless
+          .button-normal.mr-1.mt-3(v-on:click='selectTrialProduct("QK")'
+          v-bind:class='selectedCheck(trial.product_name, "QK")')
+            %i.fas.fa-check
+            QK
+          .button-normal.mt-3(v-on:click='selectTrialProduct("Go bold!")'
+          v-bind:class='selectedCheck(trial.product_name, "Go bold!")')
+            %i.fas.fa-check
+            Go bold!
+        .col-md-12.mt-3
+          .border-bottom
+            %textarea.no-outline-input.white.font-13(type='text' placeholder='意見 / Message' style='height: 100px;' v-model='trial.message')
+        .col-md-12.mt-3.white.font-13.text-center
+          %span#trial-submit.pointer(v-on:click='trialRequest')
+            已索取完畢，填寫資訊獲得最新消息
+= render 'layouts/trial_footer'
+
+// PROPS
+#props(data="#{props}")

@@ -31,7 +31,7 @@
 
 <style lang='scss' scoped>
   .loader {
-    z-index: 1060;
+    z-index: 2060;
     position: fixed;
     top: 0;
     right: 0;

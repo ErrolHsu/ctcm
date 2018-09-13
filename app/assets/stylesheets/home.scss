@@ -1,259 +1,146 @@
-#home_page_app {
-
-  .modal-lg {
-    max-width: 940px;
-  }
-
-  // 首頁大圖
-  #home-img {
-    position: relative;
-    width: 100%;
-    height: 53.1vw;
-    background-image: image-url("home-page-ing.jpg");
-    background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    #home-img-cta-box {
-      position: absolute;
-      top: 30%;
-      right: 7%;
-      padding: 20px;
-      font-size: 20px;
-      #home-img-cta {
-        display: inline-block;
-        padding: 1px 18px;
-        font-size: 14px;
-        font-weight: 100;
-        background: #ea6000;
-        color: #fff;
-        &:hover {
-          background: darken(#ea6000, 10%)
-        }
-      }
+#home-page-app {
+  .content {
+    padding: 0 30px;
+    #slide-box {
+      width: 100%;
+      height: 55.1vw;
+      background-image: image-url("slide-01.jpg");
     }
-    #about-us-box {
-      position: absolute;
-      bottom: 7%;
-      right: 0;
-      width: 415px;
-      height: 290px;
-      background-image: image-url("about-us.png");
-      background-size: 100% 100%;
-      background-position: center;
-      background-repeat: no-repeat;
+    #regular-img{
+      width: 100%;
+      height: 43.1vw;
+      background-image: image-url("regular.jpg");
     }
-  }
-
-  @media screen and (max-width: 767.98px) {
-    #home-img {
-      width: 100vw;
-      height: 100vw;
-      background-image: image-url("home-page-ing-phone.jpg");
-      #home-img-cta-box {
-        top: 1%;
-        right: 1%;
+    /**  定期訂購區塊 **/
+    #period-order {
+      width: 100%;
+      min-height: 43.1vw;
+      background: #e4cca6;
+      #order-options {
+        padding: 0 5% 0 20%;
         font-size: 15px;
-        #home-img-cta {
-          font-size: 12px;
+        #checkout-btn {
+          height: 80px;
+          width: 80px;
+          line-height: 80px;
+          border-radius: 50%;
+          background: $blood;
+          color: #fff;
+          font-size: 13px;
+          font-weight: bolder;
+          letter-spacing: 1px;
+          cursor: pointer;
+          transition: all 0.4s;
+          &:hover {
+            color: $blood;
+            background: #fff;
+          }
         }
       }
-      #about-us-box {
-        bottom: 0;
+    }
+
+    // 快速選購區塊
+    #fast-shipping {
+      justify-content:space-between;
+      #sample-1, #sample-2, #sample-3 {
+        width: 29vw;
+        height: 38.7vw;
+      }
+      #sample-1 {
+        background-image: image-url("home-p1.jpg");
+      }
+      #sample-2 {
+        background-image: image-url("home-p2.jpg");
+      }
+      #sample-3 {
+        background-image: image-url("home-p3.jpg");
+      }
+    }
+
+    // 關於我們 & 部落格區塊
+    #about-and-blog {
+      justify-content: center !important;
+      width: 100%;
+      #about-us {
+        width: 47vw;
+        height: 47vw;
+        background-image: image-url("about.jpg");
+      }
+      #blog {
+        width: 47vw;
+        height: 47vw;
+        background-image: image-url("blog.jpg");
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  #home-page-app {
+    .content {
+      padding: 0;
+
+      #slide-box {
         width: 100vw;
-        height: 73vw;
+        height: 100vw;
+        background-image: image-url("slide-01-phone.jpg");
       }
-    }
-  }
 
-// #home-shop
-  #home-shop {
-    width: 100%;
-    height: 43vw;
-    min-height: 550px;
-    display: flex;
-    justify-content:space-around;
-    align-items:center;
-    .product {
-      width: 25vw;
-      height: 25vw;
-      background-size: 100% 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      position: relative;
-      &:hover {
-        .quick-show  {
-          visibility:visible;
-          opacity: 1;
-        }
-      }
-      .quick-show {
-        opacity: 0;
-        visibility:hidden;
-        transition: opacity 0.5s;
-        position: absolute;
-        bottom: 0;
+      #regular-img{
         width: 100%;
-        height: 50px;
-        line-height:  50px;
-        text-align: center;
-        cursor: pointer;
-        background: rgba(85, 85, 85, 0.7);
-        color: #fff;
+        height: 43.1vw;
+        background-image: image-url("regular-phone.jpg");
       }
-    }
-  }
+      /**  定期訂購區塊 **/
+      #period-order {
+        padding: 0 10px;
+        .period-order-title {
+          font-size: 20px;
+        }
 
-  @media screen and (max-width: 767.98px) {
-    #home-shop{
-      .product {
-        .quick-show {
-          visibility:visible;
-          opacity: 1;
+        #order-options {
+          padding: 0 20px;
+          .col-md-3 {
+            margin-bottom: 10px;
+          }
+
+          .btn-wb {
+            font-size: 13px;
+          }
+
+          #checkout-btn-box {
+            margin-top: 40px;
+            justify-content: center;
+          }
+        }
+      }
+
+      // 快速選購區塊
+      #fast-shipping {
+        justify-content:flex-start;
+        flex-direction:column;
+        #sample-1, #sample-2, #sample-3 {
+          width: 100vw;
+          height: 133.4vw;
+        }
+      }
+
+      // 關於我們 & 部落格區塊
+      #about-and-blog {
+        justify-content: flex-start;
+        flex-direction:column;
+        width: 100%;
+        #about-us {
+          width: 100vw;
+          height: 100vw;
+          background-image: image-url("about.jpg");
+        }
+        #blog {
+          width: 100vw;
+          height: 100vw;
+          background-image: image-url("blog.jpg");
         }
       }
     }
   }
-
-  .p1-img {
-    background-image: image-url("p1.jpg");
-  }
-
-  .p2-img {
-    background-image: image-url("p2.jpg");
-  }
-
-  .p3-img {
-    background-image: image-url("p3.jpg");
-  }
-
-  @media screen and (max-width: 991.98px) {
-    #home-shop {
-      min-height: 0;
-      padding: 150px 0;
-      .product {
-        width: 30vw;
-        height: 30vw;
-      }
-    }
-  }
-
-  @media screen and (max-width: 767.98px) {
-    #home-shop {
-      min-height: 0;
-      height: auto;
-      padding: 50px 0;
-      display: flex;
-      flex-wrap: wrap;
-      .product {
-        width: 80vw;
-        height: 80vw;
-        margin-top: 20px;
-      }
-    }
-  }
-
-  // quick show modal
-  .product-modal {
-    .modal-body {
-      background: #d7d7d7;
-      padding-top: 30px;
-      padding-bottom: 130px;
-      .product-img {
-        max-width: 550px;
-        max-height: 550px;
-        width: 45vw;
-        height: 45vw;
-        background-size: 100% 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-      .product-info {
-        padding-top: 5vh;
-      }
-    }
-  }
-
-  @media screen and (max-width: 991.98px) {
-    .product-modal {
-      .modal-body {
-        .product-img {
-
-        }
-        .product-info {
-          padding-top: 50px;
-        }
-      }
-    }
-  }
-
-  @media screen and (max-width: 767.98px) {
-    .product-modal {
-      .modal-body {
-        .product-img {
-          width: 70vw;
-          height: 70vw;
-        }
-        .product-info {
-          padding-top: 30px;
-        }
-      }
-    }
-  }
-
-
-  // 試用表單
-  #customer-info {
-    justify-content:center;
-    align-items:center;
-    width: 100%;
-    padding: 80px 150px;
-    background: $brown;
-    #info-form {
-      width: 560px;
-      height: 390px;
-    }
-    #trial-submit {
-      padding: 6px;
-      &:hover {
-        border-bottom: 1px solid #fff;
-      }
-    }
-  }
-
-  @media screen and (max-width: 991.98px) {
-    #customer-info {
-      height: auto;
-      padding: 20px 20px;
-      #info-form {
-        width: auto;
-        height: auto;
-      }
-    }
-  }
-
-
-  // 改變預設placeholder文字顏色
-
-  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-      color:    #fff;
-  }
-  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-     color:    #fff;
-     opacity:  1;
-  }
-  ::-moz-placeholder { /* Mozilla Firefox 19+ */
-     color:    #fff;
-     opacity:  1;
-  }
-  :-ms-input-placeholder { /* Internet Explorer 10-11 */
-     color:    #fff;
-  }
-  ::-ms-input-placeholder { /* Microsoft Edge */
-     color:    #fff;
-  }
-
-  ::placeholder { /* Most modern browsers support this now. */
-     color:    #fff;
-  }
-
 }

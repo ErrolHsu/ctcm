@@ -16,7 +16,6 @@
 //= require rails-ujs
 //= require lodash.js
 //= require commonmark.js
-//= require axios.js
 //= require alertify.js
 //= require jquery.twzipcode.min.js
 //= require_tree ./common

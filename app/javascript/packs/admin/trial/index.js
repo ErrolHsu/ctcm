@@ -1,6 +1,7 @@
 import Vue from 'vue/dist/vue.esm'
 import Loader from '../../../components/loader.vue'
 import { EventBus } from '../../../event_bus.js';
+import axios from 'axios'
 
 document.addEventListener('DOMContentLoaded', () => {
   const adminTrialsApp = new Vue({
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // set CSRF Token
       const csrf_token = document.querySelector("meta[name=csrf-token]").content;
       axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
+      axios.defaults.headers.common['Accept'] = 'application/json'
 
       // init data
       const element = document.getElementById("props");

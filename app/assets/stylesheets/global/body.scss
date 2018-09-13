@@ -1,3 +1,11 @@
 body {
   background: #fafafa;
+  a {
+    color: $brown;
+    text-decoration: none;
+    &:hover {
+      color: lighten($brown, 10%);
+      text-decoration: none;
+    }
+  }
 }

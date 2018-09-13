@@ -1,19 +1,72 @@
 .user_navbar
-  .inline-block(class='nav-left')
+  .nav-left.inline-block
     #nav-logo.d-flex
-      #logo-left
-      #logo-right
-  .inline-block(class='nav-right')
-    / %div
-    /   Home
-    / %div
-    /   Product Slider
-    / %div
-    /   Contact
-    / %div.icon-link
-    /   = icon('fab', 'facebook-f')
-    / %div.icon-link
-    /   = icon('fab', 'twitter')
-    %div.icon-link
+      // 漢堡條
+      .con.pointer.phone-show.mr-2(v-on:click='showPhoneOptions' v-bind:class="barStyle")
+        .bar.top
+        .bar.middle
+        .bar.bottom
+      %transition(name='opacity')
+        #logo-left(v-if='!phone_options')
+      #logo-right.phone-hide
+  .nav-right.inline-block.mr-4
+    %div.font-15.ml-4.phone-hide
+      = link_to '定期配送', '#'
+    %div.font-15.ml-4.phone-hide
+      = link_to 'SHOP', '#'
+    %div.font-15.ml-4.phone-hide
+      = link_to 'ABOUT', '#'
+    %div.font-15.ml-4.phone-hide
+      = link_to 'BLOG', '#'
+    / vue 組件
+    %div.font-15.ml-4.phone-hide
+      %navbar-user-controller(v-bind:current_user="current_user" v-bind:user_login='user_login')
+
+    .phone-hide.icon-link(style='margin-left: 40px;')
+      %a{:href => "#", 'target' =>"_blank"}
+        = icon('fab', 'facebook-f')
+    .phone-hide.icon-link.ml-4
       %a{:href => "https://www.instagram.com/altitudetosteriacafe", 'target' =>"_blank"}
         = icon('fab', 'instagram')
+    // 購物車
+    %transition(name='opacity')
+      %div.icon-link(v-if='!phone_options' style='margin-left: 30px;')
+        %a{:href => ""}
+          %i#cart.fas.fa-shopping-cart
+    %transition(name='opacity')
+      #cart-count.ml-3(v-if='!phone_options')
+        %div.center
+          0
+
+
+/// 手機navbar選單
+
+%transition(name='slide-X')
+  #navbar-option-modal(v-if='phone_options')
+    .content
+      %div.center.bottom-line
+        %a{:href => "#"}
+          定期配送
+      %div.center.bottom-line
+        %a{:href => "#"}
+          SHOP
+      %div.center.bottom-line
+        %a.d-block(style='position: relative;'){"v-on:click.prevent" =>'showAboutLinks'}
+          %i.fas.fa-plus.pointer
+          ABOUT
+        %transition(name='slide-Y')
+          %div(v-if='about_links')
+            %a{:href => "#"}(style='font-size: 18px !important')
+              莊園農場
+            %br
+            %a{:href => "#"}(style='font-size: 18px !important')
+              創辦歷程
+            %br
+            %a{:href => "#"}(style='font-size: 18px !important')
+              展望與目標
+      %div.center.bottom-line
+        %a{:href => "#"}
+          BLOG
+      / vue 組件
+      %phone-user-controller(v-bind:current_user="current_user" v-bind:user_login='user_login')
+
