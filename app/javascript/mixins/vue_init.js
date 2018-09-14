@@ -62,6 +62,14 @@ const vue_init = {
       } else {
         return 'non-clicked'
       }
+    },
+    // 手機navbar plus icon
+    plusStyle () {
+      if (this.about_links) {
+        return 'clicked'
+      } else {
+        return 'non-clicked'
+      }
     }
   },
 

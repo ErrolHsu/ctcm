@@ -52,7 +52,9 @@
           SHOP
       %div.center.bottom-line
         %a.d-block.pointer(style='position: relative;'){"v-on:click.prevent" =>'showAboutLinks'}
-          %i.fas.fa-plus
+          / %i.fas.fa-plus
+          .plus-container(v-bind:class='plusStyle')
+            .plus-box
           ABOUT
         %transition(name='slide-Y')
           %div(v-if='about_links')
