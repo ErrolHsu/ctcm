@@ -40,6 +40,7 @@
     methods: {
       ShowLoginModal: function() {
         EventBus.$emit('show-login-modal');
+        EventBus.$emit('hide-phone-options');
       },
 
       signOutUser: function() {

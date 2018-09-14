@@ -45,7 +45,13 @@ const vue_init = {
     EventBus.$on('sign-out-user', () => {
       this.user_login = false;
       this.current_user = {};
-    })
+    });
+
+    // phone options 關閉
+    EventBus.$on('hide-phone-options', () => {
+      this.phone_options = false;
+    });
+
   },
 
   computed: {
