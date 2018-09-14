@@ -249,10 +249,10 @@
   .mask {
     -webkit-transform: translate3d(0,0,0);
 
-    -webkit-transform:translateZ(1px);
-    -moz-transform:translateZ(1px);
-    -o-transform:translateZ(1px);
-    transform:translateZ(1px);
+    // -webkit-transform:translateZ(1px);
+    // -moz-transform:translateZ(1px);
+    // -o-transform:translateZ(1px);
+    // transform:translateZ(1px);
 
     z-index: 1050;
     position: fixed;
@@ -269,14 +269,14 @@
   .login-register-modal {
     -webkit-transform: translate3d(0,0,0);
 
-    -webkit-transform:translateZ(1px);
-    -moz-transform:translateZ(1px);
-    -o-transform:translateZ(1px);
-    transform:translateZ(1px);
+    // -webkit-transform:translateZ(1px);
+    // -moz-transform:translateZ(1px);
+    // -o-transform:translateZ(1px);
+    // transform:translateZ(1px);
 
     z-index: 1060;
 
-    position: fixed;
+    position: absolute;
     top: 15%;
     right: 25%;
     width: 50vw;
