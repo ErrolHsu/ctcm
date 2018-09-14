@@ -2,12 +2,12 @@
 
   <div>
     <!-- 遮罩 -->
-    <div class='mask z-index-fix' v-show='display' v-on:click.stop='hideLoginModal'>
+    <div class='mask' v-show='display' v-on:click.stop='hideLoginModal'>
     </div>
 
     <!-- login & register modal -->
     <transition name='opacity'>
-      <div class='login-register-modal z-index-fix' v-show='display'>
+      <div class='login-register-modal' v-show='display'>
         <h5 class='center mt-3 mb-3'>登入或註冊以繼續</h5>
         <hr>
         <div class='flex-box mb-3'>
@@ -249,6 +249,12 @@
   .mask {
     -webkit-transform: translate3d(0,0,0);
     z-index: 1050;
+
+    -webkit-transform:translateZ(1px);
+    -moz-transform:translateZ(1px);
+    -o-transform:translateZ(1px);
+    transform:translateZ(1px);
+
     position: fixed;
     top: 0;
     right: 0;
@@ -263,6 +269,12 @@
   .login-register-modal {
     -webkit-transform: translate3d(0,0,0);
     z-index: 1060;
+
+    -webkit-transform:translateZ(1px);
+    -moz-transform:translateZ(1px);
+    -o-transform:translateZ(1px);
+    transform:translateZ(1px);
+
     position: fixed;
     top: 15%;
     right: 25%;
