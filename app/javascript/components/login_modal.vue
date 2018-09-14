@@ -274,7 +274,7 @@
     // -o-transform:translateZ(1px);
     // transform:translateZ(1px);
 
-    z-index: 1060;
+    z-index: 1060 !important;
 
     position: absolute;
     top: 15%;
