@@ -2,12 +2,12 @@
 
   <div>
     <!-- 遮罩 -->
-    <div class='mask' v-show='display' v-on:click.stop='hideLoginModal'>
+    <div class='mask z1050' v-show='display' v-on:click.stop='hideLoginModal'>
     </div>
 
     <!-- login & register modal -->
     <transition name='opacity'>
-      <div class='login-register-modal' v-show='display'>
+      <div class='login-register-modal z1060' v-show='display'>
         <h5 class='center mt-3 mb-3'>登入或註冊以繼續</h5>
         <hr>
         <div class='flex-box mb-3'>
@@ -254,7 +254,7 @@
     // -o-transform:translateZ(1px);
     // transform:translateZ(1px);
 
-    z-index: 1050;
+    // z-index: 1050;
     position: fixed;
     top: 0;
     right: 0;
@@ -274,7 +274,7 @@
     // -o-transform:translateZ(1px);
     // transform:translateZ(1px);
 
-    z-index: 1060;
+    // z-index: 1060;
 
     position: fixed;
     top: 15%;

@@ -116,6 +116,14 @@
 
 // bug fix
 
+.z1050 {
+  z-index: 1050 !important;
+}
+
+.z1060 {
+  z-index: 1050 !important;
+}
+
 .z-index-fix {
   -webkit-transform:translateZ(1px);
   -moz-transform:translateZ(1px);
