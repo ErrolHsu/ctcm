@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.period_order_form = true;
         setTimeout(() => {
           window.location.href = '#period-order';
-        }, 0)
+        }, 100)
       },
     },
 
