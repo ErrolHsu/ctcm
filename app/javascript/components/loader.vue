@@ -1,5 +1,5 @@
 <template>
-  <div v-show='loading' id='loader' class='loader'>
+  <div v-show='loading' id='loader' class='loader z2060'>
     <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
     <span class="sr-only">Loading...</span>
   </div>
@@ -31,7 +31,6 @@
 
 <style lang='scss' scoped>
   .loader {
-    z-index: 2060;
     position: fixed;
     top: 0;
     right: 0;
