@@ -8,12 +8,14 @@
   .content
     // 輪播圖區塊
     #slide-box.bg-img
+      .cta.phone-show(v-on:click='showPeriodOrderForm')
+        定期配送
     // 說明簡介區塊
     #regular-img.bg-img.pointer(v-on:click='showPeriodOrderForm')
 
     // 定期訂單區塊
     %transition(name='opacity')
-      #period-order(v-if='period_order_form')
+      #period-order(v-if='period_order_form' ref='messageDisplay')
         .period-order-title.font-35.center.pt-5
           立刻行動，享有定期配送優惠價格
         #order-options.mt-5
@@ -83,13 +85,13 @@
                 結帳 GO
 
     // 快速選購區塊
-    #fast-shipping.d-flex.mt-5
+    #fast-shipping.d-flex.mt-desktop
       #sample-1.bg-img
       #sample-2.bg-img
       #sample-3.bg-img
 
     // 關於我們 & 部落格區塊
-    #about-and-blog.d-flex.mt-5
+    #about-and-blog.d-flex.mt-desktop
       #about-us.bg-img
       #blog.bg-img
 

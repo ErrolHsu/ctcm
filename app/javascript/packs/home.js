@@ -19,8 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     methods: {
       showPeriodOrderForm () {
-        this.period_order_form = true
-      }
+        this.period_order_form = true;
+        setTimeout(() => {
+          window.location.href = '#period-order';
+        }, 0)
+      },
     },
 
 
