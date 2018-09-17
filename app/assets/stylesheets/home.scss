@@ -88,9 +88,9 @@
         .cta {
           position: absolute;
           top: 24.8vw;
-          right: 6vw;
+          right: 6.5vw;
           background: #e65e00;
-          padding: 1px 10px;
+          padding: 1px 12px;
           color: #fff;
           font-size: 10px;
         }
@@ -149,6 +149,19 @@
           width: 100vw;
           height: 100vw;
           background-image: image-url("blog.jpg");
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 374.98px) {
+  #home-page-app {
+    .content {
+      #slide-box {
+        .cta {
+          top: 24vw;
+          right: 3vw;
         }
       }
     }
