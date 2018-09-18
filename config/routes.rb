@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get 'trial' => 'home#trial'
   get 'free_sample' => 'home#landing_page'
 
+  # checkout頁
+  get 'checkout' => 'carts#checkout'
+
   # user註冊登入
   devise_scope :user do
     post 'user_sign_up' => 'custom_devise#user_sign_up'

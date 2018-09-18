@@ -45,6 +45,7 @@ const vue_init = {
     EventBus.$on('sign-out-user', () => {
       this.user_login = false;
       this.current_user = {};
+      // TODO 登出後如該頁面非會員不能訪問則導回首頁
     });
 
     // phone options 關閉

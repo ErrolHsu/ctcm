@@ -1,0 +1,17 @@
+#check-out-app {
+
+  #progress-bar {
+    margin-top: 150px;
+    justify-content:center;
+    div {
+      border: 1px solid #3a616f;
+      padding: 10px 30px;
+      color: #3a616f;
+      min-width: 200px;
+    }
+    div.current {
+      background: #3a616f;
+      color: #fff;
+    }
+  }
+}
