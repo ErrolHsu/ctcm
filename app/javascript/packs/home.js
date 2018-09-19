@@ -7,6 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
     mixins: [vue_init],
     data: {
       period_order_form: true,
+
+      // 定期訂購表單data
+      order_set: {
+        kind: '',
+        weight: 0,
+        frequency: 0,
+        duration: 0
+      }
     },
 
     components: {
@@ -18,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
 
     methods: {
+      // 顯示定期訂購表單
       showPeriodOrderForm () {
         this.period_order_form = true;
         setTimeout(() => {
@@ -25,13 +34,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100)
       },
 
+      selectKind (kind) {
+        this.order_set.kind = kind;
+      },
+
+      selectWeight (weight) {
+        this.order_set.weight = weight;
+      },
+
+      selectFrequency (frequency) {
+        this.order_set.frequency = frequency;
+      },
+
+      selectDuration (duration) {
+        this.order_set.duration = duration;
+      },
+
+      // 判斷是否被選中
+      checkSeleted (current_value, value) {
+        if (current_value === value) {
+          return 'seleted'
+        }
+      },
+
       // 前往結帳
       goToCheckout () {
+        // 結帳前須登入
         if ( !object_present(this.current_user) ) {
           error_msg('結帳前請先登入')
-        } else {
-          window.location = '/checkout?a=abc'
+          return
         }
+        // TODO 檢查 order_set
+        if (false) {
+          return
+        }
+        let kind = this.order_set.kind;
+        let weight = this.order_set.weight;
+        let frequency = this.order_set.frequency;
+        let duration = this.order_set.duration
+
+        let url = `/checkout?kind=${kind}&weight=${weight}&frequency=${frequency}&duration=${duration}`
+
+        window.location = url;
       },
     },
 

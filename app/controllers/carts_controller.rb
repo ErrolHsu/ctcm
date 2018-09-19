@@ -15,5 +15,6 @@ class CartsController < ApplicationController
   end
 
   def checkout
+    byebug
   end
 end

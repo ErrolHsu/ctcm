@@ -19,6 +19,13 @@
       #order-options {
         padding: 0 5% 0 20%;
         font-size: 15px;
+
+        // 被選中的
+        .btn-wb.seleted {
+          color: $blood;
+          background: #fff;
+        }
+
         #checkout-btn {
           height: 80px;
           width: 80px;

@@ -7,8 +7,10 @@
         .bar.middle
         .bar.bottom
       %transition(name='opacity')
-        #logo-left(v-if='!phone_options')
-      #logo-right.phone-hide
+        = link_to '/temp' do
+          #logo-left(v-if='!phone_options')
+      = link_to '/temp' do
+        #logo-right.phone-hide
   .nav-right.inline-block.mr-4
     %div.font-15.ml-4.phone-hide
       = link_to '定期配送', '#'
