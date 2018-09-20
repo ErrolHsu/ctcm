@@ -1,3 +1,6 @@
+= javascript_pack_tag 'admin/new_product'
+/ = stylesheet_pack_tag 'admin/new_product'
+
 #new_product_app
   %h1 新增商品
   = form_for product, url: admin_products_path(product), html: { method: :post } do |f|
