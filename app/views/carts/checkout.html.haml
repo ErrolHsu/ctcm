@@ -20,13 +20,26 @@
   / 必要的共用組件
   = render 'share/components'
 
-  #progress-bar.d-flex
-    %div.center.current
-      Step 1 確認訂單
-    %div.center
-      Step 2 填寫訂購資訊及付款
-    %div.center
-      Step 3 訂購完成
+  .row
+    .col-md-8.offset-md-2
+      #progress-bar.d-flex
+        %div.center.current
+          Step 1 確認訂單
+        %div.center
+          Step 2 填寫訂購資訊及付款
+        %div.center
+          Step 3 訂購完成
+  .row
+    .col-md-8.offset-md-2
+      #period-order-box
+        %div
+          豆種: {{period_order_set.kind}}
+        %div
+          重量: {{period_order_set.weight}} LB
+        %div
+          配送頻率: {{period_order_set.frequency}} 週/次
+        %div
+          時間長度: {{period_order_set.duration}} 個月
 
 
 // PROPS

@@ -65,18 +65,26 @@ document.addEventListener('DOMContentLoaded', () => {
           return
         }
         // TODO 檢查 order_set
-        if (false) {
+        if (!this.checkOrderSet()) {
+          error_msg('有未選擇的項目')
           return
         }
         let kind = this.order_set.kind;
         let weight = this.order_set.weight;
         let frequency = this.order_set.frequency;
-        let duration = this.order_set.duration
+        let duration = this.order_set.duration;
 
         let url = `/checkout?kind=${kind}&weight=${weight}&frequency=${frequency}&duration=${duration}`
 
         window.location = url;
       },
+
+      checkOrderSet () {
+        return (
+          this.order_set.kind && this.order_set.weight && this.order_set.frequency && this.order_set.duration
+        )
+      },
+
     },
 
 
