@@ -35,7 +35,7 @@ gem 'capistrano-passenger', :group => :development
 
 # gem 'vuejs-rails'
 
-gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap', '~> 4.1.2'
 
 gem 'jquery-rails'
 
