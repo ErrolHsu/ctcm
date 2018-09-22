@@ -1,4 +1,5 @@
 import Vue from 'vue/dist/vue.esm';
+import axios from 'axios'
 import { vue_init } from '../mixins/vue_init.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -6,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     el: '#home-page-app',
     mixins: [vue_init],
     data: {
-      period_order_form: true,
+      period_order_form: false,
 
       // 定期訂購表單data
       order_set: {
@@ -59,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 前往結帳
       goToCheckout () {
+        let self = this;
+        let token;
         // 結帳前須登入
         if ( !object_present(this.current_user) ) {
           error_msg('結帳前請先登入')
@@ -69,14 +72,19 @@ document.addEventListener('DOMContentLoaded', () => {
           error_msg('有未選擇的項目')
           return
         }
-        let kind = this.order_set.kind;
-        let weight = this.order_set.weight;
-        let frequency = this.order_set.frequency;
-        let duration = this.order_set.duration;
 
-        let url = `/checkout?kind=${kind}&weight=${weight}&frequency=${frequency}&duration=${duration}`
-
-        window.location = url;
+        axios.post('checkout/jwt_encode', {
+          order_set: self.order_set
+        })
+          .then(function(response) {
+            console.log(response['data']['token']);
+            token = response['data']['token'];
+            let url = `/checkout?token=${token}`
+            window.location = url;
+          })
+          .catch(function(error) {
+            error_msg(error.response['data']['message']);
+          })
       },
 
       checkOrderSet () {

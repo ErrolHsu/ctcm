@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   # checkout頁
   get 'checkout' => 'carts#checkout'
+  post 'checkout/jwt_encode' => 'carts#jwt_encode'
+  post 'checkout/jwt_decode' => 'carts#jwt_decode'
 
   # user註冊登入
   devise_scope :user do
