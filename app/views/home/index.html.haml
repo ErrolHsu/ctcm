@@ -24,24 +24,31 @@
             .col-md-3
               * 選擇您需要的豆種
             .col-md-9
-              .btn.btn-wb.mr-1.mb-2
+              .btn.btn-wb.mr-1.mb-2(v-on:click="selectKind('single_origin')"
+              v-bind:class="checkSeleted(order_set.kind, 'single_origin')")
                 Single Origin・單一產區
-              .btn.btn-wb.mr-1.mb-2
+              .btn.btn-wb.mr-1.mb-2(v-on:click="selectKind('blend')"
+              v-bind:class="checkSeleted(order_set.kind, 'blend')")
                 Blend・配方豆
-              .btn.btn-wb.mb-2
+              .btn.btn-wb.mb-2(v-on:click="selectKind('espresso')"
+              v-bind:class="checkSeleted(order_set.kind, 'espresso')")
                 Espresso
           // 重量
           .row.align-items-baseline.mt-3
             .col-md-3
               * 選擇您需要的重量
             .col-md-9
-              .btn.btn-wb.mr-1.mb-2
+              .btn.btn-wb.mr-1.mb-2(v-on:click="selectWeight(0.25)"
+              v-bind:class="checkSeleted(order_set.weight, 0.25)")
                 1/4 lb
-              .btn.btn-wb.mr-1.mb-2
+              .btn.btn-wb.mr-1.mb-2(v-on:click="selectWeight(0.5)"
+              v-bind:class="checkSeleted(order_set.weight, 0.5)")
                 1/2 lb
-              .btn.btn-wb.mb-2
+              .btn.btn-wb.mb-2(v-on:click="selectWeight(1)"
+              v-bind:class="checkSeleted(order_set.weight, 1)")
                 1 lb
-              .btn.btn-wb.mb-2
+              .btn.btn-wb.mb-2(v-on:click="selectWeight(2)"
+              v-bind:class="checkSeleted(order_set.weight, 2)")
                 2 lb
 
           // 頻率
@@ -49,13 +56,17 @@
             .col-md-3
               * 選擇您希望配送的頻率
             .col-md-9
-              .btn.btn-wb.mr-1.mb-2
+              .btn.btn-wb.mr-1.mb-2(v-on:click="selectFrequency(1)"
+              v-bind:class="checkSeleted(order_set.frequency, 1)")
                 每週 / Weekly
-              .btn.btn-wb.mr-1.mb-2
+              .btn.btn-wb.mr-1.mb-2(v-on:click="selectFrequency(2)"
+              v-bind:class="checkSeleted(order_set.frequency, 2)")
                 隔週 / Every 2 Weeks
-              .btn.btn-wb.mb-2
+              .btn.btn-wb.mb-2(v-on:click="selectFrequency(3)"
+              v-bind:class="checkSeleted(order_set.frequency, 3)")
                 三週 / Every 3 Weeks
-              .btn.btn-wb.mb-2
+              .btn.btn-wb.mb-2(v-on:click="selectFrequency(4)"
+              v-bind:class="checkSeleted(order_set.frequency, 4)")
                 每月 / Monthly
 
           // 時間長度
@@ -64,13 +75,17 @@
               * 選擇您希望訂購時間的長度
               （仍然可以中途取消）
             .col-md-9
-              .btn.btn-wb.mr-1.mb-2
+              .btn.btn-wb.mr-1.mb-2(v-on:click="selectDuration(3)"
+              v-bind:class="checkSeleted(order_set.duration, 3)")
                 三個月 / 3 Months
-              .btn.btn-wb.mr-1.mb-2
+              .btn.btn-wb.mr-1.mb-2(v-on:click="selectDuration(6)"
+              v-bind:class="checkSeleted(order_set.duration, 6)")
                 六個月 / 6 Months
-              .btn.btn-wb.mb-2
+              .btn.btn-wb.mb-2(v-on:click="selectDuration(9)"
+              v-bind:class="checkSeleted(order_set.duration, 9)")
                 九個月 / 9 Months
-              .btn.btn-wb.mb-2
+              .btn.btn-wb.mb-2(v-on:click="selectDuration(12)"
+              v-bind:class="checkSeleted(order_set.duration, 12)")
                 12個月 / 12 Months
 
           // 結帳按鈕
@@ -81,7 +96,7 @@
                 貼心提醒：將於結帳頁面顯示金額及填寫詳細的購買人資訊和配送地址
 
             #checkout-btn-box.col-md-9.col-12.d-flex
-              #checkout-btn.center
+              #checkout-btn.center(v-on:click='goToCheckout()')
                 結帳 GO
 
     // 快速選購區塊

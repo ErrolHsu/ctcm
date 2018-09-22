@@ -1,14 +1,103 @@
-%h4
-  產品
-%h5
-  = product.title
+/ %h4
+/   產品
+/ %h5
+/   = product.title
 
-%div
-  - if product.img.attached?
-    = image_tag(product.img.variant(resize: "300x300"))
+/ %div
+/   - if product.img.attached?
+/     = image_tag(product.img.variant(resize: "300x300"))
 
-%div
-  每月一次共12次
+/ %div
+/   每月一次共12次
 
-%div
-  = link_to '確認下單', orders_path(product_id: product.id),  method: 'POST', class: 'btn btn-secondary'
+/ %div
+/   = link_to '確認下單', orders_path(product_id: product.id),  method: 'POST', class: 'btn btn-secondary'
+
+= javascript_pack_tag 'checkout'
+= stylesheet_pack_tag 'checkout'
+
+#check-out-app
+  / 必要的共用組件
+  = render 'share/components'
+
+  .row
+    .col-md-8.offset-md-2
+      #progress-bar.d-flex
+        %div.center.pointer(v-bind:class="{current: checkCurrentStatus('step1')}" v-on:click=" status = 'step1' ")
+          Step 1 確認訂單
+        %div.center.pointer(v-bind:class="{current: checkCurrentStatus('step2')}" v-on:click=" status = 'step2' ")
+          Step 2 填寫訂購資訊
+        %div.center.pointer(v-bind:class="{current: checkCurrentStatus('step3')}" v-on:click=" status = 'step3' ")
+          Step 3 選擇付款方式
+
+  // STEP 1
+  %transition(name='slide-Y')
+    #step1(v-if=" status === 'step1' ")
+      .row
+        .col-md-8.offset-md-2
+          #period-order-box
+            %div
+              豆種: {{period_order_set.kind}}
+            %div
+              重量: {{period_order_set.weight}} LB
+            %div
+              配送頻率: {{period_order_set.frequency}} 週/次
+            %div
+              時間長度: {{period_order_set.duration}} 個月
+
+      .row.mt-3
+        .col-md-4.offset-md-2.font-13
+          %div
+            配送方式：物流宅配
+          %div
+            提醒您:
+          %div
+            *本公司付款方式一律採取線上付款方式 - 綠界金流
+          %div
+            *宅配請填寫正確收件人資訊，避免包裹配送不達
+
+        .col-md-4
+          .d-flex
+            #free-shopping-info.d-flex
+              %div
+                滿1500元
+              %div
+                享有免運
+
+      .d-flex.justify-center
+        %div.btn.button-normal.mt-5(v-on:click=" status = 'step2' ")
+          繼續
+
+  // STEP 2
+  %transition(name='slide-Y')
+    #step2(v-if=" status === 'step2' ")
+      .row
+        .col-md-8.offset-md-2
+          #shipping-address-box
+            %div(style='border-bottom: 1px solid #3a616f; color:#3a616f; padding: 10px 0;')
+              %span
+                訂購資料
+              %span.d-inline-block.font-13.ml-2
+                *請務必填寫完整正確收件人資訊避免配送不達
+          .form-group.mt-3
+            %input.form-control(placeholder='收件人姓名' v-model='shipping_info.name')
+
+          .form-group.mt-3
+            %input.form-control(placeholder='手機號碼' v-model='shipping_info.phone')
+
+          .form-group.mt-3
+            %input.form-control(placeholder='Email' v-model='shipping_info.email')
+
+          .form-group.mt-3
+            %input.form-control(placeholder='​配送地址' v-model='shipping_info.address')
+
+      .d-flex.justify-center
+        %div.btn.button-normal.mt-5(v-on:click=" status = 'step3' ")
+          繼續 {{shipping_info.name}}
+
+  // STEP 3
+  %transition(name='slide-Y')
+    #step2(v-if=" status === 'step3' ")
+
+// PROPS
+#props(data="#{props}")

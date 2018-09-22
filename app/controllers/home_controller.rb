@@ -4,8 +4,6 @@ class HomeController < ApplicationController
   expose(:products) { Product.all }
   expose(:product_json) { Product.includes(:variants).to_json(include: :variants) }
 
-  expose(:props) { { current_user: get_current_user, user_login: current_user.present? }.to_json }
-
   def landing_page
 
   end
@@ -49,10 +47,6 @@ class HomeController < ApplicationController
 
   def trial_params
     params.require(:trial_info).permit(:name, :address, :email, :phone, :message, :product_name)
-  end
-
-  def get_current_user
-    current_user || {}
   end
 
 end

@@ -20,12 +20,18 @@ class CustomDeviseController < ApplicationController
   def user_login
     begin
       user = User.find_for_authentication(:email => params['email']);
-      if user && user.valid_password?(params['password']);
-        sign_in(user)
-        render json: { current_user: {id: current_user.id, email: current_user.email} }, status: 200
-      else
-        render json: {message: '無此用戶或密碼錯誤'}, status: 422
+      if user.blank?
+        render json: {message: '無此用戶'}, status: 422
+        return
       end
+
+      unless user.valid_password?(params['password'])
+        render json: {message: '密碼錯誤'}, status: 422
+        return
+      end
+
+      sign_in(user)
+      render json: { current_user: {id: current_user.id, email: current_user.email} }, status: 200
     rescue => e
       Rails.logger.debug e
       render json: {message: e.message}, status: 500
