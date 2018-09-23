@@ -7,6 +7,11 @@
         = product.errors.full_messages_for(:title)
       = f.text_field :title, class: 'form-control'
 
+    .form-check
+      = f.check_box :period_order_only, class: 'form-check-input'
+      = f.label :period_order_only, "定期配送商品", class: 'form-check-label'
+    %br
+
     / %div.form-group
     /   = f.label :price, "商品價格"
     /   - if product.errors.full_messages_for(:price).size > 0
@@ -18,9 +23,9 @@
     /     = product.errors.full_messages_for(:quantity)
     /   = f.text_field :quantity, class: 'form-control'
 
-
-    %a(href="https://markdown.tw/" target="_blank")
-      markdown語法說明
+    %div
+      %a(href="https://markdown.tw/" target="_blank")
+        markdown語法說明
 
     %div.form-group
       = f.label :description, "商品介紹"

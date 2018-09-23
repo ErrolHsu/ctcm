@@ -20,14 +20,15 @@ class CartsController < ApplicationController
   # encode period order_set
   def jwt_encode
     begin
-      order_set = params.permit(order_set: [:kind, :weight, :frequency, :duration]).to_h['order_set']
-      order_set['weight'] = order_set['weight'].to_f
-      order_set['frequency'] = order_set['frequency'].to_i
-      order_set['duration'] = order_set['duration'].to_i
+      order_set = params.permit(order_set: [ {product: [:id, :title]}, {variant: [:id, :weight]}, :frequency, :duration]).to_h['order_set']
+      # order_set['weight'] = order_set['weight'].to_f
+      # order_set['frequency'] = order_set['frequency'].to_i
+      # order_set['duration'] = order_set['duration'].to_i
 
       # 檢查 period order_set
-      unless check_kind?(order_set['kind']) && check_weight?(order_set['weight']) && check_frequency?(order_set['frequency']) && check_duration?(order_set['duration'])
-        render json: {message: 'FAIL'}, status: 400
+      unless check_order_set(order_set)
+        render json: {message: '不合法的訂單資料'}, status: 400
+        Rails.logger.warn('不合法的訂單資料')
         return
       end
       token = JwtHelper::Encode.call(order_set)
@@ -54,19 +55,31 @@ class CartsController < ApplicationController
 
   private
 
-  def check_kind?(kind)
-    allow = ['single_origin', 'blend', 'espresso']
-    kind && kind.in?(allow)
-  end
+  # def check_kind?(kind)
+  #   allow = ['single_origin', 'blend', 'espresso']
+  #   kind && kind.in?(allow)
+  # end
 
-  def check_weight?(weight)
-    allow = [0.25, 0.5, 1, 2]
-    weight && weight.in?(allow)
+  # def check_weight?(weight)
+  #   allow = [0.25, 0.5, 1, 2]
+  #   weight && weight.in?(allow)
+  # end
+
+  def check_order_set(order_set)
+    product_id = order_set['product']['id']
+    variant_id = order_set['variant']['id']
+    frequency_allow = [1, 2, 3, 4]
+    duration_allow = [3, 6, 9, 12]
+
+    product = Product.find_by(id: product_id.to_i)
+    variant = product.variants.find_by(id: variant_id.to_i)
+
+    product.present? && variant.present? && order_set['frequency'].in?(frequency_allow) && order_set['duration'].in?(duration_allow)
   end
 
   def check_frequency?(frequency)
-    allow = [1, 2, 3, 4]
-    frequency && frequency.in?(allow)
+    frequency_allow = [1, 2, 3, 4]
+    frequency && frequency.in?(frequency_allow)
   end
 
   def check_duration?(duration)

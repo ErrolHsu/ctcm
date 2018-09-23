@@ -7,12 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     el: '#home-page-app',
     mixins: [vue_init],
     data: {
+      //定期訂購Products
+      period_order_products: [],
+      current_product: {},
+      current_variant: {},
+      // 定期訂購表單控制
       period_order_form: false,
-
       // 定期訂購表單data
       order_set: {
-        kind: '',
-        weight: 0,
+        product: {},
+        variant: {},
         frequency: 0,
         duration: 0
       }
@@ -23,7 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
     },
 
     mounted() {
+      let self = this;
+      // 初始化定期配送Product
+      axios.get('/find_period_order_products')
+        .then(function(response) {
+          console.log(response['data']['period_order_products'])
+          self.period_order_products = response['data']['period_order_products'];
+        })
+        .catch(function(error) {
+          error_msg(error.response['data']['message'])
+        })
+    },
 
+    computed: {
+      order_set_product_present () {
+        return object_present(this.order_set.product);
+      }
     },
 
     methods: {
@@ -35,6 +54,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100)
       },
 
+      set_order_product (product) {
+        this.order_set.product = product;
+        this.order_set.variant = {};
+      },
+
+      set_order_variant (variant) {
+        this.order_set.variant = variant;
+      },
+
+
+
+      /////////////////
       selectKind (kind) {
         this.order_set.kind = kind;
       },
@@ -89,7 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       checkOrderSet () {
         return (
-          this.order_set.kind && this.order_set.weight && this.order_set.frequency && this.order_set.duration
+          object_present(this.order_set.product) &&
+          object_present(this.order_set.variant) &&
+          this.order_set.frequency &&
+          this.order_set.duration
         )
       },
 

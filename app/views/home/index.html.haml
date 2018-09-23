@@ -23,33 +23,44 @@
           .row.align-items-baseline
             .col-md-3
               * 選擇您需要的豆種
+            / .col-md-9
+            /   .btn.btn-wb.mr-1.mb-2(v-on:click="selectKind('single_origin')"
+            /   v-bind:class="checkSeleted(order_set.kind, 'single_origin')")
+            /     Single Origin・單一產區
+            /   .btn.btn-wb.mr-1.mb-2(v-on:click="selectKind('blend')"
+            /   v-bind:class="checkSeleted(order_set.kind, 'blend')")
+            /     Blend・配方豆
+            /   .btn.btn-wb.mb-2(v-on:click="selectKind('espresso')"
+            /   v-bind:class="checkSeleted(order_set.kind, 'espresso')")
+            /     Espresso
             .col-md-9
-              .btn.btn-wb.mr-1.mb-2(v-on:click="selectKind('single_origin')"
-              v-bind:class="checkSeleted(order_set.kind, 'single_origin')")
-                Single Origin・單一產區
-              .btn.btn-wb.mr-1.mb-2(v-on:click="selectKind('blend')"
-              v-bind:class="checkSeleted(order_set.kind, 'blend')")
-                Blend・配方豆
-              .btn.btn-wb.mb-2(v-on:click="selectKind('espresso')"
-              v-bind:class="checkSeleted(order_set.kind, 'espresso')")
-                Espresso
+              .btn.btn-wb.mr-1.mb-2(v-for='product in period_order_products'
+              v-on:click="set_order_product(product)" v-bind:class="{seleted: product === order_set.product}")
+                {{ product.title }}
+
           // 重量
-          .row.align-items-baseline.mt-3
-            .col-md-3
-              * 選擇您需要的重量
-            .col-md-9
-              .btn.btn-wb.mr-1.mb-2(v-on:click="selectWeight(0.25)"
-              v-bind:class="checkSeleted(order_set.weight, 0.25)")
-                1/4 lb
-              .btn.btn-wb.mr-1.mb-2(v-on:click="selectWeight(0.5)"
-              v-bind:class="checkSeleted(order_set.weight, 0.5)")
-                1/2 lb
-              .btn.btn-wb.mb-2(v-on:click="selectWeight(1)"
-              v-bind:class="checkSeleted(order_set.weight, 1)")
-                1 lb
-              .btn.btn-wb.mb-2(v-on:click="selectWeight(2)"
-              v-bind:class="checkSeleted(order_set.weight, 2)")
-                2 lb
+          %transition(name='opacity')
+            .row.align-items-baseline.mt-3(v-if='order_set_product_present')
+              .col-md-3
+                * 選擇您需要的重量
+              / .col-md-9
+              /   .btn.btn-wb.mr-1.mb-2(v-on:click="selectWeight(0.25)"
+              /   v-bind:class="checkSeleted(order_set.weight, 0.25)")
+              /     1/4 lb
+              /   .btn.btn-wb.mr-1.mb-2(v-on:click="selectWeight(0.5)"
+              /   v-bind:class="checkSeleted(order_set.weight, 0.5)")
+              /     1/2 lb
+              /   .btn.btn-wb.mb-2(v-on:click="selectWeight(1)"
+              /   v-bind:class="checkSeleted(order_set.weight, 1)")
+              /     1 lb
+              /   .btn.btn-wb.mb-2(v-on:click="selectWeight(2)"
+              /   v-bind:class="checkSeleted(order_set.weight, 2)")
+              /     2 lb
+              .col-md-9
+                .btn.btn-wb.mr-1.mb-2(v-for='variant in order_set.product.variants'
+                v-on:click="set_order_variant(variant)" v-bind:class="{seleted: variant === order_set.variant}")
+                  {{ variant.weight }}
+
 
           // 頻率
           .row.align-items-baseline.mt-3

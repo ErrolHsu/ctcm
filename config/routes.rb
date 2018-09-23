@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   root 'home#landing_page'
   get 'temp' => 'home#index'
+  # 拿到定期訂單用 product
+  get 'find_period_order_products' => 'home#find_period_order_products'
+
   get 'home/initialize_data' => 'home#initialize_data'
   post 'home/trial_request' => 'home#trial_request'
 

@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
       status: '',
       // 定期訂單配置
       period_order_set: {
-        kind: '',
-        weight: 0,
+        product: {},
+        variant: {},
         frequency: 0,
         duration: 0
       },
@@ -34,16 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
       let url_string = window.location;
       let url = new URL(url_string);
       let token = url.searchParams.get('token')
+      // 有token代表是定期訂單
       if (token) {
         EventBus.$emit('loading');
         axios.post('checkout/jwt_decode', {
             token: token
           })
           .then(function(response) {
-            console.log(response['data']['token_payload_json'])
+            //  set 定期訂單 data
             let token_payload = JSON.parse(response['data']['token_payload_json']);
-            self.period_order_set.kind = token_payload.kind;
-            self.period_order_set.weight = token_payload.weight;
+            self.period_order_set.product = token_payload.product;
+            self.period_order_set.variant = token_payload.variant;
             self.period_order_set.frequency = token_payload.frequency;
             self.period_order_set.duration = token_payload.duration;
 

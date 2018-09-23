@@ -10,9 +10,14 @@
         = product.errors.full_messages_for(:title)
       = f.text_field :title, class: 'form-control'
 
+    .form-check
+      = f.check_box :period_order_only, class: 'form-check-input'
+      = f.label :period_order_only, "定期配送商品", class: 'form-check-label'
+    %br
+
     %div.form-group
       = f.label :img, "Image"
-      %br/
+      %br
       = f.file_field :img
 
     %hr
@@ -34,8 +39,9 @@
     / variants input
     %input(type="hidden" name='variants_json' v-model='variants_json')
 
-    %a(href="https://markdown.tw/" target="_blank")
-      markdown語法說明
+    %div
+      %a(href="https://markdown.tw/" target="_blank")
+        markdown語法說明
 
     %div.form-group
       = f.label :description, "商品介紹"

@@ -9,6 +9,14 @@ class HomeController < ApplicationController
   end
 
   def index
+
+  end
+
+  def find_period_order_products
+    period_order_products = Product.includes(:variants).where(period_order_only: true)
+    period_order_products_json = period_order_products.as_json(include: {variants: {only: [:id, :weight]}}, only: [:id, :title] )
+
+    render json: { period_order_products:  period_order_products_json}, status: 200
   end
 
   def initialize_data

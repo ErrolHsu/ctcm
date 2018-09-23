@@ -37,9 +37,9 @@
         .col-md-8.offset-md-2
           #period-order-box
             %div
-              豆種: {{period_order_set.kind}}
+              豆種: {{period_order_set.product.title}}
             %div
-              重量: {{period_order_set.weight}} LB
+              重量: {{period_order_set.variant.weight}}
             %div
               配送頻率: {{period_order_set.frequency}} 週/次
             %div
