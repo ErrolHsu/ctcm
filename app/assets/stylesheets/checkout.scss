@@ -32,12 +32,42 @@
       align-items: center;
       justify-content:center;
     }
+    #order-cost-info-title {
+      flex-direction: column;
+    }
+    #order-cost-info-value {
+
+    }
   }
 
   #step2 {
     #shipping-address-box {
       margin-top: 50px;
     }
+  }
+
+  #step3 {
+    #pay-box {
+      flex-direction:column;
+      align-items: center;
+    }
+  }
+
+  .payment-type-box {
+    width: 150px;
+    height: 76px;
+    line-height: 76px;
+    border: 2px solid #3a616f;
+    text-align: center;
+    background: #3a616f;
+    border-radius: 10px;
+    color: #fff;
+  }
+
+  .payment-type-box.seleted {
+    border: 2px solid #3a616f;
+    background: #fff;
+    color: #3a616f;
   }
 
 }

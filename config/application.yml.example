@@ -2,6 +2,8 @@ defaults: &defaults
 
 development:
   <<: *defaults
+  root: 'https://ce1c370f.ngrok.io'
+  jwt_secret: ''
   ecpay:
     merchant_id: ''
     hash_key: ''

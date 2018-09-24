@@ -2,7 +2,7 @@
 class EcpayController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  def order_notify
+  def period_order_notify
     ecpay_parameters = filter(params)
     ecpay_log('order_notify', "綠界回傳: #{ecpay_parameters.inspect}")
     mac = ecpay_parameters.delete('CheckMacValue')
@@ -23,11 +23,28 @@ class EcpayController < ApplicationController
 
     begin
       order = Order.find_by(merchant_trade_no: ecpay_parameters['MerchantTradeNo'])
-      order.paid!(ecpay_parameters)
-      ecpay_log 'order_notify', "交易成功: order_id: #{order.id}, order_no: #{order.order_no}"
-      render plain: '1|OK', status: 200
+      period_order = order.period_orders.last
+
+      ActiveRecord::Base.transaction do
+        order.period_order_paid!
+        period_order.paid!(ecpay_parameters, order.id)
+        # 建立下一筆 period_order
+        order.period_orders.create!(
+          user_id: order.user_id,
+          no: period_order.no + 1,
+          amount: order.period_amount,
+          expected_date: get_expected_date(order),
+          status: 'open',
+          paid: false,
+          shipping_status: '',
+        )
+
+        ecpay_log 'order_notify', "交易成功: order_id: #{order.id}, order_no: #{order.order_no}"
+        render plain: '1|OK', status: 200
+      end
     rescue => e
-      ecpay_log 'order_notify', "發生錯誤 #{e.message}"
+      Rails.logger.error "發生錯誤 #{e.message}, file: #{__FILE__}, line: #{__LINE__}"
+      ecpay_log 'order_notify', "發生錯誤 #{e.message}, file: #{__FILE__}, line: #{__LINE__}"
       render plain: '1|OK', status: 200
     end
   end
@@ -39,6 +56,14 @@ class EcpayController < ApplicationController
     ecpay_parameters.delete('controller')
     ecpay_parameters.delete('action')
     ecpay_parameters
+  end
+
+  def get_expected_date(order)
+    if order.period_type == 'D'
+      Date.current + order.frequency.days
+    else
+      Date.current + order.frequency.month
+    end
   end
 
 end

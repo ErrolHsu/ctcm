@@ -44,42 +44,86 @@ class OrdersController < ApplicationController
 
   def create_period_order
     unless current_user.present?
-      render json: { message: 'please login!' }
+      render json: { message: '請先登入' }, status: 400
       return
     end
-    # TODO
-    # valid customer_set
-    customer_set = params['customer_set']
-    product = Product.find_by(id: customer_set[:product_id])
-    variant = ProductVariant.find_by(id: customer_set['variant_id'])
-    frequency = customer_set['period'].to_i
-    exec_times = customer_set['limit'].to_i / frequency
 
-    order = current_user.orders.create!(
-      order_no: generate_order_no,
-      total: variant.price * exec_times,
-      regular: true,
-      period_type: 'D',
-      period_amount: variant.price,
-      frequency: frequency,
-      exec_times: exec_times,
-      status: 'open',
-      payment_status: 'pending',
-      shipping_status: 'unshipping',
-      duration: customer_set['limit'].to_i,
-    )
+    begin
+      # TODO
+      # valid period_order_total_data
 
-    order.items.create!(
-      product_name: "#{product.title} #{variant.weight}",
-      price: variant.price,
-      quantity: 1,
-      product_id: product.id,
-      variant_id: variant.id,
-    )
+      period_order_total_data = params['period_order_total_data']
 
-    order.create_shipping_address!(address: customer_set['address'])
+      # token 裡面有當初選擇的product與variant資料等等資料
+      token = period_order_total_data['token']
+      decode_token = JwtHelper::Decode.call(token).payload
+      product = decode_token['product']
+      variant = decode_token['variant']
 
-    render json: {message: "#{params['data']}建立訂單成功", order: order.to_json}
+      # decode_token['duration']  拿到的為幾月，要轉成 天
+      duration = decode_token['duration'] * 30
+
+      # decode_token['frequency'] 拿到的為幾週，要轉成 天or月
+      # decode_token['frequency'] == 4 表示為一個月一次
+      if decode_token['frequency'] == 4
+        frequency = 1 # 1 月/次
+        exec_times = decode_token['duration'] / frequency # 預計執行次數
+        period_type = 'M' # 週期是以月為單位
+      else
+        frequency = decode_token['frequency'] * 7 # n 天/次
+        exec_times = duration / frequency # 預計執行次數
+        period_type = 'D' # 週期是以天為單位
+      end
+
+      # shipping_info
+      shipping_info = period_order_total_data['shipping_info']
+      shipping_rate = variant['price'] >= 1500 ? 0 : 100
+
+      ActiveRecord::Base.transaction do
+        # 建立訂單
+        order = current_user.orders.create!(
+          order_no: generate_order_no,
+          total: variant['price'] * exec_times,
+          period: true,
+          period_type: period_type,
+          period_amount: variant['price'],
+          frequency: frequency,
+          exec_times: exec_times,
+          status: 'open',
+          payment_status: 'pending',
+          shipping_status: 'unshipping',
+          duration: duration,
+          shipping_rate: shipping_rate,
+          payment: 'credit',
+        )
+
+        #建立 訂單 items
+        order.items.create!(
+          product_name: "#{product['title']} #{variant['weight']}",
+          price: variant['price'],
+          quantity: 1,
+          product_id: product['id'],
+          variant_id: variant['id'],
+        )
+
+        # 建立首張period_order
+        order.period_orders.create!(
+          user_id: current_user.id,
+          no: 1,
+          amount: variant['price'],
+          status: 'open',
+          paid: false,
+          shipping_status: '',
+        )
+        # TODO 建立create_shipping_address
+        order.create_shipping_address!(address: shipping_info['address'])
+        render json: {message: "建立訂單成功", order_no: order.order_no}
+      end
+
+    rescue => e
+      render json: { 'message' => '發生錯誤，請稍候重試。' }, status: 500
+      Rails.logger.error("發生錯誤，請稍候重試。 #{e}, file: #{__FILE__}, line: #{__LINE__}")
+    end
   end
 
   def show
@@ -87,16 +131,18 @@ class OrdersController < ApplicationController
 
   # 更新merchant_trade_no，並產生綠界訂單data
   def ecpay_generate
-    order = Order.find_by(id: params['order_id'].to_i)
+    order = Order.find_by(order_no: params['order_no'])
     begin
       order.merchant_trade_no = order.order_no + SecureRandom.hex(1).upcase
       order.save!
 
-      ecpay_info = get_ecpay_info(order)
+      # ecpay_info = get_ecpay_info(order)
+      ecpay_info = EcpayServices::PeriodOrder.call(order)
 
       render json: { ecpay_info: ecpay_info }
     rescue => e
       render json: { 'message' => '發生錯誤，請稍候重試。' }, status: 500
+      Rails.logger.error("發生錯誤，請稍候重試。 #{e}, file: #{__FILE__}, line: #{__LINE__}")
       error_log 'ecpay_generate', e.message
     end
   end

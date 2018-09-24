@@ -1,7 +1,14 @@
 %div
   - order.items.each do |item|
     %div
+      豆種:
       = item.product_name
       %br/
-      - if item.img.attached?
-        = image_tag(item.img.variant(resize: "500x500"))
+      / - if item.img.attached?
+      /   = image_tag(item.img.variant(resize: "500x500"))
+    %div
+      配送頻率:
+      = "#{order.frequency } 週/次"
+    %div
+      時間長度:
+      = "#{order.duration} 天"

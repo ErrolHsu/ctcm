@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if='current_user_present'>
-      <a href="#">
+      <a href="/account/index">
         {{ current_user.email }}
       </a>
 

@@ -5,18 +5,10 @@ class Order < ApplicationRecord
   has_one  :shipping_address, dependent: :destroy
   has_many :trade_infos, dependent: :nullify
 
-  def paid!(params)
-    self.status = 'pending'
+  def period_order_paid!
+    self.status = 'process'
     self.payment_status = 'subscribe'
+    self.paid_at = Time.current
     self.save!
-    self.trade_infos.create!({
-      rtn_code: params['RtnCode'],
-      merchant_trade_no: params['MerchantTradeNo'],
-      trade_no: params['TradeNo'],
-      trade_amt: params['TradeAmt'],
-      amount: params['Amount'],
-      rtn_msg: params['RtnMsg'],
-      total_info: params,
-    })
   end
 end

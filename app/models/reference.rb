@@ -30,8 +30,8 @@ module Reference
 
   class ShippingStatus < Reference::Base
     self.data = [
-      {id: 1, name: '收到訂單',  code: '' },
-      {id: 2, name: '烘培中',    code: '' },
+      {id: 1, name: '收到訂單',  code: 'pending' },
+      {id: 2, name: '烘培中',    code: 'preparing' },
       {id: 3, name: '已寄送',    code: ''},
       {id: 4, name: '已到店',    code: ''},
       {id: 5, name: '已取貨',    code: ''},

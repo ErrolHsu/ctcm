@@ -2,6 +2,8 @@ module EcpayServices
 
   class PeriodOrder < EcpayServices::Ecpay
 
+    attr_reader :order, :items
+
     PERIOD_ORDER_OPTIONS = [
       :MerchantID,
       :PaymentType,
@@ -11,20 +13,25 @@ module EcpayServices
       :OrderResultURL,
     ]
 
+    def self.call(*args)
+      new(*args).call
+    end
+
     def initialize(order)
       @order = order
-      @item  = order.items.first
+      @items  = order.items
     end
 
     def call
       data = {
-        MerchantTradeNo: @order.merchant_trade_no,
-        TotalAmount: @order.period_amount,
-        ItemName: @item.product_name,
-        PeriodAmount: @order.period_amount,
-        PeriodType: @order.period_type,
-        Frequency: @order.frequency,
-        ExecTimes: @order.exec_times,
+        MerchantTradeNo: order.merchant_trade_no,
+        TotalAmount: get_total_amount,
+        ItemName: get_items_name,
+        PeriodAmount: get_total_amount,
+        PeriodType: order.period_type,
+        Frequency: order.frequency,
+        ExecTimes: order.exec_times,
+        ReturnURL: Settings.root + '/ecpay/period_order_notify',  # 付款完成 通知回傳網址
         # OrderResultURL: "http://localhost:3000/orders/ecpay_return",
       }
 
@@ -37,6 +44,18 @@ module EcpayServices
     def necessary_data
       data = EcpayServices::EcpaySettings::OPTIONS.select {|key, value| key.in?(PERIOD_ORDER_OPTIONS)}
       data.merge(MerchantTradeDate: Time.current.to_s(:complete) )
+    end
+
+    # 綠界如有多個item，需以 # 分隔
+    # 目前定期訂單 item 只有一個
+    def get_items_name
+      items.first.product_name
+    end
+
+    # 每期的錢
+    # 定期訂單 TotalAmount 與 PeriodAmount 必須相同
+    def get_total_amount
+      order.period_amount + order.shipping_rate
     end
 
   end

@@ -20,10 +20,8 @@ class CartsController < ApplicationController
   # encode period order_set
   def jwt_encode
     begin
-      order_set = params.permit(order_set: [ {product: [:id, :title]}, {variant: [:id, :weight]}, :frequency, :duration]).to_h['order_set']
-      # order_set['weight'] = order_set['weight'].to_f
-      # order_set['frequency'] = order_set['frequency'].to_i
-      # order_set['duration'] = order_set['duration'].to_i
+      # 要encode的資料
+      order_set = params.permit(order_set: [ {product: [:id, :title]}, {variant: [:id, :weight, :price]}, :frequency, :duration]).to_h['order_set']
 
       # 檢查 period order_set
       unless check_order_set(order_set)
@@ -54,16 +52,6 @@ class CartsController < ApplicationController
   end
 
   private
-
-  # def check_kind?(kind)
-  #   allow = ['single_origin', 'blend', 'espresso']
-  #   kind && kind.in?(allow)
-  # end
-
-  # def check_weight?(weight)
-  #   allow = [0.25, 0.5, 1, 2]
-  #   weight && weight.in?(allow)
-  # end
 
   def check_order_set(order_set)
     product_id = order_set['product']['id']

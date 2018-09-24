@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     post 'user_facebook_login' => 'custom_devise#user_facebook_login'
   end
 
+  namespace :account do
+    get 'index' => 'users#index'
+  end
+
   resources :products
 
   resources :orders do
@@ -49,8 +53,8 @@ Rails.application.routes.draw do
   end
 
   # ecpay
-
-  post 'ecpay/order_notify' => 'ecpay#order_notify'
+  # 定期訂單 notify
+  post 'ecpay/period_order_notify' => 'ecpay#period_order_notify'
 
   # 後台
 
