@@ -30,6 +30,9 @@ Rails.application.routes.draw do
 
   namespace :account do
     get 'index' => 'users#index'
+    resources :orders, only: [:show] do
+
+    end
   end
 
   resources :products

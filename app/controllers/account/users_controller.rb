@@ -9,9 +9,5 @@ class Account::UsersController < ApplicationController
 
   private
 
-  def current_user?
-    redirect_to root_path unless user_signed_in?
-    return
-  end
 
 end

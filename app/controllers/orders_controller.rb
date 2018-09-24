@@ -91,7 +91,7 @@ class OrdersController < ApplicationController
           exec_times: exec_times,
           status: 'open',
           payment_status: 'pending',
-          shipping_status: 'unshipping',
+          shipping_status: '',
           duration: duration,
           shipping_rate: shipping_rate,
           payment: 'credit',

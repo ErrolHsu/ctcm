@@ -1,3 +1,18 @@
-- orders.each do |order|
-  %div
-    = order.order_no
+= javascript_pack_tag 'account/index'
+/ = stylesheet_pack_tag 'account/index'
+
+#account-index-app
+  / 必要的共用組件
+  = render 'share/components'
+
+  #orders-list
+    %h6
+      訂單歷史紀錄
+
+    - orders.each do |order|
+      %div
+        %a{:href => "/account/orders/#{order.order_no}"}
+          = order.order_no
+
+// PROPS
+#props(data="#{props}")

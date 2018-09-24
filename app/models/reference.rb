@@ -6,15 +6,20 @@ module Reference
       all.map { |e| {id: e.id, name: e.name, code: e.code} }
     end
 
+    def self.to_name(code)
+      find_by(code: code).name
+    end
+
   end
 
   class OrderStatus < Reference::Base
     self.data = [
-      {id: 1, name: '已下單', code: 'open' },
-      {id: 2, name: '待處理', code: 'pending'},
-      {id: 3, name: '進行中', code: 'process'}, # 定期訂單
-      {id: 4, name: '已結案', code: 'close'},
-      {id: 5, name: '異常',   code: 'error'},
+      {id: 1, name: '已下單',  code: 'open' },
+      {id: 2, name: '待處理',  code: 'pending'},
+      {id: 3, name: '進行中',  code: 'process'}, # 定期訂單
+      {id: 4, name: '已結案',  code: 'close'},
+      {id: 5, name: '異常',    code: 'error'},
+      {id: 6, name: '下期訂單', code: 'future'},
     ]
   end
 

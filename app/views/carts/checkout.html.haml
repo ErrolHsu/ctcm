@@ -134,7 +134,10 @@
         .col-md-8.offset-md-2
           .payment-type-box.pointer(v-on:click=" payment_type='credit' "
           v-bind:class=" { seleted: payment_type === 'credit'} ")
-            信用卡
+            %span(v-if=" payment_type === 'credit' ")
+              %i.far.fa-check-circle
+            %span
+              信用卡
 
       #pay-box.d-flex(v-if='order_no.length > 0')
         .button-normal(v-on:click='go_to_pay')
