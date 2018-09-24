@@ -39,6 +39,7 @@ class EcpayController < ApplicationController
           shipping_status: '',
         )
 
+        MailServices::OrderMailer.period_order_paid(order)
         ecpay_log 'order_notify', "交易成功: order_id: #{order.id}, order_no: #{order.order_no}"
         render plain: '1|OK', status: 200
       end

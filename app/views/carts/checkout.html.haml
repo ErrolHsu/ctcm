@@ -120,7 +120,7 @@
 
       .d-flex.justify-center
         //  TODO 檢查 shipping_info
-        %div.btn.button-normal.mt-5(v-on:click=" status = 'step3' ")
+        %div.btn.button-normal.mt-5(v-on:click="got_to_step3")
           繼續
 
   // STEP 3
@@ -143,7 +143,7 @@
           進行結帳代表您同意電子商務約定條款
       .d-flex.justify-center(v-else)
         .btn.button-normal.mt-5(v-on:click="create_period_order")
-          繼續
+          確認下單
 
 // PROPS
 #props(data="#{props}")

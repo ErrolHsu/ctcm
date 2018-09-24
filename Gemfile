@@ -76,7 +76,10 @@ gem 'jwt'
 # 多國語系
 gem "rails-i18n"
 
+# for 正式機node 版本bug
 gem 'mini_racer'
+
+gem 'sidekiq'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

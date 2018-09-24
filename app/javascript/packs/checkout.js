@@ -79,6 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
     computed: {
       order_total_cost () {
         return (this.period_order_set.price + this.period_order_set.shipping_rate)
+      },
+
+      // 檢查是否有收件地址
+      check_shipping_info () {
+        let shipping_info = this.shipping_info;
+        return (
+          shipping_info.name === '' || shipping_info.email === '' || shipping_info.phone === '' || shipping_info.address === ''
+        )
       }
     },
 
@@ -88,9 +96,29 @@ document.addEventListener('DOMContentLoaded', () => {
         return status === this.status;
       },
 
+      got_to_step3 () {
+        if (this.check_shipping_info) {
+          error_msg('請確實填寫收件資訊');
+          return;
+        }
+        this.status = 'step3';
+      },
+
       // 建立訂單
       create_period_order () {
         let self = this;
+
+        // check 收件地址
+        if (self.check_shipping_info) {
+          error_msg('請確實填寫收件資訊')
+          return
+        }
+        // check 付款方式
+        if (self.payment_type.length === 0) {
+          error_msg('請選擇付款方式')
+          return
+        }
+
         EventBus.$emit('loading');
         let period_order_total_data = {
           period_order_set: this.period_order_set,
@@ -130,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
           error_msg(error.response['data']['message']);
         })
       },
+
     }
 
   });

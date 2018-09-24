@@ -116,7 +116,14 @@ class OrdersController < ApplicationController
           shipping_status: '',
         )
         # TODO 建立create_shipping_address
-        order.create_shipping_address!(address: shipping_info['address'])
+        order.create_shipping_address!(
+          name: shipping_info['name'],
+          address: shipping_info['address'],
+          email: shipping_info['email'],
+          phone: shipping_info['phone'],
+        )
+
+        MailServices::OrderMailer.period_order_create(order)
         render json: {message: "建立訂單成功", order_no: order.order_no}
       end
 
