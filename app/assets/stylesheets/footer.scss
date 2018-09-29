@@ -4,6 +4,7 @@
   width: 100%;
   min-height: 400px;
 
+
   #footer-logo {
     width: 80px;
     height: 80px;
@@ -14,7 +15,14 @@
     padding: 0 15%;
     justify-content: space-around;
     color: #ccc;
+    a {
+      color: #ccc;
+      &:hover {
+        color: lighten(#ccc, 15%);
+      }
+    }
   }
+
 
 }
 

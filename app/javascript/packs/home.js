@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       current_product: {},
       current_variant: {},
       // 定期訂購表單控制
-      period_order_form: false,
+      period_order_form: true,
       // 定期訂購表單data
       order_set: {
         product: {},

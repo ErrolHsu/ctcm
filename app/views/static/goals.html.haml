@@ -1,0 +1,42 @@
+= javascript_pack_tag 'general_page'
+= stylesheet_pack_tag 'general_page'
+
+#general-page-app
+  / 必要的共用組件
+  = render 'share/components'
+
+  .content
+    .static-head.d-flex
+      .title
+        OUR COFFEE
+      .decoration-line
+
+
+    .static-body
+      .row
+        .col-md-5.col-12
+          #goals-img.body-img.bg-img
+        #body-description.col-md-7.col-12
+          #description-title
+            展望與目標
+          #description-body
+            %div
+              我們誓言成立 Altitude Tosteria的意義是要增進小農們的生活品質和這個社群中至少一百萬個人。為了達成這個目標，首要的工作就是讓每一杯咖啡都達到完美。
+            %br
+            %div
+              我們和對待員工友善的莊園合作，不經過第三方直接與莊園購買生豆，保障在這個產業中工作的人得到合理的對待，也保障消費者得到合理的價格。
+            %br
+            %div
+              除了讓您能喝到一杯美味的咖啡以外，我們也積極地向各基金會洽談，希望我們的產業能找到任何方式有機會協助這個社群。
+              作為一個企業，我們不只想提供您最好的產品，也期望能回饋這片土地、關注社會議題，溫柔、誠實、包容且負責。
+
+
+
+
+
+
+// PROPS
+#props(data="#{props}")
+
+
+

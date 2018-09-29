@@ -7,13 +7,13 @@
         .bar.middle
         .bar.bottom
       %transition(name='opacity')
-        = link_to '/temp' do
+        = link_to root_path do
           #logo-left(v-if='!phone_options')
-      = link_to '/temp' do
+      = link_to root_path do
         #logo-right.phone-hide
   .nav-right.inline-block.mr-4
     %div.font-15.ml-4.phone-hide
-      = link_to '定期配送', '#period-order'
+      = link_to '定期配送', root_path(anchor: "period-order")
     %div.font-15.ml-4.phone-hide
       = link_to 'SHOP', '#'
     %div.font-15.ml-4.phone-hide
@@ -60,13 +60,13 @@
           ABOUT
         %transition(name='slide-Y')
           %div(v-if='about_links')
-            %a{:href => "#"}(style='font-size: 18px !important')
+            %a{:href => "farm_info"}(style='font-size: 18px !important')
               莊園農場
             %br
-            %a{:href => "#"}(style='font-size: 18px !important')
+            %a{:href => "history"}(style='font-size: 18px !important')
               創辦歷程
             %br
-            %a{:href => "#"}(style='font-size: 18px !important')
+            %a{:href => "goals"}(style='font-size: 18px !important')
               展望與目標
       %div.center.bottom-line
         %a{:href => "#"}

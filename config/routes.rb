@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :admins
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
-  root 'home#landing_page'
+  root 'home#index'
   get 'temp' => 'home#index'
   # 拿到定期訂單用 product
   get 'find_period_order_products' => 'home#find_period_order_products'
@@ -18,6 +18,11 @@ Rails.application.routes.draw do
   get 'checkout' => 'carts#checkout'
   post 'checkout/jwt_encode' => 'carts#jwt_encode'
   post 'checkout/jwt_decode' => 'carts#jwt_decode'
+
+  # 靜態頁面
+  get 'farm_info' => 'static#farm_info' # 莊園農場
+  get 'history' => 'static#history' # 創辦歷程
+  get 'goals' => 'static#goals' # 展望與目標
 
   # user註冊登入
   devise_scope :user do

@@ -1,0 +1,41 @@
+= javascript_pack_tag 'general_page'
+= stylesheet_pack_tag 'general_page'
+
+#general-page-app
+  / 必要的共用組件
+  = render 'share/components'
+
+  .content
+    .static-head.d-flex
+      .title
+        FARM
+      .decoration-line
+
+
+    .static-body
+      .row
+        .col-md-5.col-12
+          #farm-img.body-img.bg-img
+        #body-description.col-md-7.col-12
+          #description-title
+            莊園農場​
+          #description-body
+            %div
+              我們選擇合作的莊園不僅身處於巴拿馬眾所皆知的優良產區 - Boquete (波奎特)，依附在 Barú (巴魯) 火山東側，擁有火山灰帶來的肥沃黑土，與貫穿小鎮的 Caldera河流形成優良的排水系統。莊園海拔皆介於1300-1600m之間，由於高海拔的關係，氣候型態穩定，採收期規律。
+            %br
+            %div
+              當生長期的雨季結束，各個莊園如火如荼地準備採收、曬豆、處理。而每年的這個時候，莊園會聘請當地的原住民，提供他們工作機會，以手採的方式收成咖啡豆。我們不虧待每一位辛勤工作的員工，長期且穩定的合作關係，讓品質更加穩定，並且致力於協助他們的孩童順利就學。
+            %br
+            %div
+              我們和巴拿馬的小農莊園合作，特別挑選重視環境議題與永續發展的農主。莊園僅使用有機肥料耕作，也不使用除草劑，重視雨林保護與水資源再利用。目前也努力地和有機咖啡豆莊園洽談，並且鼓勵其他小農轉型，希望能更加接近環保、永續經營的理念，讓這美好的大自然、產物得以延續下去。
+
+
+
+
+
+
+// PROPS
+#props(data="#{props}")
+
+
+
