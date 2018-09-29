@@ -14,7 +14,6 @@ class Reporter
   end
 
   def error
-    byebug
     Rails.logger.error "#{message}\n#{error_obj.message}"
     Rails.logger.error error_obj.backtrace.join("\n")
   end

@@ -123,7 +123,7 @@ class OrdersController < ApplicationController
           phone: shipping_info['phone'],
         )
 
-        MailServices::OrderMailer.period_order_create(order)
+        Mailer::PeriodOrderCreateJob.perform_later(order.id)
         render json: {message: "建立訂單成功", order_no: order.order_no}
       end
 

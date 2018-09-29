@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   end
 
   def index
-    TestJob.perform_later
+
   end
 
   def find_period_order_products
