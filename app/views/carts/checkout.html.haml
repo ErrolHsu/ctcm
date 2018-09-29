@@ -46,7 +46,7 @@
               時間長度: {{period_order_set.duration}} 個月
 
       .row.mt-3
-        .col-md-4.offset-md-2.font-13
+        .col-md-4.col-12.offset-md-2.font-13
           %div
             配送方式：物流宅配
           %div
@@ -56,7 +56,7 @@
           %div
             *宅配請填寫正確收件人資訊，避免包裹配送不達
 
-        .col-md-2
+        .col-md-2.col-5
           #free-shopping-info.d-flex
             %div
               滿1500元
@@ -64,9 +64,9 @@
               享有免運
 
         // 訂單金額計算
-        .col-md-2
+        .col-md-2.col-7#cost-info-box
           .row
-            .col-md-6
+            .col-md-6.col-6
               #order-cost-info-title.font-13.mt-2
                 %div
                   總金額
@@ -74,7 +74,7 @@
                   運費
                 %div.mt-2
                   折價券
-            .col-md-6
+            .col-md-6.col-6
               #order-cost-info-value.font-13.mt-2
                 %div
                   {{ period_order_set.price }}
@@ -84,9 +84,9 @@
           %hr
 
           .row
-            .col-md-6.font-13
+            .col-md-6.font-13.col-6
               應付金額
-            .col-md-6.font-13
+            .col-md-6.font-13.col-6
               {{ order_total_cost }}
 
 
