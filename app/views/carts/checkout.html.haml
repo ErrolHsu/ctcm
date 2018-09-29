@@ -106,17 +106,35 @@
                 訂購資料
               %span.d-inline-block.font-13.ml-2
                 *請務必填寫完整正確收件人資訊避免配送不達
-          .form-group.mt-3
-            %input.form-control(placeholder='收件人姓名' v-model='shipping_info.name')
+          // 收件資料表單
+          %div(v-if=" order_no.length === 0 ")
+            .form-group.mt-3
+              %input.form-control(placeholder='收件人姓名' v-model='shipping_info.name')
 
-          .form-group.mt-3
-            %input.form-control(placeholder='手機號碼' v-model='shipping_info.phone')
+            .form-group.mt-3
+              %input.form-control(placeholder='手機號碼' v-model='shipping_info.phone')
 
-          .form-group.mt-3
-            %input.form-control(placeholder='Email' v-model='shipping_info.email')
+            .form-group.mt-3
+              %input.form-control(placeholder='Email' v-model='shipping_info.email')
 
-          .form-group.mt-3
-            %input.form-control(placeholder='​配送地址' v-model='shipping_info.address')
+            .form-group.mt-3
+              %input.form-control(placeholder='配送地址' v-model='shipping_info.address')
+
+          // 訂單建立後顯示收件資料
+          %div.mt-3.font-15(v-else)
+            %div
+              收件人姓名:
+              {{ shipping_info.name }}
+            %div
+              手機號碼:
+              {{ shipping_info.phone }}
+            %div
+              Email:
+              {{ shipping_info.email }}
+            %div
+              收件地址:
+              {{ shipping_info.address }}
+
 
       .d-flex.justify-center
         //  TODO 檢查 shipping_info

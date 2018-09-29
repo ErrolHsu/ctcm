@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :ecpay_return
 
-  expose(:orders) { current_user.orders }
+  # expose(:orders) { current_user.orders }
   expose(:period_orders) { current_user.period_orders }
-  expose :order, scope: ->{ orders }
+  # expose :order, scope: ->{ orders }
   expose(:ecpay_order) { get_ecpay_order(order) }
 
   def index
@@ -115,7 +115,7 @@ class OrdersController < ApplicationController
           paid: false,
           shipping_status: '',
         )
-        # TODO 建立create_shipping_address
+        # 建立收件資訊
         order.create_shipping_address!(
           name: shipping_info['name'],
           address: shipping_info['address'],
@@ -128,8 +128,8 @@ class OrdersController < ApplicationController
       end
 
     rescue => e
-      render json: { 'message' => '發生錯誤，請稍候重試。' }, status: 500
-      Rails.logger.error("發生錯誤，請稍候重試。 #{e}, file: #{__FILE__}, line: #{__LINE__}")
+      render json: { 'message' => '建立訂單錯誤，請稍候重試。' }, status: 500
+      Reporter.error(e, "建立訂單錯誤 file: #{__FILE__}")
     end
   end
 
@@ -145,12 +145,12 @@ class OrdersController < ApplicationController
 
       # ecpay_info = get_ecpay_info(order)
       ecpay_info = EcpayServices::PeriodOrder.call(order)
-
+      byebug
       render json: { ecpay_info: ecpay_info }
     rescue => e
       render json: { 'message' => '發生錯誤，請稍候重試。' }, status: 500
-      Rails.logger.error("發生錯誤，請稍候重試。 #{e}, file: #{__FILE__}, line: #{__LINE__}")
-      error_log 'ecpay_generate', e.message
+      Reporter.error(e, "ecpay_generate error file: #{__FILE__}")
+      # error_log 'ecpay_generate', e.message
     end
   end
 
