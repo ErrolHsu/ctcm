@@ -146,7 +146,6 @@ class OrdersController < ApplicationController
 
       # ecpay_info = get_ecpay_info(order)
       ecpay_info = EcpayServices::PeriodOrder.call(order)
-      byebug
       render json: { ecpay_info: ecpay_info }
     rescue => e
       render json: { 'message' => '發生錯誤，請稍候重試。' }, status: 500

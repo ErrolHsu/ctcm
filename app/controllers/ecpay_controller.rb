@@ -6,7 +6,6 @@ class EcpayController < ApplicationController
     ecpay_parameters = filter(params)
     ecpay_log('order_notify', "綠界回傳: #{ecpay_parameters.inspect}")
     mac = ecpay_parameters.delete('CheckMacValue')
-
     # CheckMacValue 錯誤
     unless EcpayServices::Ecpay.check(ecpay_parameters, mac)
       ecpay_log 'order_notify', "交易失敗 CheckMacValue 不相符!"
@@ -34,12 +33,13 @@ class EcpayController < ApplicationController
           no: period_order.no + 1,
           amount: order.period_amount,
           expected_date: get_expected_date(order),
-          status: 'open',
+          status: 'future',
           paid: false,
           shipping_status: '',
         )
 
-        MailServices::OrderMailer.period_order_paid(order)
+        # MailServices::OrderMailer.period_order_paid(order)
+        Mailer::PeriodOrderPaidJob.perform_later(order.id)
         ecpay_log 'order_notify', "交易成功: order_id: #{order.id}, order_no: #{order.order_no}"
         render plain: '1|OK', status: 200
       end

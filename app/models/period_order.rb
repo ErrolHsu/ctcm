@@ -4,6 +4,8 @@ class PeriodOrder < ApplicationRecord
 
   has_many :trade_infos
 
+  default_scope { order(created_at: :asc) }
+
   def paid!(params, order_id)
     self.status = 'pending'
     self.paid = true
