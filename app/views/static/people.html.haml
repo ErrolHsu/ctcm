@@ -1,0 +1,48 @@
+= javascript_pack_tag 'general_page'
+= stylesheet_pack_tag 'general_page'
+
+#general-page-app
+  / 必要的共用組件
+  = render 'share/components'
+
+  .content
+    .static-head.d-flex
+      .title
+        人群，新鮮，永續經營
+      .decoration-line
+
+
+    .static-body
+      .row
+        .col-md-5.col-12
+          #people-img.body-img.bg-img
+        .body-description.col-md-7.col-12
+          .description-title
+            人群，新鮮，永續經營
+          %div.mt-3(style='font-family:cursive; font-size: 15px;')
+            ALTITUDE TOSTERIA
+          .description-body.mt-3
+            %div
+              台灣最新鮮的咖啡。
+            %div
+              Altitude Tosteria希望能透過美好的咖啡，讓這個世界有更好的發展。
+            %div
+              Altitude Tosteria誓言讓顧客喝到咖啡最完美的風味，所以只販賣48小時內，現烘的新鮮咖啡豆。
+            %div
+              「人生苦短，我們不能浪費時間在一杯壞咖啡上！」
+            %div
+              我們和巴拿馬的小農莊園直接工作以確保咖啡的品質是最恰當、最美味的。因為我們了解產區的實際環境、氣候與作業，能保證品質和公平貿易，我們有責任為您把關咖啡豆的品質。
+              我們期許自己以謙和的態度，用我們的方式替環境與群眾付出：一個永續經營的世界、您每一天所喝下的咖啡，這就是我們最在乎的事情了！
+            %div.mt-5
+              Yara & Afdel
+
+
+
+
+
+
+// PROPS
+#props(data="#{props}")
+
+
+

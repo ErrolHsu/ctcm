@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post 'checkout/jwt_decode' => 'carts#jwt_decode'
 
   # 靜態頁面
+  get 'people' => 'static#people'
   get 'farm_info' => 'static#farm_info' # 莊園農場
   get 'history' => 'static#history' # 創辦歷程
   get 'goals' => 'static#goals' # 展望與目標

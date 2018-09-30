@@ -26,8 +26,11 @@
         width: 30vw;
         height: 30vw;
       }
+      #people-img {
+        background-image: image-url("people.jpg");
+      }
       #farm-img {
-        background-image: image-url("farm.png");
+        background-image: image-url("farm.jpg");
       }
       #goals-img {
         background-image: image-url("goals.jpg");
@@ -42,7 +45,6 @@
         .description-title {
           font-size: 18px;
           font-weight: 500;
-          margin-bottom: 25px;
         }
         .description-body {
           font-size: 15px;

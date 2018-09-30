@@ -1,5 +1,9 @@
 class StaticController < ApplicationController
 
+  def people
+
+  end
+
   def farm_info
 
   end
