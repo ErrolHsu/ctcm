@@ -1,7 +1,7 @@
 <template>
   <div class='bottom-line'>
     <span class='center d-block'  v-if='current_user_present'>
-      <a href="#" style='font-size: 19px; !important'>
+      <a href="/account/index" style='font-size: 19px; !important'>
         {{ current_user.email }}
       </a>
 
