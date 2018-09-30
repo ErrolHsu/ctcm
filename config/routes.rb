@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get 'history' => 'static#history' # 創辦歷程
   get 'goals' => 'static#goals' # 展望與目標
 
+  get 'privacy_policy' => 'static#privacy_policy' # 隱私保護政策
+
   # user註冊登入
   devise_scope :user do
     post 'user_sign_up' => 'custom_devise#user_sign_up'
