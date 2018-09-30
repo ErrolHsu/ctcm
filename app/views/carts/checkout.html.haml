@@ -1,18 +1,3 @@
-/ %h4
-/   產品
-/ %h5
-/   = product.title
-
-/ %div
-/   - if product.img.attached?
-/     = image_tag(product.img.variant(resize: "300x300"))
-
-/ %div
-/   每月一次共12次
-
-/ %div
-/   = link_to '確認下單', orders_path(product_id: product.id),  method: 'POST', class: 'btn btn-secondary'
-
 = javascript_pack_tag 'checkout'
 = stylesheet_pack_tag 'checkout'
 
@@ -21,153 +6,154 @@
   / 必要的共用組件
   = render 'share/components'
 
-  .row
-    .col-md-8.offset-md-2
-      #progress-bar.d-flex
-        %div.center.pointer(v-bind:class="{current: checkCurrentStatus('step1')}" v-on:click=" status = 'step1' ")
-          Step 1 確認訂單
-        %div.center.pointer(v-bind:class="{current: checkCurrentStatus('step2')}" v-on:click=" status = 'step2' ")
-          Step 2 填寫訂購資訊
-        %div.center.pointer(v-bind:class="{current: checkCurrentStatus('step3')}" v-on:click=" status = 'step3' ")
-          Step 3 選擇付款方式
+  .content
+    .row
+      .col-md-8.offset-md-2
+        #progress-bar.d-flex
+          %div.center.pointer(v-bind:class="{current: checkCurrentStatus('step1')}" v-on:click=" status = 'step1' ")
+            Step 1 確認訂單
+          %div.center.pointer(v-bind:class="{current: checkCurrentStatus('step2')}" v-on:click=" status = 'step2' ")
+            Step 2 填寫訂購資訊
+          %div.center.pointer(v-bind:class="{current: checkCurrentStatus('step3')}" v-on:click=" status = 'step3' ")
+            Step 3 選擇付款方式
 
-  // STEP 1
-  %transition(name='slide-Y')
-    #step1(v-if=" status === 'step1' ")
-      .row
-        .col-md-8.offset-md-2
-          #period-order-box(style='font-size: 14px;')
+    // STEP 1
+    %transition(name='slide-Y')
+      #step1(v-if=" status === 'step1' ")
+        .row
+          .col-md-8.offset-md-2
+            #period-order-box(style='font-size: 14px;')
+              %div
+                豆種: {{period_order_set.product.title}}
+              %div
+                重量: {{period_order_set.variant.weight}}
+              %div
+                配送頻率: {{period_order_set.frequency}} 週/次
+              %div
+                時間長度: {{period_order_set.duration}} 個月
+
+        .row.mt-3
+          .col-md-4.col-12.offset-md-2.font-13
             %div
-              豆種: {{period_order_set.product.title}}
+              配送方式：物流宅配
             %div
-              重量: {{period_order_set.variant.weight}}
+              提醒您:
             %div
-              配送頻率: {{period_order_set.frequency}} 週/次
+              *本公司付款方式一律採取線上付款方式 - 綠界金流
             %div
-              時間長度: {{period_order_set.duration}} 個月
+              *宅配請填寫正確收件人資訊，避免包裹配送不達
 
-      .row.mt-3
-        .col-md-4.col-12.offset-md-2.font-13
-          %div
-            配送方式：物流宅配
-          %div
-            提醒您:
-          %div
-            *本公司付款方式一律採取線上付款方式 - 綠界金流
-          %div
-            *宅配請填寫正確收件人資訊，避免包裹配送不達
+          .col-md-2.col-5
+            #free-shopping-info.d-flex
+              %div
+                滿1500元
+              %div
+                享有免運
 
-        .col-md-2.col-5
-          #free-shopping-info.d-flex
-            %div
-              滿1500元
-            %div
-              享有免運
+          // 訂單金額計算
+          .col-md-2.col-7#cost-info-box
+            .row
+              .col-md-6.col-6
+                #order-cost-info-title.font-13.mt-2
+                  %div
+                    總金額
+                  %div.mt-2
+                    運費
+                  %div.mt-2
+                    折價券
+              .col-md-6.col-6
+                #order-cost-info-value.font-13.mt-2
+                  %div
+                    {{ period_order_set.price }}
+                  %div.mt-2
+                    {{ period_order_set.shipping_rate }}
+                  %div.mt-2
+            %hr
 
-        // 訂單金額計算
-        .col-md-2.col-7#cost-info-box
-          .row
-            .col-md-6.col-6
-              #order-cost-info-title.font-13.mt-2
-                %div
-                  總金額
-                %div.mt-2
-                  運費
-                %div.mt-2
-                  折價券
-            .col-md-6.col-6
-              #order-cost-info-value.font-13.mt-2
-                %div
-                  {{ period_order_set.price }}
-                %div.mt-2
-                  {{ period_order_set.shipping_rate }}
-                %div.mt-2
-          %hr
-
-          .row
-            .col-md-6.font-13.col-6
-              應付金額
-            .col-md-6.font-13.col-6
-              {{ order_total_cost }}
+            .row
+              .col-md-6.font-13.col-6
+                應付金額
+              .col-md-6.font-13.col-6
+                {{ order_total_cost }}
 
 
 
-      .d-flex.justify-center
-        %div.btn.button-normal.mt-5(v-on:click=" status = 'step2' ")
-          繼續
+        .d-flex.justify-center
+          %div.btn.button-normal.mt-5(v-on:click=" status = 'step2' ")
+            繼續
 
-  // STEP 2
-  %transition(name='slide-Y')
-    #step2(v-if=" status === 'step2' ")
-      .row
-        .col-md-8.offset-md-2
-          #shipping-address-box
-            %div(style='border-bottom: 1px solid #3a616f; color:#3a616f; padding: 10px 0;')
+    // STEP 2
+    %transition(name='slide-Y')
+      #step2(v-if=" status === 'step2' ")
+        .row
+          .col-md-8.offset-md-2
+            #shipping-address-box
+              %div(style='border-bottom: 1px solid #3a616f; color:#3a616f; padding: 10px 0;')
+                %span
+                  訂購資料
+                %span.d-inline-block.font-13.ml-2
+                  *請務必填寫完整正確收件人資訊避免配送不達
+            // 收件資料表單
+            %div(v-if=" order_no.length === 0 ")
+              .form-group.mt-3
+                %input.form-control(placeholder='收件人姓名' v-model='shipping_info.name')
+
+              .form-group.mt-3
+                %input.form-control(placeholder='手機號碼' v-model='shipping_info.phone')
+
+              .form-group.mt-3
+                %input.form-control(placeholder='Email' v-model='shipping_info.email')
+
+              .form-group.mt-3
+                %input.form-control(placeholder='配送地址' v-model='shipping_info.address')
+
+            // 訂單建立後顯示收件資料
+            %div.mt-3.font-15(v-else)
+              %div
+                收件人姓名:
+                {{ shipping_info.name }}
+              %div
+                手機號碼:
+                {{ shipping_info.phone }}
+              %div
+                Email:
+                {{ shipping_info.email }}
+              %div
+                收件地址:
+                {{ shipping_info.address }}
+
+
+        .d-flex.justify-center
+          //  TODO 檢查 shipping_info
+          %div.btn.button-normal.mt-5(v-on:click="got_to_step3")
+            繼續
+
+    // STEP 3
+    %transition(name='slide-Y')
+      #step3(v-if=" status === 'step3' ")
+        / 綠界付款表單
+        = form_tag("#{Settings.ecpay.host}/Cashier/AioCheckOut/V5", id: 'ecpay_info_form', method: "post", :authenticity_token => false, :enforce_utf8 => false ) do
+          %input(v-for='(value, key) in ecpay_info' v-bind:name='key' v-bind:value='value' type="hidden")
+
+        .row.mt-3
+          .col-md-8.offset-md-2
+            .payment-type-box.pointer(v-on:click=" payment_type='credit' "
+            v-bind:class=" { seleted: payment_type === 'credit'} ")
+              %span(v-if=" payment_type === 'credit' ")
+                %i.far.fa-check-circle
               %span
-                訂購資料
-              %span.d-inline-block.font-13.ml-2
-                *請務必填寫完整正確收件人資訊避免配送不達
-          // 收件資料表單
-          %div(v-if=" order_no.length === 0 ")
-            .form-group.mt-3
-              %input.form-control(placeholder='收件人姓名' v-model='shipping_info.name')
+                信用卡
 
-            .form-group.mt-3
-              %input.form-control(placeholder='手機號碼' v-model='shipping_info.phone')
-
-            .form-group.mt-3
-              %input.form-control(placeholder='Email' v-model='shipping_info.email')
-
-            .form-group.mt-3
-              %input.form-control(placeholder='配送地址' v-model='shipping_info.address')
-
-          // 訂單建立後顯示收件資料
-          %div.mt-3.font-15(v-else)
-            %div
-              收件人姓名:
-              {{ shipping_info.name }}
-            %div
-              手機號碼:
-              {{ shipping_info.phone }}
-            %div
-              Email:
-              {{ shipping_info.email }}
-            %div
-              收件地址:
-              {{ shipping_info.address }}
-
-
-      .d-flex.justify-center
-        //  TODO 檢查 shipping_info
-        %div.btn.button-normal.mt-5(v-on:click="got_to_step3")
-          繼續
-
-  // STEP 3
-  %transition(name='slide-Y')
-    #step3(v-if=" status === 'step3' ")
-      / 綠界付款表單
-      = form_tag("#{Settings.ecpay.host}/Cashier/AioCheckOut/V5", id: 'ecpay_info_form', method: "post", :authenticity_token => false, :enforce_utf8 => false ) do
-        %input(v-for='(value, key) in ecpay_info' v-bind:name='key' v-bind:value='value' type="hidden")
-
-      .row.mt-3
-        .col-md-8.offset-md-2
-          .payment-type-box.pointer(v-on:click=" payment_type='credit' "
-          v-bind:class=" { seleted: payment_type === 'credit'} ")
-            %span(v-if=" payment_type === 'credit' ")
-              %i.far.fa-check-circle
-            %span
-              信用卡
-
-      #pay-box.d-flex(v-if='order_no.length > 0')
-        .button-normal(v-on:click='go_to_pay')
-          前往付款
-        %div.font-13.mt-3
-          進行結帳代表您同意
-          .d-inline-block.pointer(style='color:#286494'  data-toggle="modal" data-target="#e-commerce-contract-modal")
-            電子商務約定條款
-      .d-flex.justify-center(v-else)
-        .btn.button-normal.mt-5(v-on:click="create_period_order")
-          確認下單
+        #pay-box.d-flex(v-if='order_no.length > 0')
+          .button-normal(v-on:click='go_to_pay')
+            前往付款
+          %div.font-13.mt-3
+            進行結帳代表您同意
+            .d-inline-block.pointer(style='color:#286494'  data-toggle="modal" data-target="#e-commerce-contract-modal")
+              電子商務約定條款
+        .d-flex.justify-center(v-else)
+          .btn.button-normal.mt-5(v-on:click="create_period_order")
+            確認下單
 
 // PROPS
 #props(data="#{props}")
