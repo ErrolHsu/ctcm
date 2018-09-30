@@ -1,0 +1,76 @@
+#account-index-app {
+  .content {
+    margin-top:200px;
+    margin-bottom: 80px;
+    padding: 0 10%;
+
+    .order-columns {
+      display: flex;
+
+      .column {
+        width: 16.66%;
+      }
+    }
+    #subscribe-orders-info {
+      font-size: 14px;
+    }
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  #account-index-app {
+    .content {
+      margin-top:150px;
+      padding-left: 20px;
+      padding-right: 0;
+
+      .order-columns {
+        display: flex;
+
+        .column {
+          width: 45%;
+        }
+      }
+      #subscribe-orders-info {
+        font-size: 14px;
+      }
+    }
+  }
+
+}
+
+
+// @media screen and (max-width: 767.98px) {
+//   #account-index-app {
+//     .content {
+//       margin-top:150px;
+//       padding-left: 20px;
+//       padding-right: 0;
+//       .order-columns {
+//         display: inline-flex;
+//         flex-direction:column;
+
+//       }
+//       #subscribe-orders-info-title {
+//         display: inline-block;
+//         width: 30%;
+//         .order-columns {
+//           font-size: 13px;
+//           .column {
+//             min-width: 100%;
+//           }
+//         }
+//       }
+//       #subscribe-orders-info {
+//         display: inline-block;
+//         width: 65%;
+//         .order-columns {
+//           font-size: 13px;
+//           .column {
+//             min-width: 100%;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

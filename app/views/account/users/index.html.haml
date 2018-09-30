@@ -1,18 +1,46 @@
 = javascript_pack_tag 'account/index'
-/ = stylesheet_pack_tag 'account/index'
+= stylesheet_pack_tag 'account/index'
 
 #account-index-app
   / 必要的共用組件
   = render 'share/components'
 
-  #orders-list
-    %h6
-      訂單歷史紀錄
+  .content
+    #subscribe-orders
+      %h6
+        我訂閱的咖啡
+      #subscribe-orders-info-title
+        .order-columns
+          .column
+            訂單編號
+          .column.phone-hide
+            訂購日期
+          .column.phone-hide
+            付款狀態
+          .column
+            品項
+          .column.phone-hide
+            總金額
+          .column.phone-hide
+            訂單狀態
 
-    - orders.each do |order|
-      %div
-        %a{:href => "/account/orders/#{order.order_no}"}
-          = order.order_no
+      #subscribe-orders-info.mt-2
+        - subscribe_orders.each do |order|
+          .order-columns
+            .column
+              %a{:href => "/account/orders/#{order.order_no}"}
+                = order.order_no
+            .column.phone-hide
+              = order.created_at.to_s(:date)
+            .column.phone-hide
+              = order.payment_name
+            .column
+              = order.items.last.product_name
+            .column.phone-hide
+              = order.period_amount
+            .column.phone-hide
+              = order.status_name
+
 
 // PROPS
 #props(data="#{props}")

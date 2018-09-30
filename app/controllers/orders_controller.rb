@@ -92,7 +92,7 @@ class OrdersController < ApplicationController
           exec_times: exec_times,
           status: 'open',
           payment_status: 'pending',
-          shipping_status: '',
+          shipping_status: 'period',
           duration: duration,
           shipping_rate: shipping_rate,
           payment: 'credit',
@@ -114,7 +114,7 @@ class OrdersController < ApplicationController
           amount: variant['price'],
           status: 'open',
           paid: false,
-          shipping_status: '',
+          shipping_status: 'pending',
         )
         # 建立收件資訊
         order.create_shipping_address!(

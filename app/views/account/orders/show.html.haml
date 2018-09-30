@@ -1,28 +1,125 @@
-%div
-  %div
-    訂單編號:
-    = order.order_no
-  %div
-    訂單類型:
-    = order.period ? '定期配送' : '一般訂單'
+= javascript_pack_tag 'account/order'
+= stylesheet_pack_tag 'account/order'
 
-  - if order.period
+#account-order-app
+  = render 'carts/e_commerce_contract_modal'
+  / 必要的共用組件
+  = render 'share/components'
+  .content
+    // if 訂單未付款
     %div
-      每期金額:
-      = order.period_amount
-    %div
-      訂閱時間:
-      = order.duration / 30
-      個月
-    %div
-      訂閱週期:
-      - if order.period_type == 'M'
-        =  order.frequency
-        月 / 次
-      - else
-        =  order.frequency / 7
-        週 / 次
+      - if order.payment_status == 'pending'
+
+        / 綠界付款表單
+        = form_tag("#{Settings.ecpay.host}/Cashier/AioCheckOut/V5", id: 'ecpay_info_form', method: "post", :authenticity_token => false, :enforce_utf8 => false ) do
+          %input(v-for='(value, key) in ecpay_info' v-bind:name='key' v-bind:value='value' type="hidden")
+
+        .red-tag
+          此訂單尚未付款
+        .d-inline-block.pointer.ml-3(v-on:click='go_to_pay')
+          前往付款 >>>
+        %div.font-13.mt-3
+          進行結帳代表您同意
+          .d-inline-block.pointer(style='color:#286494'  data-toggle="modal" data-target="#e-commerce-contract-modal")
+            電子商務約定條款
+
+    ///////   infos  ////////
+    .row
+      .col-md-6
+        // 訂單資訊
+        .info-box
+          %h5
+            訂單資訊
+          %div
+            訂單編號:
+            = order.order_no
+          %div
+            訂單類型:
+            = order.period ? '定期配送' : '一般訂單'
+          %div
+            訂單狀態:
+            = order.status_name
+
+          %div
+            訂單品項:
+            = order.items.last.product_name
+
+          - if order.period
+            %div
+              每期金額:
+              = order.period_amount
+            %div
+              訂閱時間:
+              = order.duration / 30
+              個月
+            %div
+              訂閱週期:
+              - if order.period_type == 'M'
+                =  order.frequency
+                月 / 次
+              - else
+                =  order.frequency / 7
+                週 / 次
+            %div
+              付款狀態:
+              = order.payment_name
+      .col-md-6
+        // 配送資訊
+        .info-box
+          %h5
+            配送資訊
+          %div
+            訂購人姓名:
+            = order.shipping_address.name
+          %div
+            訂購人信箱:
+            = order.shipping_address.email
+          %div
+            訂購人電話:
+            = order.shipping_address.phone
+          %div
+            訂購人地址:
+            = order.shipping_address.address
 
 
+      // 定期訂單資訊
+      - if order.period?
+        // 本期訂單
+        .col-md-6
+          .info-box
+            %h5
+              本期訂單
+            %div
+              本期金額:
+              = current_period_order.amount
+            %div
+              訂單期數:
+              = current_period_order.no
+            %div
+              訂單品項:
+              = order.items.last.product_name
+            %div
+              付款狀態:
+              = current_period_order.paid ? '已付款' : '尚未付款'
+            %div
+              訂單狀態:
+              = current_period_order.status_name
+            %div
+              配送狀態:
+              = current_period_order.shipping_name
+        // 下期訂單
+        - if next_period_order.present?
+          .col-md-6
+            .info-box
+              %h5
+                下期訂單
+              %div
+                預計日期:
+                = next_period_order.expected_date.to_s(:date)
+
+
+
+// PROPS
+#props(data="#{props}")
 
 

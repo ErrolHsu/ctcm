@@ -7,7 +7,7 @@ module Reference
     end
 
     def self.to_name(code)
-      find_by(code: code).name
+      find_by(code: code).try(:name)
     end
 
   end
@@ -16,7 +16,7 @@ module Reference
     self.data = [
       {id: 1, name: '已下單',  code: 'open' },
       {id: 2, name: '待處理',  code: 'pending'},
-      {id: 3, name: '進行中',  code: 'process'}, # 定期訂單
+      {id: 3, name: '訂閱中',  code: 'process'}, # 定期訂單
       {id: 4, name: '已結案',  code: 'close'},
       {id: 5, name: '異常',    code: 'error'},
       {id: 6, name: '下期訂單', code: 'future'},
@@ -37,10 +37,10 @@ module Reference
     self.data = [
       {id: 1, name: '收到訂單',  code: 'pending' },
       {id: 2, name: '烘培中',    code: 'preparing' },
-      {id: 3, name: '已寄送',    code: ''},
-      {id: 4, name: '已到店',    code: ''},
-      {id: 5, name: '已取貨',    code: ''},
-      {id: 6, name: '定期配送',  code: ''},
+      {id: 3, name: '已寄送',    code: 'shipping'},
+      # {id: 4, name: '已到店',    code: ''},
+      # {id: 5, name: '已取貨',    code: ''},
+      {id: 6, name: '定期配送',  code: 'period'},
       {id: 7, name: '異常',      code: 'error'},
     ]
   end

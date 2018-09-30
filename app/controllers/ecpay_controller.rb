@@ -4,18 +4,18 @@ class EcpayController < ApplicationController
 
   def period_order_notify
     ecpay_parameters = filter(params)
-    ecpay_log('order_notify', "綠界回傳: #{ecpay_parameters.inspect}")
+    ecpay_log('period_order_notify', "綠界回傳: #{ecpay_parameters.inspect}")
     mac = ecpay_parameters.delete('CheckMacValue')
     # CheckMacValue 錯誤
     unless EcpayServices::Ecpay.check(ecpay_parameters, mac)
-      ecpay_log 'order_notify', "交易失敗 CheckMacValue 不相符!"
+      ecpay_log 'period_order_notify', "交易失敗 CheckMacValue 不相符!"
       render plain: '1|OK', status: 200
       return
     end
 
     # 綠界交易失敗
     unless ecpay_parameters['RtnCode'].to_s == '1'
-      ecpay_log 'order_notify', "交易失敗 #{ecpay_parameters['RtnMsg']}"
+      ecpay_log 'period_order_notify', "交易失敗 #{ecpay_parameters['RtnMsg']}"
       render plain: '1|OK', status: 200
       return
     end
@@ -40,14 +40,27 @@ class EcpayController < ApplicationController
 
         # MailServices::OrderMailer.period_order_paid(order)
         Mailer::PeriodOrderPaidJob.perform_later(order.id)
-        ecpay_log 'order_notify', "交易成功: order_id: #{order.id}, order_no: #{order.order_no}"
+        ecpay_log 'period_order_notify', "交易成功: order_id: #{order.id}, order_no: #{order.order_no}"
         render plain: '1|OK', status: 200
       end
     rescue => e
-      Rails.logger.error "發生錯誤 #{e.message}, file: #{__FILE__}, line: #{__LINE__}"
-      ecpay_log 'order_notify', "發生錯誤 #{e.message}, file: #{__FILE__}, line: #{__LINE__}"
+      Reporter.error(e, "period_order_notify錯誤 file: #{__FILE__}")
+      ecpay_log 'period_order_notify', "發生錯誤 #{e.message}"
       render plain: '1|OK', status: 200
     end
+  end
+
+  def period_order_return
+    # ecpay_parameters = filter(params)
+    # mac = ecpay_parameters.delete('CheckMacValue')
+
+    # # CheckMacValue 錯誤
+    # unless EcpayServices::Ecpay.check(ecpay_parameters, mac)
+    #   ecpay_log 'period_order_return', "CheckMacValue 不相符!"
+    #   redirect_to root_path
+    #   return
+    # end
+
   end
 
   private

@@ -24,4 +24,12 @@ class PeriodOrder < ApplicationRecord
 
   end
 
+  def status_name
+    Reference::OrderStatus.to_name(self.status)
+  end
+
+  def shipping_name
+    Reference::ShippingStatus.to_name(self.shipping_status)
+  end
+
 end

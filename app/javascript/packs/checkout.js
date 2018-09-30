@@ -148,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // 產生ecpay付款所需資料並跳往綠界
       go_to_pay: function() {
         let self = this;
+        EventBus.$emit('loading');
         axios.post('/orders/ecpay_generate', {
           order_no: self.order_no
         })

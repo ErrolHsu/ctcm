@@ -10,7 +10,6 @@ module EcpayServices
       :TradeDesc,
       :ChoosePayment,
       :ReturnURL,
-      :OrderResultURL,
     ]
 
     def self.call(*args)
@@ -31,8 +30,9 @@ module EcpayServices
         PeriodType: order.period_type,
         Frequency: order.frequency,
         ExecTimes: order.exec_times,
-        ReturnURL: Settings.root + '/ecpay/period_order_notify',  # 付款完成 通知回傳網址
-        # OrderResultURL: "http://localhost:3000/orders/ecpay_return",
+        ReturnURL: "#{Settings.root}/ecpay/period_order_notify",  # 付款完成 通知回傳網址
+        ClientBackURL: "#{Settings.root}/account/orders/#{order.order_no}", # Client 端返回特店的按鈕連結
+        # OrderResultURL: "#{Settings.root}/account/orders/#{order.order_no}", # Client 端回傳付款結果網址
       }
 
       data.merge!(necessary_data)
