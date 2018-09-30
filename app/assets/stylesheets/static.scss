@@ -32,14 +32,19 @@
       #goals-img {
         background-image: image-url("goals.jpg");
       }
+      #history-img {
+        width: 80vw;
+        height: 41vw;
+        background-image: image-url("history.png");
+      }
 
-      #body-description {
-        #description-title {
+      .body-description {
+        .description-title {
           font-size: 18px;
           font-weight: 500;
           margin-bottom: 25px;
         }
-        #description-body {
+        .description-body {
           font-size: 15px;
         }
       }
@@ -61,7 +66,11 @@
           width: 100vw;
           height: 100vw;
         }
-        #body-description {
+        #history-img {
+          width: 100vw;
+          height: 51.25vw;
+        }
+        .body-description {
           padding: 50px 30px;
         }
       }

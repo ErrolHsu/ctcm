@@ -1,1 +1,77 @@
-TODO....
+= javascript_pack_tag 'general_page'
+= stylesheet_pack_tag 'general_page'
+
+#general-page-app
+  / 必要的共用組件
+  = render 'share/components'
+
+  .content
+    .static-head.d-flex
+      .title
+        創辦歷程
+      .decoration-line
+
+    .static-body
+      .row
+        // 中文
+        .body-description.col-md-6.col-12
+          .description-title
+            創辦歷程
+          .description-body
+            %div
+              當我們還是孩子的時候，
+              每天醒來整個屋子裡總是瀰漫著咖啡的香氣，
+              這是讓我們最難以忘懷的記憶。
+              我們對咖啡的熱愛也是從那個時候便開始，
+              那是我們日常生活的一部分。
+            %br
+            %div
+              在歷經幾次工作搬遷後我們認識了台灣，
+              我們認為台灣是一個友善、美好的地方，
+              也希望我們的孩子能在這裡成長為一位善良的人。
+            %br
+            %div
+              在這裡生活了兩年，
+              發現大家對咖啡的需求普遍依賴連鎖企業，
+              而我們則想起了兒時祖父沖煮咖啡的記憶。
+              那麼新鮮、那麼溫暖。
+            %br
+            %div
+              我們想讓大家知道，精品咖啡並非遙遠，
+              只要你願意，我們提供你這些讓我們引以為傲得豆子，讓大家可以簡單、方便地享用。
+              “You deserve a fresh, finest cup of coffee.”
+            %br
+            %div
+              我們懷著感恩的心繼續生活在這片土地，
+              並且對您保證能從家族的莊園帶來品質最好的咖啡豆，
+              這是我們能為我們所愛的土地盡的一份努力。與台灣這片美好的土地交流。
+        // 英文
+        .body-description.col-md-6.col-12
+          .description-title
+            The Story Behind Our Story
+          .description-body
+            %div
+              Our love for coffee started when we were kids.  Growing up in Panama had printed the unforgettable memory of waking up by the smell of freshly brewed coffee by grandpa.
+            %br
+            %div
+              After some business trips around the world, we found that Taiwan is a wonderful place —friendly people, beautiful natural and great food. We hope our kids can grew up as decent as people likely here.
+            %br
+            %div
+              There’s only one thing we couldn’t get used to —coffee from the convenient stores. It took us back to the memory of, the freshness and the warmness, grandpa’s. We called back home right away and wished to bring some beans here for those who want a finest cup of coffee. You will find it easy to reach to the farm in Panama because we have brought them here just for you.
+            %br
+              We are so thankful to be here. For the best we can do is guarantee you the responsible beans from family farms. Sharing the best of our hometown with you and keep living on the land we love.
+        // 圖片
+        .col-md-12.col-12.mt-5
+          #history-img.bg-img
+
+
+
+
+
+
+
+// PROPS
+#props(data="#{props}")
+
+
+

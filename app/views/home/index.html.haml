@@ -36,8 +36,10 @@
               .col-md-9
                 .btn.btn-wb.mr-1.mb-2(v-for='variant in order_set.product.variants'
                 v-on:click="set_order_variant(variant)" v-bind:class="{seleted: variant === order_set.variant}")
-                  {{ variant.weight }}
-
+                  %span
+                    {{ variant.weight }}
+                  %span.font-13.font-italic.ml-1
+                    NT {{ variant.price }}
 
           // 頻率
           .row.align-items-baseline.mt-3
