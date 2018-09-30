@@ -17,6 +17,7 @@
 = stylesheet_pack_tag 'checkout'
 
 #check-out-app
+  = render 'e_commerce_contract_modal'
   / 必要的共用組件
   = render 'share/components'
 
@@ -160,8 +161,10 @@
       #pay-box.d-flex(v-if='order_no.length > 0')
         .button-normal(v-on:click='go_to_pay')
           前往付款
-        %div.font-13
-          進行結帳代表您同意電子商務約定條款
+        %div.font-13.mt-3
+          進行結帳代表您同意
+          .d-inline-block.pointer(style='color:#286494'  data-toggle="modal" data-target="#e-commerce-contract-modal")
+            電子商務約定條款
       .d-flex.justify-center(v-else)
         .btn.button-normal.mt-5(v-on:click="create_period_order")
           確認下單
