@@ -23,6 +23,13 @@
           .d-inline-block.pointer(style='color:#286494'  data-toggle="modal" data-target="#e-commerce-contract-modal")
             電子商務約定條款
 
+    // if 訂單已付款
+
+    // 取消訂閱
+    - if order.subscribe?
+      .btn.button-normal
+        取消定期配送
+
     ///////   infos  ////////
     .row
       .col-md-6
@@ -83,7 +90,7 @@
 
 
       // 定期訂單資訊
-      - if order.period?
+      - if order.subscribe?
         // 本期訂單
         .col-md-6
           .info-box

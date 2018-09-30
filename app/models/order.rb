@@ -15,6 +15,11 @@ class Order < ApplicationRecord
     self.save!
   end
 
+  # 訂閱中
+  def subscribe?
+    self.period? && self.status == 'process'
+  end
+
   def status_name
     Reference::OrderStatus.to_name(self.status)
   end
