@@ -60,11 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
             self.period_order_set.price     = token_payload.variant.price;
 
             // set 運費
-            if (self.period_order_set.price >= 1500) {
-              self.period_order_set.shipping_rate = 0;
-            } else {
-              self.period_order_set.shipping_rate = 100;
-            }
+            // if (self.period_order_set.price >= 1500) {
+            //   self.period_order_set.shipping_rate = 0;
+            // } else {
+            //   self.period_order_set.shipping_rate = 100;
+            // }
+            // 定期配送運費為 0
+            self.period_order_set.shipping_rate = 0;
+
 
             self.status = 'step1';
             EventBus.$emit('end-loading');

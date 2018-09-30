@@ -77,7 +77,8 @@ class OrdersController < ApplicationController
 
       # shipping_info
       shipping_info = period_order_total_data['shipping_info']
-      shipping_rate = variant['price'] >= 1500 ? 0 : 100
+      # 定期配送運費為零
+      shipping_rate = 0
 
       ActiveRecord::Base.transaction do
         # 建立訂單
