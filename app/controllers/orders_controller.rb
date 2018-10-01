@@ -80,23 +80,25 @@ class OrdersController < ApplicationController
       # 定期配送運費為零
       shipping_rate = 0
 
+      order = current_user.orders.build(
+        order_no: generate_order_no,
+        total: variant['price'] * exec_times,
+        period: true,
+        period_type: period_type,
+        period_amount: variant['price'],
+        frequency: frequency,
+        exec_times: exec_times,
+        status: 'open',
+        payment_status: 'pending',
+        shipping_status: 'period',
+        duration: duration,
+        shipping_rate: shipping_rate,
+        payment: 'credit',
+      )
+
       ActiveRecord::Base.transaction do
         # 建立訂單
-        order = current_user.orders.create!(
-          order_no: generate_order_no,
-          total: variant['price'] * exec_times,
-          period: true,
-          period_type: period_type,
-          period_amount: variant['price'],
-          frequency: frequency,
-          exec_times: exec_times,
-          status: 'open',
-          payment_status: 'pending',
-          shipping_status: 'period',
-          duration: duration,
-          shipping_rate: shipping_rate,
-          payment: 'credit',
-        )
+        order.save!
 
         #建立 訂單 items
         order.items.create!(
@@ -124,9 +126,10 @@ class OrdersController < ApplicationController
           phone: shipping_info['phone'],
         )
 
-        Mailer::PeriodOrderCreateJob.perform_later(order.id)
-        render json: {message: "建立訂單成功", order_no: order.order_no}
       end
+
+      Mailer::PeriodOrderCreateJob.perform_later(order.id)
+      render json: {message: "建立訂單成功", order_no: order.order_no}
 
     rescue => e
       render json: { 'message' => '建立訂單錯誤，請稍候重試。' }, status: 500
