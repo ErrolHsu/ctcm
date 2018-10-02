@@ -67,6 +67,33 @@
         font-size: 18px;
       }
     }
+    #about-box {
+      position: relative;
+      .links {
+        position: absolute;
+        top: 80%;
+        left: 10px;
+
+        display: none;
+        height: auto;
+        width: 200px;
+        padding: 10px 30px;
+        background-color: #fff;
+        z-index: 20;
+        line-height: 40px;
+        a {
+          font-size: 15px;
+        }
+      }
+      &:hover {
+        .links {
+          display: flex;
+          flex-direction:column;
+        }
+      }
+
+    }
+
   }
 
 }
@@ -236,3 +263,5 @@
   &:before{ transform: rotate(90deg); }
   &:after{ transform: rotate(180deg); }
 }
+
+

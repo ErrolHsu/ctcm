@@ -14,10 +14,20 @@
   .nav-right.inline-block.mr-4
     %div.font-15.ml-4.phone-hide
       = link_to '定期配送', root_path(anchor: "period-order")
-    %div.font-15.ml-4.phone-hide
-      = link_to 'SHOP', '#'
-    %div.font-15.ml-4.phone-hide
+    / %div.font-15.ml-4.phone-hide
+    /   = link_to 'SHOP', '#'
+    #about-box.font-15.ml-4.phone-hide
       = link_to 'ABOUT', '/people'
+      .links
+        %div
+          %a{:href => "farm_info"}
+            莊園農場
+        %div
+          %a{:href => "history"}
+            創辦歷程
+        %div
+          %a{:href => "goals"}
+            展望與目標
     %div.font-15.ml-4.phone-hide
       = link_to 'BLOG', '#'
     / vue 組件
@@ -49,9 +59,9 @@
       %div.center.bottom-line
         %a{:href => "/#period-order"}
           定期配送
-      %div.center.bottom-line
-        %a{:href => "#"}
-          SHOP
+      / %div.center.bottom-line
+      /   %a{:href => "#"}
+      /     SHOP
       %div.center.bottom-line
         %a.d-block.pointer(style='position: relative;'){"v-on:click.prevent" =>'showAboutLinks'}
           / %i.fas.fa-plus
@@ -66,8 +76,12 @@
             %a{:href => "history"}(style='font-size: 18px !important')
               創辦歷程
             %br
+            %a{:href => "people"}(style='font-size: 18px !important')
+              關於我們
+            %br
             %a{:href => "goals"}(style='font-size: 18px !important')
               展望與目標
+
       %div.center.bottom-line
         %a{:href => "#"}
           BLOG
