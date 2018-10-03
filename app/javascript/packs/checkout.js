@@ -41,9 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mounted() {
       let self = this;
-      let url_string = window.location;
-      let url = new URL(url_string);
-      self.token = url.searchParams.get('token')
+      // let url_string = window.location;
+      // let url = new URL(url_string);
+      // self.token = url.searchParams.get('token')
+      self.token = self.getParameterByName('token');
       // 有token代表是定期訂單
       if (self.token) {
         EventBus.$emit('loading');
