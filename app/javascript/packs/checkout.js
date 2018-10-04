@@ -157,7 +157,9 @@ document.addEventListener('DOMContentLoaded', () => {
           self.ecpay_info = Object.assign({}, response['data']['ecpay_info']);
         })
         .then(function(response) {
-          document.getElementById('ecpay_info_form').submit();
+          setTimeout(() => {
+            document.getElementById('ecpay_info_form').submit();
+          }, 5000)
         })
         .catch(function(error) {
           error_msg(error.response['data']['message']);

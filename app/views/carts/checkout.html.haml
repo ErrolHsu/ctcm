@@ -133,7 +133,7 @@
       #step3(v-if=" status === 'step3' ")
         / 綠界付款表單
         = form_tag("#{Settings.ecpay.host}/Cashier/AioCheckOut/V5", id: 'ecpay_info_form', method: "post", :authenticity_token => false, :enforce_utf8 => false ) do
-          %input(v-for='(value, key) in ecpay_info' v-bind:name='key' v-bind:value='value' type="hidden")
+          %input(v-for='(value, key) in ecpay_info' v-bind:name='key' v-bind:value='value')
 
         .row.mt-3
           .col-md-8.offset-md-2
