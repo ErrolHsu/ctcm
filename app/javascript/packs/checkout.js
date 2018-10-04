@@ -157,12 +157,20 @@ document.addEventListener('DOMContentLoaded', () => {
           self.ecpay_info = Object.assign({}, response['data']['ecpay_info']);
         })
         .then(function(response) {
-          setTimeout(() => {
+          // 手機上表單不會馬上render出來
+          if (document.getElementsByName("MerchantTradeNo").length === 1) {
             document.getElementById('ecpay_info_form').submit();
-          }, 5000)
+          } else {
+            setTimeout(() => {
+              document.getElementById('ecpay_info_form').submit();
+            }, 1000)
+          }
         })
         .catch(function(error) {
           error_msg(error.response['data']['message']);
+        })
+        .then(() => {
+          EventBus.$emit('end-loading');
         })
       },
 
