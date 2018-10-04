@@ -39,7 +39,9 @@ Rails.application.routes.draw do
   namespace :account do
     get 'index' => 'users#index'
     resources :orders, only: [:show] do
-
+      member do
+        get 'cancel_subscribe' => 'orders#cancel_subscribe'
+      end
     end
   end
 

@@ -9,7 +9,7 @@ class Order < ApplicationRecord
   scope :subscribe_orders, -> { where(period: true) }
 
   def period_order_paid!
-    self.status = 'process'
+    self.status = 'subscribe'
     self.payment_status = 'subscribe'
     self.paid_at = Time.current
     self.save!
@@ -17,7 +17,7 @@ class Order < ApplicationRecord
 
   # 訂閱中
   def subscribe?
-    self.period? && self.status == 'process'
+    self.period? && self.status == 'subscribe'
   end
 
   def status_name

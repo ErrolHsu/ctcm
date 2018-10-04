@@ -16,10 +16,11 @@ module Reference
     self.data = [
       {id: 1, name: '已下單',  code: 'open' },
       {id: 2, name: '待處理',  code: 'pending'},
-      {id: 3, name: '訂閱中',  code: 'process'}, # 定期訂單
+      {id: 3, name: '訂閱中',  code: 'subscribe'}, # 定期訂單
       {id: 4, name: '已結案',  code: 'close'},
       {id: 5, name: '異常',    code: 'error'},
       {id: 6, name: '下期訂單', code: 'future'},
+      {id: 7, name: '取消訂閱', code: 'subscribe_cancel'},
     ]
   end
 

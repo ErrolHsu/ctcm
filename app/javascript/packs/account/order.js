@@ -8,8 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     el: '#account-order-app',
     mixins: [vue_init],
     data: {
-      // 訂單編號
-      order_no: '',
+      // order
+      order: {
+        id: '',
+        order_no: '',
+        status: '',
+        payment_status: '',
+      },
       // ecpay_info 所需資料
       ecpay_info: {},
     },
@@ -17,7 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     mounted() {
       let url_string = window.location;
       let url = new URL(url_string);
-      this.order_no = url.pathname.split('/')[3]
+      this.order.order_no = url.pathname.split('/')[3]
+
+      // init order data
+      const orderJson = document.getElementById("order-json");
+      const orderJsonData = JSON.parse(orderJson.getAttribute('data'));
+      this.order = Object.assign({}, orderJsonData);
     },
 
     computed: {
@@ -29,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let self = this;
         EventBus.$emit('loading');
         axios.post('/orders/ecpay_generate', {
-          order_no: self.order_no
+          order_no: self.order.order_no
         })
         .then(function(response) {
           self.ecpay_info = Object.assign({}, response['data']['ecpay_info']);
@@ -39,6 +49,22 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(function(error) {
           error_msg(error.response['data']['message']);
+        })
+      },
+
+      cancelSubscribe (orderId) {
+        let self = this;
+        EventBus.$emit('loading');
+        axios.get(`/account/orders/${orderId}/cancel_subscribe`)
+        .then(response => {
+          self.order = Object.assign({}, response.data.order_json)
+          success_msg(response.data.message);
+        })
+        .catch(err => {
+
+        })
+        .then(() => {
+          EventBus.$emit('end-loading');
         })
       },
     }

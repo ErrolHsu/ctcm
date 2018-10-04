@@ -6,29 +6,31 @@
   / 必要的共用組件
   = render 'share/components'
   .content
+    // if 取消訂閱
+    %div(v-if=" order.payment_status === 'subscribe_cancel' ")
+      你已取消訂閱
+
     // if 訂單未付款
-    %div
-      - if order.payment_status == 'pending'
+    %div(v-if=" order.payment_status === 'pending' ")
 
-        / 綠界付款表單
-        = form_tag("#{Settings.ecpay.host}/Cashier/AioCheckOut/V5", id: 'ecpay_info_form', method: "post", :authenticity_token => false, :enforce_utf8 => false ) do
-          %input(v-for='(value, key) in ecpay_info' v-bind:name='key' v-bind:value='value' type="hidden")
+      / 綠界付款表單
+      = form_tag("#{Settings.ecpay.host}/Cashier/AioCheckOut/V5", id: 'ecpay_info_form', method: "post", :authenticity_token => false, :enforce_utf8 => false ) do
+        %input(v-for='(value, key) in ecpay_info' v-bind:name='key' v-bind:value='value' type="hidden")
 
-        .red-tag
-          此訂單尚未付款
-        .d-inline-block.pointer.ml-3(v-on:click='go_to_pay')
-          前往付款 >>>
-        %div.font-13.mt-3
-          進行結帳代表您同意
-          .d-inline-block.pointer(style='color:#286494'  data-toggle="modal" data-target="#e-commerce-contract-modal")
-            電子商務約定條款
+      .red-tag
+        此訂單尚未付款
+      .d-inline-block.pointer.ml-3(v-on:click='go_to_pay')
+        前往付款 >>>
+      %div.font-13.mt-3
+        進行結帳代表您同意
+        .d-inline-block.pointer(style='color:#286494'  data-toggle="modal" data-target="#e-commerce-contract-modal")
+          電子商務約定條款
 
     // if 訂單已付款
 
     // 取消訂閱
-    - if order.subscribe?
-      .btn.button-normal
-        取消定期配送
+    .btn.button-normal(v-if="order.status === 'subscribe' " v-on:click='cancelSubscribe(order.id)')
+      取消定期配送
 
     ///////   infos  ////////
     .row
@@ -128,5 +130,6 @@
 
 // PROPS
 #props(data="#{props}")
+#order-json(data="#{order_json}")
 
 

@@ -158,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(function(response) {
           // 手機上表單不會馬上render出來
+          // 如果input 沒出來，等一秒再送
           if (document.getElementsByName("MerchantTradeNo").length === 1) {
             document.getElementById('ecpay_info_form').submit();
           } else {

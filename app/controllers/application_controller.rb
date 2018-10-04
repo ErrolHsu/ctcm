@@ -23,7 +23,11 @@ class ApplicationController < ActionController::Base
   end
 
   def get_current_user
-    current_user || {}
+    if current_user
+      current_user.as_json(only: :email)
+    else
+      {}
+    end
   end
 
   def current_user?
