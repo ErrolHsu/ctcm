@@ -31,6 +31,7 @@ module Reference
       {id: 3, name: '訂閱中', code: 'subscribe'},
       {id: 4, name: '已付款', code: 'paid'},
       {id: 5, name: '異常',   code: 'error'},
+      {id: 6, name: '取消訂閱', code: 'subscribe_cancel'},
     ]
   end
 

@@ -57,11 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
         EventBus.$emit('loading');
         axios.get(`/account/orders/${orderId}/cancel_subscribe`)
         .then(response => {
-          self.order = Object.assign({}, response.data.order_json)
+          self.order = Object.assign({}, JSON.parse(response.data.order_json))
           success_msg(response.data.message);
         })
         .catch(err => {
-
+          error_msg(error.response.data.message);
         })
         .then(() => {
           EventBus.$emit('end-loading');

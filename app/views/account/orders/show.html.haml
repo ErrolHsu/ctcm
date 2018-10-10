@@ -29,7 +29,7 @@
     // if 訂單已付款
 
     // 取消訂閱
-    .btn.button-normal(v-if="order.status === 'subscribe' " v-on:click='cancelSubscribe(order.id)')
+    .btn.button-normal(v-if="order.status === 'subscribe' " v-on:click='cancelSubscribe(order.order_no)')
       取消定期配送
 
     ///////   infos  ////////
@@ -41,13 +41,13 @@
             訂單資訊
           %div
             訂單編號:
-            = order.order_no
+            {{order.order_no}}
           %div
             訂單類型:
-            = order.period ? '定期配送' : '一般訂單'
+            {{order.type}}
           %div
             訂單狀態:
-            = order.status_name
+            {{order.status_name}}
 
           %div
             訂單品項:
@@ -71,7 +71,7 @@
                 週 / 次
             %div
               付款狀態:
-              = order.payment_name
+              {{order.payment_name}}
       .col-md-6
         // 配送資訊
         .info-box
@@ -92,39 +92,38 @@
 
 
       // 定期訂單資訊
-      - if order.subscribe?
-        // 本期訂單
-        .col-md-6
+      // 本期訂單
+      .col-md-6
+        .info-box
+          %h5
+            本期訂單
+          %div
+            本期金額:
+            = current_period_order.amount
+          %div
+            訂單期數:
+            = current_period_order.no
+          %div
+            訂單品項:
+            = order.items.last.product_name
+          %div
+            付款狀態:
+            = current_period_order.paid ? '已付款' : '尚未付款'
+          %div
+            訂單狀態:
+            = current_period_order.status_name
+          %div
+            配送狀態:
+            = current_period_order.shipping_name
+      // 下期訂單
+      .col-md-6(v-if="order.status == 'subscribe' ")
+        - if next_period_order.present?
           .info-box
             %h5
-              本期訂單
+              下期訂單
             %div
-              本期金額:
-              = current_period_order.amount
-            %div
-              訂單期數:
-              = current_period_order.no
-            %div
-              訂單品項:
-              = order.items.last.product_name
-            %div
-              付款狀態:
-              = current_period_order.paid ? '已付款' : '尚未付款'
-            %div
-              訂單狀態:
-              = current_period_order.status_name
-            %div
-              配送狀態:
-              = current_period_order.shipping_name
-        // 下期訂單
-        - if next_period_order.present?
-          .col-md-6
-            .info-box
-              %h5
-                下期訂單
-              %div
-                預計烘培日:
-                = next_period_order.expected_date.to_s(:date)
+              預計烘培日:
+              = next_period_order.expected_date.to_s(:date)
 
 
 

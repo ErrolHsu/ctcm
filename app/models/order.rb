@@ -15,9 +15,18 @@ class Order < ApplicationRecord
     self.save!
   end
 
-  # 訂閱中
+  # 訂閱中?
   def subscribe?
     self.period? && self.status == 'subscribe'
+  end
+
+  def type
+    period ? '定期配送' : '一般訂單'
+  end
+
+  # 定期訂單品項
+  def item
+
   end
 
   def status_name
