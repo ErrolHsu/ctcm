@@ -14,7 +14,7 @@
             Step 1 確認訂單
           %div.center.pointer(v-bind:class="{current: checkCurrentStatus('step2')}" v-on:click=" status = 'step2' ")
             Step 2 填寫訂購資訊
-          %div.center.pointer(v-bind:class="{current: checkCurrentStatus('step3')}" v-on:click=" status = 'step3' ")
+          %div.center.pointer(v-bind:class="{current: checkCurrentStatus('step3')}" v-on:click="got_to_step3")
             Step 3 選擇付款方式
 
     // STEP 1
@@ -48,7 +48,7 @@
               %div
                 定期配送
               %div
-                享有免運
+                享免運優惠
 
           // 訂單金額計算
           .col-md-2.col-7#cost-info-box

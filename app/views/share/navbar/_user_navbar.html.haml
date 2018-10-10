@@ -21,13 +21,13 @@
       .links
         %div
           %a{:href => "farm_info"}
-            莊園農場
+            莊園農場 / Farm
         %div
           %a{:href => "history"}
-            創辦歷程
+            創辦歷程 / Our story
         %div
           %a{:href => "goals"}
-            展望與目標
+            展望與目標 / Our Coffee
     %div.font-15.ml-4.phone-hide
       = link_to 'BLOG', '#'
     / vue 組件
@@ -41,14 +41,14 @@
       %a{:href => "https://www.instagram.com/altitudetosteriacafe", 'target' =>"_blank"}
         = icon('fab', 'instagram')
     // 購物車
-    %transition(name='opacity')
-      %div.icon-link(v-if='!phone_options' style='margin-left: 30px;')
-        %a{:href => ""}
-          %i#cart.fas.fa-shopping-cart
-    %transition(name='opacity')
-      #cart-count.ml-3(v-if='!phone_options')
-        %div.center
-          0
+    / %transition(name='opacity')
+    /   %div.icon-link(v-if='!phone_options' style='margin-left: 30px;')
+    /     %a{:href => ""}
+    /       %i#cart.fas.fa-shopping-cart
+    / %transition(name='opacity')
+    /   #cart-count.ml-3(v-if='!phone_options')
+    /     %div.center
+    /       0
 
 
 /// 手機navbar選單

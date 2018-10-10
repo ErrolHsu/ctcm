@@ -105,7 +105,18 @@ document.addEventListener('DOMContentLoaded', () => {
           error_msg('請確實填寫收件資訊');
           return;
         }
-        this.status = 'step3';
+
+        // 驗證email
+        if (this.validateEmail(this.shipping_info.email)) {
+          this.status = 'step3';
+        } else {
+          error_msg('email格式錯誤');
+        }
+      },
+
+      validateEmail (email) {
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
       },
 
       // 建立訂單

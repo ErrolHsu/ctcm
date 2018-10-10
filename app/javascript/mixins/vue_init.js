@@ -45,6 +45,7 @@ const vue_init = {
     EventBus.$on('sign-out-user', () => {
       this.user_login = false;
       this.current_user = {};
+      this.redirectToRoot();
       // TODO 登出後如該頁面非會員不能訪問則導回首頁
     });
 
@@ -93,7 +94,16 @@ const vue_init = {
       if (!results) return null;
       if (!results[2]) return '';
       return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
+    },
+
+    // 登出後如果是在會員中心，則導回首頁
+    redirectToRoot () {
+      let url_string = window.location;
+      let url = new URL(url_string);
+      if (url.pathname.split('/')[1] == 'account') {
+        window.location = '/';
+      }
+    },
   }
 }
 
