@@ -94,10 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let self = this;
         let token;
         // 結帳前須登入
-        if ( !object_present(this.current_user) ) {
-          error_msg('結帳前請先登入')
-          return
-        }
+        // if ( !object_present(this.current_user) ) {
+        //   error_msg('結帳前請先登入')
+        //   return
+        // }
         // TODO 檢查 order_set
         if (!this.checkOrderSet()) {
           error_msg('有未選擇的項目')
