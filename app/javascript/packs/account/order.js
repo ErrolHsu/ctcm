@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
 
     computed: {
-      },
+    },
 
     methods: {
       // 產生ecpay付款所需資料並跳往綠界

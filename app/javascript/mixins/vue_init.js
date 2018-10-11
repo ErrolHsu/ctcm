@@ -10,7 +10,7 @@ const vue_init = {
     return {
       user_login: false,
       current_user: {},
-      // 手機navbar
+      // 手機navbar選單
       phone_options: false,
       about_links: false,
     }

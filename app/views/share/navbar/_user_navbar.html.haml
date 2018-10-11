@@ -56,7 +56,7 @@
 %transition(name='slide-X')
   #navbar-option-modal.phone-show(v-if='phone_options')
     .nav-content
-      %div.center.bottom-line
+      %div.center.bottom-line(v-on:click='phone_options = false')
         %a{:href => "/#period-order"}
           定期配送
       / %div.center.bottom-line
