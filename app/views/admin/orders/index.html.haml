@@ -1,3 +1,11 @@
-- orders.each do |order|
-  = link_to order.order_no, admin_order_path(order)
-  %hr
+%div.mt-5
+  - orders.each do |order|
+    %div
+      = link_to order.order_no, admin_order_path(order)
+    %div
+      訂單狀態:
+      = order.status_name
+    %div
+      付款狀態:
+      = order.payment_name
+    %hr
