@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_24_113522) do
+ActiveRecord::Schema.define(version: 2018_10_11_132538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2018_09_24_113522) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "admin_settings", force: :cascade do |t|
+    t.bigint "admin_id"
+    t.boolean "order_paid_mail", default: true
+    t.boolean "order_cancel_mail", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_admin_settings_on_admin_id"
   end
 
   create_table "admins", force: :cascade do |t|
@@ -206,6 +215,7 @@ ActiveRecord::Schema.define(version: 2018_09_24_113522) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "admin_settings", "admins"
   add_foreign_key "cart_items", "carts"
   add_foreign_key "carts", "users"
   add_foreign_key "order_items", "orders"

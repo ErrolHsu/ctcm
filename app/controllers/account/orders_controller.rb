@@ -17,6 +17,9 @@ class Account::OrdersController < ApplicationController
     order.payment_status = 'subscribe_cancel'
     order.save
 
+    # 通知管理員
+    Mailer::Admin::PeriodOrderCancelJob.perform_later(order.id)
+
     render json: { message: '已取消訂閱' , order_json: order_json }
   end
 end
