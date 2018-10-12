@@ -6,7 +6,7 @@ module MailServices
       order_items = order.items
       shipping_address = order.shipping_address
 
-      subject = '定期訂單已建立'
+      subject = '[Altitude Tosteria][AT Cafe]訂單確認'
       text = ERB.new(<<~heredoc).result(binding)
         <%= order.shipping_address.name %> 您好，
 
@@ -33,7 +33,7 @@ module MailServices
     def self.period_order_paid(order)
       shipping_address = order.shipping_address
 
-      subject = '定期訂單付款成功'
+      subject = '[Altitude Tosteria][AT Cafe]付款完成'
       text = ERB.new(<<~heredoc).result(binding)
         <%= order.shipping_address.name %> 您好，
 
