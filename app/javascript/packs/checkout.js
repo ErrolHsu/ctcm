@@ -78,6 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
             EventBus.$emit('end-loading');
           })
       }
+
+      // 如果有登入直接幫顧客帶入email
+      self.shipping_info.email = self.current_user.email;
     },
 
     computed: {
