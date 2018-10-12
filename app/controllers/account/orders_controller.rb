@@ -18,7 +18,9 @@ class Account::OrdersController < ApplicationController
     order.save
 
     # 通知管理員
-    Mailer::Admin::PeriodOrderCancelJob.perform_later(order.id)
+    MailWorker::Admin::PeriodOrderCancelJob.perform_later(order.id)
+    # 通知消費者
+    MailWorker::PeriodOrderCancelJob.perform_later(order.id)
 
     render json: { message: '已取消訂閱' , order_json: order_json }
   end

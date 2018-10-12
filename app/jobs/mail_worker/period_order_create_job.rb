@@ -1,4 +1,4 @@
-class Mailer::PeriodOrderCreateJob < ApplicationJob
+class MailWorker::PeriodOrderCreateJob < ApplicationJob
   queue_as :mailers
 
   def perform(order_id)

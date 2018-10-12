@@ -4,9 +4,9 @@ module MailServices
     DOMAIN = Settings.mailgun.domain
     FROM = 'Altitude Tosteria <services@altitudetosteria.com>'
 
-    def self.send(from: FROM, to:, subject:, text:)
+    def self.send(from: FROM, to:, subject:, text:, html: nil)
       mg_client = Mailgun::Client.new(API_KEY)
-      message_params = { from: from,to: to, subject: subject, text: text }
+      message_params = { from: from,to: to, subject: subject, text: text, html: html}
       mg_client.send_message(DOMAIN, message_params)
     end
 

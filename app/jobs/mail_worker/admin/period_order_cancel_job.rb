@@ -1,4 +1,4 @@
-module Mailer
+module MailWorker
   class Admin::PeriodOrderCancelJob < ApplicationJob
     queue_as :mailers
 

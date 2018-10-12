@@ -39,7 +39,7 @@ class EcpayController < ApplicationController
         )
 
         # MailServices::OrderMailer.period_order_paid(order)
-        Mailer::PeriodOrderPaidJob.perform_later(order.id)
+        MailWorker::PeriodOrderPaidJob.perform_later(order.id)
         ecpay_log 'period_order_notify', "交易成功: order_id: #{order.id}, order_no: #{order.order_no}"
         render plain: '1|OK', status: 200
       end

@@ -128,7 +128,7 @@ class OrdersController < ApplicationController
 
       end
 
-      Mailer::PeriodOrderCreateJob.perform_later(order.id)
+      MailWorker::PeriodOrderCreateJob.perform_later(order.id)
       render json: {message: "建立訂單成功", order_no: order.order_no}
 
     rescue => e

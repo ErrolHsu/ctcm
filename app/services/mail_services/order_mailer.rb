@@ -3,10 +3,9 @@ module MailServices
   class OrderMailer < MailServices::Mailer
 
     def self.period_order_create(order)
-      order_items = order.items
       shipping_address = order.shipping_address
 
-      subject = '[Altitude Tosteria][AT Cafe]訂單確認'
+      subject = '[Altitude Tosteria][AT Cafe] 訂單確認'
       text = ERB.new(<<~heredoc).result(binding)
         <%= order.shipping_address.name %> 您好，
 
@@ -33,11 +32,12 @@ module MailServices
     def self.period_order_paid(order)
       shipping_address = order.shipping_address
 
-      subject = '[Altitude Tosteria][AT Cafe]付款完成'
+      subject = '[Altitude Tosteria][AT Cafe] 付款完成'
       text = ERB.new(<<~heredoc).result(binding)
         <%= order.shipping_address.name %> 您好，
 
-        我們已收到您 <%= order.order_no %> 的款項，
+        我們已收到您的款項，
+        訂單編號: <%= order.order_no %>
         您可以在此查看您的訂單狀態：<%= "https://altitudetosteria.com/account/orders/#{order.order_no}" %>
 
         單品咖啡每一次的配送皆為新鮮烘焙，
@@ -51,6 +51,36 @@ module MailServices
         一個月內皆適合飲用。
 
         喜歡我們的產品嗎？別忘了和您的好友分享喔！
+
+        預祝您有個美好的一天，
+        萬分感謝！
+
+        Altitude Tosteria創辦人
+        Afdel 阿福
+      heredoc
+
+      send(to: shipping_address.email, subject: subject, text: text)
+    end
+
+    def self.period_order_cancel(order)
+      shipping_address = order.shipping_address
+
+      subject = '[Altitude Tosteria][AT Cafe] 訂單已取消'
+      text = ERB.new(<<~heredoc).result(binding)
+        <%= order.shipping_address.name %> 您好，
+
+        我們已取消您的訂單，
+        訂單編號: <%= order.order_no %>
+        希望您還喜歡我們的咖啡。
+
+        我們期望能成為方便、符合人性的商家，
+        如果您有什麼寶貴的意見，
+        我們很樂意聽您分享。
+
+        欲聯絡我們，
+        請寫信至 hola@altitudetosteria.com
+        或加入我們的line帳號: @aus8184o，
+        我們期待再次為您服務！
 
         預祝您有個美好的一天，
         萬分感謝！
