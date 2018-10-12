@@ -9,6 +9,7 @@ class Order < ApplicationRecord
   scope :subscribe_orders, -> { where(period: true) }
 
   def period_order_paid!
+    self.paid = true
     self.status = 'subscribe'
     self.payment_status = 'subscribe'
     self.paid_at = Time.current
@@ -35,5 +36,14 @@ class Order < ApplicationRecord
 
   def payment_name
     Reference::PaymentStatus.to_name(self.payment_status)
+  end
+
+
+  ###### 方便測試用 #######
+  def tcancel
+    self.paid = false
+    self.status = 'subscribe_cancel'
+    self.payment_status = 'subscribe_cancel'
+    self.save
   end
 end

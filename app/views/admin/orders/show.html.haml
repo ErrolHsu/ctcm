@@ -39,9 +39,10 @@
             %div
               付款狀態:
               = order.payment_name
-            %div
-              付款時間:
-              = order.paid_at.to_s(:complete)
+            - if order.paid?
+              %div
+                付款時間:
+                = order.paid_at.to_s(:complete)
       .col-md-6
         // 配送資訊
         .info-box
