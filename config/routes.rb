@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get 'farm_info' => 'static#farm_info' # 莊園農場
   get 'history' => 'static#history' # 創辦歷程
   get 'goals' => 'static#goals' # 展望與目標
+  get 'FAQ' => 'static#faq' # FAQ
 
   get 'privacy_policy' => 'static#privacy_policy' # 隱私保護政策
 

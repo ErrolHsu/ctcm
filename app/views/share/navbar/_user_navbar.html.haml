@@ -35,7 +35,7 @@
       %navbar-user-controller(v-bind:current_user="current_user" v-bind:user_login='user_login')
 
     .phone-hide.icon-link(style='margin-left: 40px;')
-      %a{:href => "#", 'target' =>"_blank"}
+      %a{:href => "https://www.facebook.com/altitudetosteria/", 'target' =>"_blank"}
         = icon('fab', 'facebook-f')
     .phone-hide.icon-link.ml-4
       %a{:href => "https://www.instagram.com/altitudetosteriacafe", 'target' =>"_blank"}
@@ -57,17 +57,21 @@
   #navbar-option-modal.phone-show(v-if='phone_options')
     .nav-content
       %div.center.bottom-line(v-on:click='phone_options = false')
-        %a{:href => "/#period-order"}
-          定期配送
+        %a.list{:href => "/#period-order"}
+          .icon
+            %i.fas.fa-truck-moving
+          .list-name
+            定期配送
       / %div.center.bottom-line
       /   %a{:href => "#"}
       /     SHOP
       %div.center.bottom-line
-        %a.d-block.pointer(style='position: relative;'){"v-on:click.prevent" =>'showAboutLinks'}
+        %a.list.pointer(style='position: relative;'){"v-on:click.prevent" =>'showAboutLinks'}
           / %i.fas.fa-plus
-          .plus-container(v-bind:class='plusStyle')
+          .icon.plus-container(v-bind:class='plusStyle')
             .plus-box
-          ABOUT
+          .list-name
+            ABOUT
         %transition(name='slide-Y')
           %div(v-if='about_links')
             %a{:href => "people"}(style='font-size: 18px !important')
@@ -83,8 +87,11 @@
               展望與目標
 
       %div.center.bottom-line
-        %a{:href => "#"}
-          BLOG
+        %a.list{:href => "#"}
+          .icon
+            %i.far.fa-newspaper
+          .list-name
+            BLOG
       / vue 組件
       %phone-user-controller(v-bind:current_user="current_user" v-bind:user_login='user_login')
 

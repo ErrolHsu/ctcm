@@ -145,9 +145,20 @@
     align-items: center;
     width: 100%;
     min-height: 100vh;
+    .list {
+      display: flex;
+      align-items:center;
+      justify-content:center;
+      .icon {
+        width: 40px;
+      }
+      .list-name {
+        width: 80px;
+      }
+    }
     .bottom-line {
       width: 60vw;
-      padding: 15px 0;
+      padding: 20px 0;
       border-bottom: 1px solid #9c9b9b;
       a {
         font-size: 20px;
@@ -218,18 +229,22 @@
 
 // plus
 
+// .plus-container {
+//   position: absolute;
+//   width: 50px;
+//   height: 50px;
+//   left:5px;
+//   top: 5px;
+// }
+
 .plus-container {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  left:5px;
-  top: 5px;
 }
 
 .plus-box {
   position: relative;
   width: 20px;
   height: 20px;
+  margin-left: 10px;
 
   &:before,
   &:after {

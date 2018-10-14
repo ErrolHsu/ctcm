@@ -16,6 +16,10 @@ class StaticController < ApplicationController
 
   end
 
+  def faq
+
+  end
+
   # 隱私保護政策
   def privacy_policy
 
