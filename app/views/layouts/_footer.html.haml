@@ -43,11 +43,20 @@
       %div(style='color: #fff;')
         SERVICE
       %div.font-13
-        如何購買
+        %a{:href => "/account_policy"}
+          會員服務使用條款
       %div.font-13
-        付款及配送
-      %div.font-13
-        FAQ
+        %a{:href => "/FAQ#account-question"}
+          FAQ
+      / %div.font-13
+      /   %a{:href => "/FAQ#after-sales"}
+      /     售後服務
+      / %div.font-13
+      /   %a{:href => "/FAQ#einvoice-question"}
+      /     發票常見問題
+      / %div.font-13
+      /   %a{:href => "/FAQ#coffee-question"}
+      /     咖啡豆常見問題
       %div.font-13
         = link_to "隱私保護政策", "/privacy_policy"
 

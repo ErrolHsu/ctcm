@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get 'FAQ' => 'static#faq' # FAQ
 
   get 'privacy_policy' => 'static#privacy_policy' # 隱私保護政策
+  get 'account_policy' => 'static#account_policy' # 隱私保護政策
 
   # user註冊登入
   devise_scope :user do

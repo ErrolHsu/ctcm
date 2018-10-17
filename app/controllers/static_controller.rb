@@ -25,4 +25,9 @@ class StaticController < ApplicationController
 
   end
 
+  # 會員條款
+  def account_policy
+
+  end
+
 end
