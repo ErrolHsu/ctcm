@@ -52,9 +52,9 @@ gem 'active_hash'
 
 gem 'haml'
 # fb sign up or login
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'koala'
+# gem 'omniauth'
+# gem 'omniauth-facebook'
+# gem 'koala'
 
 # img size
 gem 'image_processing', '~> 1.2'
