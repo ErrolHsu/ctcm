@@ -8,12 +8,21 @@ class Order < ApplicationRecord
   default_scope { order(created_at: :asc) }
   scope :subscribe_orders, -> { where(period: true) }
 
+  def current_period_order_json
+    period_orders.where(current: true).last.to_json(except: [:created_at, :updated_at], methods: [:shipping_name, :status_name, :paid_name, :paid_at_date])
+  end
+
   def period_order_paid!
     self.paid = true
     self.status = 'subscribe'
     self.payment_status = 'subscribe'
     self.paid_at = Time.current
     self.save!
+  end
+
+  # 當期定期訂單
+  def current_period_order
+    period_orders.where(current: true).last
   end
 
   # 訂閱中?

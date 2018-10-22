@@ -36,6 +36,7 @@ class EcpayController < ApplicationController
           status: 'future',
           paid: false,
           shipping_status: '',
+          current: true,
         )
 
         # MailServices::OrderMailer.period_order_paid(order)

@@ -33,4 +33,12 @@ class PeriodOrder < ApplicationRecord
     Reference::ShippingStatus.to_name(self.shipping_status)
   end
 
+  def paid_at_date
+    paid_at.to_s(:date)
+  end
+
+  def paid_name
+    paid ? '已付款' : '尚未付款'
+  end
+
 end

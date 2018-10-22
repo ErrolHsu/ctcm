@@ -10,10 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     data: {
       // order
       order: {
-        id: '',
         order_no: '',
         status: '',
         payment_status: '',
+        payment_name: '',
+      },
+      currentPeriodOrder: {
+
       },
       // ecpay_info 所需資料
       ecpay_info: {},
@@ -28,9 +31,26 @@ document.addEventListener('DOMContentLoaded', () => {
       const orderJson = document.getElementById("order-json");
       const orderJsonData = JSON.parse(orderJson.getAttribute('data'));
       this.order = Object.assign({}, orderJsonData);
+
+      // init current_period_order data
+      const currentPeriodOrderJson = document.getElementById("current-period-order-json");
+      const currentPeriodOrderJsonData = JSON.parse(currentPeriodOrderJson.getAttribute('data'));
+      this.currentPeriodOrder = Object.assign({}, currentPeriodOrderJsonData);
     },
 
     computed: {
+      isUnpaid() {
+        if (this.order.payment_status === 'pending') {
+          return true;
+        } else {
+          return false;
+        }
+      },
+
+      // 出現烘培中按鈕
+      perparingBtnShow() {
+        return (this.currentPeriodOrder.paid && this.currentPeriodOrder.shipping_status === 'pending' )
+      }
     },
 
     methods: {
@@ -52,16 +72,35 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       },
 
-      cancelSubscribe (orderId) {
+      // 取消訂閱
+      cancelSubscribe (orderNo) {
         let self = this;
         EventBus.$emit('loading');
-        axios.get(`/account/orders/${orderId}/cancel_subscribe`)
+        axios.get(`/account/orders/${orderNo}/cancel_subscribe`)
         .then(response => {
           self.order = Object.assign({}, JSON.parse(response.data.order_json))
           success_msg(response.data.message);
         })
         .catch(err => {
-          error_msg(error.response.data.message);
+          error_msg(err.response.data.message);
+        })
+        .then(() => {
+          EventBus.$emit('end-loading');
+        })
+      },
+
+      // 定期訂單配送狀態改為烘培中
+      periodOrderPreparing() {
+        let self = this;
+        let orderNo = self.order.order_no;
+        EventBus.$emit('loading');
+        axios.get(`/admin/orders/${orderNo}/period_order_preparing`)
+        .then(res => {
+          self.currentPeriodOrder = Object.assign({}, JSON.parse(res.data.current_period_order_json))
+          success_msg(res.data.message);
+        })
+        .catch(err => {
+          error_msg(err.res.data.message);
         })
         .then(() => {
           EventBus.$emit('end-loading');

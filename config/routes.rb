@@ -78,7 +78,11 @@ Rails.application.routes.draw do
     get 'index' => 'core#index'
     resources :products
     resources :articles
-    resources :orders
+    resources :orders, only: [:index, :show] do
+      member do
+        get :period_order_preparing
+      end
+    end
     resources :trials, only: [:index, :show] do
       member do
         post :shipping

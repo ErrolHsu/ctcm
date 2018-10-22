@@ -2,36 +2,11 @@
 = stylesheet_pack_tag 'account/order'
 
 #account-order-app
-  = render 'carts/e_commerce_contract_modal'
-  / 必要的共用組件
-  = render 'share/components'
+  / loader
+  %loader
   .content
-    // if 取消訂閱
-    %div(v-if=" order.payment_status === 'subscribe_cancel' ")
-      你已取消訂閱
-
-    // if 訂單未付款
-    %div(v-if=" order.payment_status === 'pending' ")
-
-      / 綠界付款表單
-      = form_tag("#{Settings.ecpay.host}/Cashier/AioCheckOut/V5", id: 'ecpay_info_form', method: "post", :authenticity_token => false, :enforce_utf8 => false ) do
-        %input(v-for='(value, key) in ecpay_info' v-bind:name='key' v-bind:value='value' type="hidden")
-
-      .red-tag
-        此訂單尚未付款
-      .d-inline-block.pointer.ml-3(v-on:click='go_to_pay')
-        前往付款 >>>
-      %div.font-13.mt-3
-        進行結帳代表您同意
-        .d-inline-block.pointer(style='color:#286494'  data-toggle="modal" data-target="#e-commerce-contract-modal")
-          電子商務約定條款
-
-    // if 訂單已付款
-
-    // 取消訂閱
-    .btn.button-normal(v-if="order.status === 'subscribe' " v-on:click='cancelSubscribe(order.order_no)')
-      取消定期配送
-
+    .btn.button-normal(v-if=" perparingBtnShow " v-on:click='periodOrderPreparing')
+      烘培中
     ///////   infos  ////////
     .row
       .col-md-6
@@ -71,10 +46,8 @@
                 週 / 次
             %div
               付款狀態:
-              {{order.payment_name}}
-            %div
-              付款時間
-              {{order.paid_at}}
+              %span(v-bind:class='{ unpaid: isUnpaid }')
+                {{order.payment_name}}
       .col-md-6
         // 配送資訊
         .info-box
@@ -102,22 +75,22 @@
             本期訂單
           %div
             本期金額:
-            = current_period_order.amount
+            {{currentPeriodOrder.amount}}
           %div
             訂單期數:
-            = current_period_order.no
+            {{currentPeriodOrder.no}}
           %div
             訂單品項:
             = order.items.last.product_name
           %div
             付款狀態:
-            = current_period_order.paid ? '已付款' : '尚未付款'
+            {{currentPeriodOrder.paid_name}}
           %div
             訂單狀態:
-            = current_period_order.status_name
+            {{currentPeriodOrder.status_name}}
           %div
             配送狀態:
-            = current_period_order.shipping_name
+            {{currentPeriodOrder.shipping_name}}
       // 下期訂單
       .col-md-6(v-if="order.status == 'subscribe' ")
         - if next_period_order.present?
@@ -133,6 +106,6 @@
 // PROPS
 #props(data="#{props}")
 #order-json(data="#{order_json}")
+#current-period-order-json(data="#{current_period_order_json}")
 
 
-order.paid_at.to_s(:complete)

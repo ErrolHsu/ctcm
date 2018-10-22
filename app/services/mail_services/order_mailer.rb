@@ -92,5 +92,32 @@ module MailServices
       send(to: shipping_address.email, subject: subject, text: text)
     end
 
+    def self.period_order_preparing(order)
+      shipping_address = order.shipping_address
+
+      subject = '[Altitude Tosteria][AT Cafe]您這一期的咖啡豆在烘焙囉'
+      text = ERB.new(<<~heredoc).result(binding)
+        <%= order.shipping_address.name %> 您好，
+
+        您的訂單這一期的咖啡豆已經在排隊下鍋囉！
+        訂單編號: <%= order.order_no %>
+        預計三個工作天內完成烘焙。
+
+        每一次的烘焙皆是創辦人親自手選出漂亮的生豆，
+        烘焙後再次人工手選，挑出瑕疵豆，
+        請您耐心等候！
+
+        喜歡我們的產品嗎？別忘了和您的好友分享喔！
+
+        預祝您有個美好的一天，
+        萬分感謝！
+
+        Altitude Tosteria創辦人
+        Afdel 阿福
+      heredoc
+
+      send(to: shipping_address.email, subject: subject, text: text)
+    end
+
   end
 end

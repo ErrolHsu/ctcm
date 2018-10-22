@@ -17,10 +17,10 @@
       = form_tag("#{Settings.ecpay.host}/Cashier/AioCheckOut/V5", id: 'ecpay_info_form', method: "post", :authenticity_token => false, :enforce_utf8 => false ) do
         %input(v-for='(value, key) in ecpay_info' v-bind:name='key' v-bind:value='value' type="hidden")
 
-      .red-tag
-        此訂單尚未付款
-      .d-inline-block.pointer.ml-3(v-on:click='go_to_pay')
-        前往付款 >>>
+      .red-tag.pointer(v-on:click='go_to_pay')
+        前往付款
+      / .d-inline-block.pointer.ml-3(v-on:click='go_to_pay')
+      /   前往付款 >>>
       %div.font-13.mt-3
         進行結帳代表您同意
         .d-inline-block.pointer(style='color:#286494'  data-toggle="modal" data-target="#e-commerce-contract-modal")
@@ -71,7 +71,8 @@
                 週 / 次
             %div
               付款狀態:
-              {{order.payment_name}}
+              %span(v-bind:class='{ unpaid: isUnpaid }')
+                {{order.payment_name}}
       .col-md-6
         // 配送資訊
         .info-box
