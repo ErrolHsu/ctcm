@@ -1,9 +1,8 @@
 class Admin::OrdersController < AdminController
 
   expose(:orders) { Order.all }
-  expose(:order) { Order.find_by(order_no: params['id']) }
+  expose(:order)
   expose(:order_json) { order.to_json(except: [:id, :created_at, :updated_at], methods: [:status_name, :payment_name, :type]) }
-  expose(:current_period_order) { order.current_period_order }
   expose(:current_period_order_json) { order.current_period_order_json }
   expose(:next_period_order) { order.period_orders.where(status: [:future]).last }
 
@@ -16,6 +15,10 @@ class Admin::OrdersController < AdminController
 
   # 當期定期訂單改為烘培中
   def period_order_preparing
+    order = Order.find_by(order_no: params['id'])
+
+    current_period_order = order.current_period_order
+
     unless current_period_order.try(:paid)
       render json: { message: '本期訂單尚未付款' }, status: 400
     end

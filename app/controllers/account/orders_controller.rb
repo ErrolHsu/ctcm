@@ -3,7 +3,7 @@ class Account::OrdersController < ApplicationController
 
   expose(:order) { current_user.orders.find_by(order_no: params[:id]) }
   expose(:order_json) { order.to_json(except: [:id, :created_at, :updated_at], methods: [:status_name, :payment_name, :type]) }
-  expose(:current_period_order) { order.period_orders.where(status: [:open, :pending]).last }
+  expose(:current_period_order_json) { order.current_period_order_json }
   expose(:next_period_order) { order.period_orders.where(status: [:future]).last }
 
   def show

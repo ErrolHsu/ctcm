@@ -1,6 +1,7 @@
 import Vue from 'vue/dist/vue.esm';
 import axios from 'axios'
 import { vue_init } from '../../mixins/vue_init.js';
+import { EventBus } from '../../event_bus.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const AccountIndexApp = new Vue({

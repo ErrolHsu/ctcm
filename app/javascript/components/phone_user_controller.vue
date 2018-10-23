@@ -44,7 +44,7 @@
       },
 
       signOutUser: function() {
-        axios.get('user_sign_out')
+        axios.get('/user_sign_out')
           .then((response) => {
             EventBus.$emit('sign-out-user');
             success_msg('成功登出');

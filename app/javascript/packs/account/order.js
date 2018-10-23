@@ -50,7 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
       // 出現烘培中按鈕
       perparingBtnShow() {
         return (this.currentPeriodOrder.paid && this.currentPeriodOrder.shipping_status === 'pending' )
-      }
+      },
+
+      //
+      currentPeriodOrderPresent() {
+        return object_present(this.currentPeriodOrder);
+      },
     },
 
     methods: {
@@ -65,10 +70,21 @@ document.addEventListener('DOMContentLoaded', () => {
           self.ecpay_info = Object.assign({}, response['data']['ecpay_info']);
         })
         .then(function(response) {
-          document.getElementById('ecpay_info_form').submit();
+          // 手機上表單不會馬上render出來
+          // 如果input 沒出來，等一秒再送
+          if (document.getElementsByName("MerchantTradeNo").length === 1) {
+            document.getElementById('ecpay_info_form').submit();
+            EventBus.$emit('end-loading');
+          } else {
+            setTimeout(() => {
+              EventBus.$emit('end-loading');
+              document.getElementById('ecpay_info_form').submit();
+            }, 1000)
+          }
         })
         .catch(function(error) {
           error_msg(error.response['data']['message']);
+          EventBus.$emit('end-loading');
         })
       },
 

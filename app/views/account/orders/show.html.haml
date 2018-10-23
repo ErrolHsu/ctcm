@@ -95,27 +95,30 @@
       // 定期訂單資訊
       // 本期訂單
       .col-md-6
-        .info-box
+        .info-box(v-if='currentPeriodOrderPresent')
           %h5
             本期訂單
           %div
             本期金額:
-            = current_period_order.amount
+            {{currentPeriodOrder.amount}}
           %div
             訂單期數:
-            = current_period_order.no
+            {{currentPeriodOrder.no}}
           %div
             訂單品項:
             = order.items.last.product_name
           %div
             付款狀態:
-            = current_period_order.paid ? '已付款' : '尚未付款'
+            {{currentPeriodOrder.paid_name}}
           %div
             訂單狀態:
-            = current_period_order.status_name
+            {{currentPeriodOrder.status_name}}
           %div
             配送狀態:
-            = current_period_order.shipping_name
+            {{currentPeriodOrder.shipping_name}}
+          %div
+            付款時間:
+            {{currentPeriodOrder.paid_at_date}}
       // 下期訂單
       .col-md-6(v-if="order.status == 'subscribe' ")
         - if next_period_order.present?
@@ -131,5 +134,6 @@
 // PROPS
 #props(data="#{props}")
 #order-json(data="#{order_json}")
+#current-period-order-json(data="#{current_period_order_json}")
 
 

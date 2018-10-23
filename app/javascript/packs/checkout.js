@@ -175,16 +175,16 @@ document.addEventListener('DOMContentLoaded', () => {
           // 如果input 沒出來，等一秒再送
           if (document.getElementsByName("MerchantTradeNo").length === 1) {
             document.getElementById('ecpay_info_form').submit();
+            EventBus.$emit('end-loading');
           } else {
             setTimeout(() => {
+              EventBus.$emit('end-loading');
               document.getElementById('ecpay_info_form').submit();
             }, 1000)
           }
         })
         .catch(function(error) {
           error_msg(error.response['data']['message']);
-        })
-        .then(() => {
           EventBus.$emit('end-loading');
         })
       },
