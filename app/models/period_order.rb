@@ -11,6 +11,7 @@ class PeriodOrder < ApplicationRecord
     self.paid = true
     self.paid_at = Time.current
     self.shipping_status = 'pending'
+    self.current = true
     self.save!
     self.trade_infos.create!({
       order_id: order_id,

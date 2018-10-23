@@ -22,21 +22,29 @@ class EcpayController < ApplicationController
 
     begin
       order = Order.find_by(merchant_trade_no: ecpay_parameters['MerchantTradeNo'])
-      period_order = order.period_orders.last
+      current_period_order = order.current_period_order
+      if current_period_order
+        current_period_order.current = false
+        current_period_order.save
+
+        current_period_order = order.period_orders.where(status: 'future')
+      else
+        current_period_order = order.period_orders.last
+      end
+
 
       ActiveRecord::Base.transaction do
         order.period_order_paid!
-        period_order.paid!(ecpay_parameters, order.id)
+        current_period_order.paid!(ecpay_parameters, order.id)
         # 建立下一筆 period_order
         order.period_orders.create!(
           user_id: order.user_id,
-          no: period_order.no + 1,
+          no: current_period_order.no + 1,
           amount: order.period_amount,
           expected_date: get_expected_date(order),
           status: 'future',
           paid: false,
           shipping_status: '',
-          current: true,
         )
 
         # MailServices::OrderMailer.period_order_paid(order)
