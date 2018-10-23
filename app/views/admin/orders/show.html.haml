@@ -70,6 +70,7 @@
       // 定期訂單資訊
       // 本期訂單
       .col-md-6
+        - if current_period_order.present?
         .info-box
           %h5
             本期訂單
