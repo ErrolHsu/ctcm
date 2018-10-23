@@ -34,7 +34,7 @@ class PeriodOrder < ApplicationRecord
   end
 
   def paid_at_date
-    paid_at.to_s(:date)
+    paid_at.try(:to_s, :date)
   end
 
   def paid_name
