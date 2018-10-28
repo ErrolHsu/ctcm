@@ -5,12 +5,6 @@
   / 必要的共用組件
   = render 'share/components'
 
-  / product modal
-  = render 'home/coffee_info_modal/single_origin'
-  = render 'home/coffee_info_modal/blend'
-  = render 'home/coffee_info_modal/espresso'
-
-
   .content
     // 輪播圖區塊
     #slide-box.bg-img
@@ -97,9 +91,12 @@
 
     // 快速選購區塊
     #fast-shipping.d-flex.mt-desktop
-      #sample-1.bg-img.pointer(data-toggle="modal" data-target="#sinfle-origin-model")
-      #sample-2.bg-img.pointer(data-toggle="modal" data-target="#blend-model")
-      #sample-3.bg-img.pointer(data-toggle="modal" data-target="#espresso-model")
+      #sample-1.bg-img(data-toggle="modal" data-target="#sinfle-origin-model")
+        = render 'home/coffee_info/single_origin'
+      #sample-2.bg-img(data-toggle="modal" data-target="#blend-model")
+        = render 'home/coffee_info/blend'
+      #sample-3.bg-img(data-toggle="modal" data-target="#espresso-model")
+        = render 'home/coffee_info/espresso'
 
     // 關於我們 & 部落格區塊
     #about-and-blog.d-flex.mt-desktop

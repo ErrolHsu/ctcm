@@ -52,6 +52,23 @@
       #sample-1, #sample-2, #sample-3 {
         width: 29vw;
         height: 38.7vw;
+        .coffee-info {
+          visibility: hidden;
+          background: rgba(0,0,0,.5);
+          height: 38.7vw;
+          color: #fff;
+          font-size: 16px;
+          padding-top: 10vw;
+          overflow: scroll;
+          div {
+            padding: 0 5vw;
+          }
+        }
+        &:hover {
+          .coffee-info {
+            visibility: visible;
+          }
+        }
       }
       #sample-1 {
         background-image: image-url("home-p1.jpg");
@@ -139,6 +156,13 @@
         #sample-1, #sample-2, #sample-3 {
           width: 100vw;
           height: 133.4vw;
+          .coffee-info {
+            height: 133.4vw;
+            padding-top: 40vw;
+            div {
+              padding: 0 20vw;
+            }
+          }
         }
       }
 
