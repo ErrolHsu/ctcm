@@ -81,6 +81,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show] do
       member do
         get :period_order_preparing
+        get :period_order_shipping
       end
     end
     resources :trials, only: [:index, :show] do

@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
         payment_status: '',
         payment_name: '',
       },
-      currentPeriodOrder: {
-
-      },
+      currentPeriodOrder: {},
+      // 物流追蹤碼
+      trackingNo: '',
       // ecpay_info 所需資料
       ecpay_info: {},
     },
@@ -52,7 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return (this.currentPeriodOrder.paid && this.currentPeriodOrder.shipping_status === 'pending' )
       },
 
-      //
+      // 出現配送中按鈕
+      shippingBtnShow() {
+        return (this.currentPeriodOrder.paid && this.currentPeriodOrder.shipping_status === 'preparing')
+      },
+
       currentPeriodOrderPresent() {
         return object_present(this.currentPeriodOrder);
       },
@@ -105,6 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       },
 
+      // 填寫物流追蹤碼表單
+      trackingNoModalShow() {
+        $('#tracking-no-modal').modal('show');
+      },
+
       // 定期訂單配送狀態改為烘培中
       periodOrderPreparing() {
         let self = this;
@@ -122,6 +131,36 @@ document.addEventListener('DOMContentLoaded', () => {
           EventBus.$emit('end-loading');
         })
       },
+
+      // 定期訂單配送狀態改為配送中
+      periodOrderShipping() {
+        let self = this;
+
+        if (self.trackingNo.length === 0) {
+          error_msg('請填寫物流追蹤碼')
+          return
+        }
+
+        $('#tracking-no-modal').modal('hide');
+
+        let orderNo = self.order.order_no;
+        EventBus.$emit('loading');
+        axios.get(`/admin/orders/${orderNo}/period_order_shipping`, {
+          params: {
+            trackingNo: self.trackingNo
+          }
+        })
+        .then(res => {
+          self.currentPeriodOrder = Object.assign({}, JSON.parse(res.data.current_period_order_json))
+          success_msg(res.data.message);
+        })
+        .catch(err => {
+          error_msg(err.res.data.message);
+        })
+        .then(() => {
+          EventBus.$emit('end-loading');
+        })
+      }
     }
   })
 })

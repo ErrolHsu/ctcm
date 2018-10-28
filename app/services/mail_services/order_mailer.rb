@@ -119,5 +119,41 @@ module MailServices
       send(to: shipping_address.email, subject: subject, text: text)
     end
 
+    def self.period_order_shipping(order)
+      current_period_order = order.current_period_order
+      shipping_address = order.shipping_address
+
+      subject = '[Altitude Tosteria][AT Cafe]本期出貨通知'
+
+      text = ERB.new(<<~heredoc).result(binding)
+        <%= order.shipping_address.name %> 您好，
+
+        您的訂單[訂單編號]這一期的咖啡豆已經在路上囉！
+        預計於三個工作天內送達。
+        （偏遠地區、離島需三到五個工作天。）
+        訂單編號: <%= order.order_no %>
+
+        物流追蹤碼: <%= current_period_order.tracking_no %>
+        您可以透過此追蹤碼，
+        至http://postserv.post.gov.tw/pstmail/main_mail.html查詢。
+
+        您喜歡用什麼方式沖煮咖啡呢？
+        我們很樂於用創新的方式享用咖啡，
+        也歡迎您和我們分享你的獨門咖啡。
+
+        別忘了！
+        一杯好的咖啡與好的朋友分享，
+        會更加美味喔！
+
+        預祝您有個美好的一天，
+        萬分感謝！
+
+        Altitude Tosteria創辦人
+        Afdel 阿福
+      heredoc
+
+      send(to: shipping_address.email, subject: subject, text: text)
+    end
+
   end
 end

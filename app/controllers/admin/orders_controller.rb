@@ -32,4 +32,26 @@ class Admin::OrdersController < AdminController
     render json: { message: '已通知顧客咖啡烘培中' , current_period_order_json: order.current_period_order_json }
   end
 
+  # 當期定期訂單改為配送中
+  def period_order_shipping
+    order = Order.find_by(order_no: params['id'])
+    tracking_no = params['trackingNo']
+
+    current_period_order = order.current_period_order
+
+    unless current_period_order.try(:paid)
+      render json: { message: '本期訂單尚未付款' }, status: 400
+    end
+
+    current_period_order.shipping_status = 'shipping'
+    current_period_order.tracking_no = tracking_no
+    current_period_order.save
+
+    # 通知消費者
+    MailWorker::PeriodOrderShippingJob.perform_later(order.id)
+
+    render json: { message: '已通知顧客咖啡配送中' , current_period_order_json: order.current_period_order_json }
+
+  end
+
 end

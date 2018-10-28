@@ -4,9 +4,14 @@
 #account-order-app
   / loader
   %loader
+  = render 'tracking_no_modal'
   .content
-    .btn.button-normal(v-if=" perparingBtnShow " v-on:click='periodOrderPreparing')
-      烘培中
+    // 定期訂單操作選項
+    %div(v-if='order.period')
+      .btn.button-normal(v-if="perparingBtnShow" v-on:click='periodOrderPreparing')
+        烘培中
+      .btn.button-normal(v-if="shippingBtnShow" v-on:click='trackingNoModalShow')
+        配送中
     ///////   infos  ////////
     .row
       .col-md-6
@@ -94,6 +99,9 @@
           %div
             付款時間:
             {{currentPeriodOrder.paid_at_date}}
+          %div
+            物流追蹤:
+            {{currentPeriodOrder.tracking_no}}
       // 下期訂單
       .col-md-6(v-if="order.status == 'subscribe' ")
         - if next_period_order.present?

@@ -1,0 +1,11 @@
+.modal.fade#tracking-no-modal{:role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-lg{:role => "document"}
+    .modal-content
+      .modal-body
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        .container-fluid
+          %div
+            %input(v-model='trackingNo')
+          .btn.button-normal.mt-2(v-on:click='periodOrderShipping')
+            送出
