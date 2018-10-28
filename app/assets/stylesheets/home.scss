@@ -64,7 +64,7 @@
             padding: 0 5vw;
           }
         }
-        &:hover {
+        &:hover, &:focus, &:active {
           .coffee-info {
             visibility: visible;
           }
