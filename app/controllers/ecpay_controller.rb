@@ -28,7 +28,7 @@ class EcpayController < ApplicationController
           current_period_order.current = false
           current_period_order.save
 
-          current_period_order = order.period_orders.where(status: 'future')
+          current_period_order = order.period_orders.where(status: 'future').last
         else
           current_period_order = order.period_orders.last
         end
