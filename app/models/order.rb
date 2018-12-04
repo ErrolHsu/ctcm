@@ -8,6 +8,11 @@ class Order < ApplicationRecord
   default_scope { order(created_at: :asc) }
   scope :subscribe_orders, -> { where(period: true) }
 
+  def close!
+    self.status = 'closse'
+    self.save
+  end
+
   def current_period_order_json
     period_orders.where(current: true).last.to_json(except: [:created_at, :updated_at], methods: [:shipping_name, :status_name, :paid_name, :paid_at_date])
   end

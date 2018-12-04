@@ -47,6 +47,11 @@ class Admin::OrdersController < AdminController
     current_period_order.tracking_no = tracking_no
     current_period_order.save
 
+    # 最後一期
+    if order.exec_times == current_period_order.no
+      order.close!
+    end
+
     # 通知消費者
     MailWorker::PeriodOrderShippingJob.perform_later(order.id)
 
