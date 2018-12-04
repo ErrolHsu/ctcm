@@ -35,16 +35,18 @@ class EcpayController < ApplicationController
 
         order.period_order_paid!
         current_period_order.paid!(ecpay_parameters, order.id)
-        # 建立下一筆 period_order
-        order.period_orders.create!(
-          user_id: order.user_id,
-          no: current_period_order.no + 1,
-          amount: order.period_amount,
-          expected_date: get_expected_date(order),
-          status: 'future',
-          paid: false,
-          shipping_status: '',
-        )
+        # 如果還沒全部執行完畢，建立下一筆 period_order
+        if order.exec_times > current_period_order.no
+          order.period_orders.create!(
+            user_id: order.user_id,
+            no: current_period_order.no + 1,
+            amount: order.period_amount,
+            expected_date: get_expected_date(order),
+            status: 'future',
+            paid: false,
+            shipping_status: '',
+          )
+        end
 
         # MailServices::OrderMailer.period_order_paid(order)
         MailWorker::PeriodOrderPaidJob.perform_later(order.id)
