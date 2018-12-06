@@ -1,24 +1,24 @@
 <template>
-  <div class='bottom-line'>
-    <span class='center d-block'  v-if='current_user_present'>
+  <span class='center d-block'  v-if='current_user_present'>
+    <div class='bottom-line'>
       <a href="/account/index" style='font-size: 19px; !important'>
         {{ current_user.email }}
       </a>
-
-      <br>
+    </div>
+    <div class='bottom-line'>
 
       <a href="#" v-on:click.prevent='signOutUser'>
         登出
       </a>
-    </span>
-
-    <span class='center d-block' v-else>
+    </div>
+  </span>
+  <span class='center d-block' v-else>
+    <div class='bottom-line'>
       <a href="#" v-on:click.prevent='ShowLoginModal'>
         註冊 / 登入
       </a>
-    </span>
-
-  </div>
+    </div>
+  </span>
 </template>
 
 <script>

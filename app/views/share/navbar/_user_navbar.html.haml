@@ -14,6 +14,8 @@
   .nav-right.inline-block.mr-4
     %div.font-15.ml-4.phone-hide
       = link_to '定期配送', root_path(anchor: "period-order")
+    %div.font-15.ml-4.phone-hide
+      = link_to '商城', products_path
     / %div.font-15.ml-4.phone-hide
     /   = link_to 'SHOP', '#'
     #about-box.font-15.ml-4.phone-hide
@@ -36,10 +38,10 @@
 
     .phone-hide.icon-link(style='margin-left: 40px;')
       %a{:href => "https://www.facebook.com/altitudetosteria/", 'target' =>"_blank"}
-        = icon('fab', 'facebook-f')
+        %i.fab.facebook-f
     .phone-hide.icon-link.ml-4
       %a{:href => "https://www.instagram.com/altitudetosteriacafe", 'target' =>"_blank"}
-        = icon('fab', 'instagram')
+        %i.fab.instagram
     // 購物車
     / %transition(name='opacity')
     /   %div.icon-link(v-if='!phone_options' style='margin-left: 30px;')
@@ -62,6 +64,12 @@
             %i.fas.fa-truck-moving
           .list-name
             定期配送
+      %div.center.bottom-line
+        %a.list{:href => "/products"}
+          .icon
+            %i.fas.fa-mosque
+          .list-name
+            商城
       / %div.center.bottom-line
       /   %a{:href => "#"}
       /     SHOP

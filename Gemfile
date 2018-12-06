@@ -40,7 +40,7 @@ gem 'bootstrap', '~> 4.1.2'
 
 gem 'jquery-rails'
 
-gem 'font-awesome-sass', '~> 5.0.13'
+# gem 'font-awesome-sass', '~> 5.0.13'
 
 gem 'devise'
 
