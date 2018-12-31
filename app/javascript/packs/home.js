@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
           .then(function(response) {
             console.log(response['data']['token']);
             token = response['data']['token'];
-            let url = `/checkout?token=${token}`
+            let url = `/checkout?token=${token}&type=periodOrder`
             window.location = url;
           })
           .catch(function(error) {

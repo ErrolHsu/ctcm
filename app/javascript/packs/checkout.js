@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
       status: '',
       // 紀錄product資訊的token
       token: '',
+      // 訂單種類
+      type: '',
       // 定期訂單配置
       period_order_set: {
         product: {},
@@ -45,8 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // let url = new URL(url_string);
       // self.token = url.searchParams.get('token')
       self.token = self.getParameterByName('token');
-      // 有token代表是定期訂單
-      if (self.token) {
+      self.type = self.getParameterByName('type');
+      // 如果是定期訂單
+      if (self.type === 'periodOrder') {
         EventBus.$emit('loading');
         axios.post('checkout/jwt_decode', {
             token: self.token

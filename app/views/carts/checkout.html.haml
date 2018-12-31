@@ -22,7 +22,8 @@
       #step1(v-if=" status === 'step1' ")
         .row
           .col-md-8.offset-md-2
-            #period-order-box(style='font-size: 14px;')
+            // 定期訂單品項
+            #period-order-box.font-14(v-if="type === 'periodOrder'")
               %div
                 豆種: {{period_order_set.product.title}}
               %div
