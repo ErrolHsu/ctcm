@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # 通用的vue props
-  expose(:props) { { current_user: get_current_user, user_login: current_user.present? }.to_json }
+  # expose(:props) { { current_user: get_current_user, user_login: current_user.present? }.to_json }
 
   include CartsHelper
 

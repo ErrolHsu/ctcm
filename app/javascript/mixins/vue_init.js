@@ -24,16 +24,27 @@ const vue_init = {
   },
 
   mounted() {
+    let self = this;
     // set CSRF Token
     const csrf_token = document.querySelector("meta[name=csrf-token]").content;
     axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
     axios.defaults.headers.common['Accept'] = 'application/json'
 
     // init data
-    const element = document.getElementById("props");
-    const props = JSON.parse(element.getAttribute('data'));
-    this.user_login = props.user_login;
-    this.current_user = props.current_user;
+    // const element = document.getElementById("props");
+    // const props = JSON.parse(element.getAttribute('data'));
+    // this.user_login = props.user_login;
+    // this.current_user = props.current_user;
+
+    // get current_user
+    axios.get('/account/get_user')
+      .then(function(response) {
+        self.current_user = response['data']['current_user']
+        self.user_login = response['data']['user_login'];
+      })
+      .catch(function(error) {
+        error_msg(error.response['data']['message'])
+      })
 
     // 會員登入
     EventBus.$on('login-user', (current_user) => {
